@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Programming.Model
+﻿namespace Programming.Model
 {
     public enum Color
     {
         Red,
         Green,
         Blue,
-        Purple,
         Yellow,
+        Purple,
+        Orange,
         Cyan,
+        Pink,
+        White,
         Grey,
-        Black,
-        White
+        Black
     }
 }
