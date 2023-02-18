@@ -92,7 +92,7 @@
             // 
             // SeasonButton
             // 
-            this.SeasonButton.Location = new System.Drawing.Point(170, 38);
+            this.SeasonButton.Location = new System.Drawing.Point(171, 36);
             this.SeasonButton.Name = "SeasonButton";
             this.SeasonButton.Size = new System.Drawing.Size(75, 23);
             this.SeasonButton.TabIndex = 2;
@@ -140,7 +140,7 @@
             // 
             // WeekdayButton
             // 
-            this.WeekdayButton.Location = new System.Drawing.Point(164, 38);
+            this.WeekdayButton.Location = new System.Drawing.Point(164, 36);
             this.WeekdayButton.Name = "WeekdayButton";
             this.WeekdayButton.Size = new System.Drawing.Size(75, 23);
             this.WeekdayButton.TabIndex = 2;
