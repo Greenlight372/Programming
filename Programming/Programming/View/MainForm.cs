@@ -16,6 +16,9 @@ namespace Programming
             SeasonComboBox.DataSource = Enum.GetValues(typeof(Season));
         }
 
+        /// <summary>
+        /// Выбор нумерации.
+        /// </summary>
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedEnum = EnumsListBox.SelectedItem.ToString();
@@ -44,6 +47,9 @@ namespace Programming
             }
         }
 
+        /// <summary>
+        /// Парсинг дня недели.
+        /// </summary>
         private void WeekdayButton_Click(object sender, EventArgs e)
         {
             object parsedValue;
@@ -72,6 +78,9 @@ namespace Programming
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
         }
 
+        /// <summary>
+        /// Времена года.
+        /// </summary>
         private void SeasonButton_Click(object sender, EventArgs e)
         {
             string currentSeason = SeasonComboBox.Text;
