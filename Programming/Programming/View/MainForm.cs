@@ -40,7 +40,7 @@ namespace Programming
                     ValuesListBox.DataSource = Enum.GetValues(typeof(Season));
                     break;
                 case "Weekday":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Weekday));
+                    ValuesListBox.DataSource = Enum.GetValues(typeof(Season));
                     break;
                 default:
                     break;
