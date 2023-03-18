@@ -7,13 +7,28 @@ namespace Programming
 {
     public partial class MainForm : Form
     {
+        private Programming.Model.Rectangle[] _rectangle = new Programming.Model.Rectangle[5];
+        private Programming.Model.Rectangle _currentRectangle = new Programming.Model.Rectangle();
+
+        private Programming.Model.Movie[] _movie = new Programming.Model.Movie[5];
+        private Programming.Model.Movie _currentMovie = new Programming.Model.Movie();
+
+        Random rand = new Random();
+
         public MainForm()
         {
             InitializeComponent();
             EnumsListBox.SetSelected(0, true);
+            RectangleListBox.SetSelected(0, true);
 
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
             SeasonComboBox.DataSource = Enum.GetValues(typeof(Season));
+
+            for (int i = 0; i < 5; i++)
+            {
+                _rectangle[i] = new Programming.Model.Rectangle(rand.Next(0, 100), rand.Next(0, 100), "White");
+                _movie[i] = new Programming.Model.Movie("Sample Title", 30 + rand.Next(0, 120), 1900 + rand.Next(0, 123), "Sample Genre", rand.Next(0, 10));
+            }
         }
 
         /// <summary>
@@ -64,7 +79,7 @@ namespace Programming
                 int counter = 0;
                 foreach (string value in Enum.GetNames(typeof(Weekday)))
                 {
-                    counter = counter + 1;
+                    counter += 1;
                     if (parsedValue.ToString() == value)
                         parseID = counter;
                 }
@@ -100,6 +115,136 @@ namespace Programming
                     SeasonHandle.BackColor = System.Drawing.Color.White;
                     MessageBox.Show("So cold... Why is it so cold?..");
                     break;
+            }
+        }
+
+        private void Classes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RectangleListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _currentRectangle = _rectangle[RectangleListBox.SelectedIndex];
+
+            LengthTextBox.Text = _currentRectangle.Length.ToString();
+            WidthTextBox.Text = _currentRectangle.Width.ToString();
+            ColorTextBox.Text = _currentRectangle.Color;
+        }
+
+        private void LengthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentRectangle.Length = double.Parse(LengthTextBox.Text);
+                Classes.BackColor = System.Drawing.Color.White;
+            }
+            catch
+            {
+                Classes.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+
+        private void WidthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentRectangle.Width = double.Parse(WidthTextBox.Text);
+                Classes.BackColor = System.Drawing.Color.White;
+            }
+            catch
+            {
+                Classes.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+
+        private void ColorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _currentRectangle.Color = ColorTextBox.Text;
+        }
+
+        private int FindRectangleWithMaxWidth(Programming.Model.Rectangle[] _rectangleArray)
+        {
+            int temp = 0;
+
+            for (int i = 0; i < _rectangleArray.Length; i++)
+            {
+                if (_rectangleArray[i].Width > _rectangleArray[temp].Width)
+                    temp = i;
+            }
+
+            return temp;
+        }
+
+        private int FindMovieWithMaxScore(Programming.Model.Movie[] _movieArray)
+        {
+            int temp = 0;
+
+            for (int i = 0; i < _movieArray.Length; i++)
+            {
+                if (_movieArray[i].Score > _movieArray[temp].Score)
+                    temp = i;
+            }
+
+            return temp;
+        }
+
+        private void RectangleButton_Click(object sender, EventArgs e)
+        {
+            RectangleListBox.SelectedIndex = FindRectangleWithMaxWidth(_rectangle);
+        }
+
+        private void MoviesButton_Click(object sender, EventArgs e)
+        {
+            MoviesListBox.SelectedIndex = FindMovieWithMaxScore(_movie);
+        }
+
+        private void TitleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _currentMovie.Title = TitleTextBox.Text;
+        }
+
+        private void DurationTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentMovie.Duration = int.Parse(DurationTextBox.Text);
+                Classes.BackColor = System.Drawing.Color.White;
+            }
+            catch
+            {
+                Classes.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+
+        private void YearTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentMovie.Year = int.Parse(YearTextBox.Text);
+                Classes.BackColor = System.Drawing.Color.White;
+            }
+            catch
+            {
+                Classes.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+
+        private void GenreTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _currentMovie.Genre = GenreTextBox.Text;
+        }
+
+        private void ScoreTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentMovie.Score = double.Parse(ScoreTextBox.Text);
+                Classes.BackColor = System.Drawing.Color.White;
+            }
+            catch
+            {
+                Classes.BackColor = System.Drawing.Color.LightPink;
             }
         }
     }
