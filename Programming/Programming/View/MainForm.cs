@@ -118,18 +118,13 @@ namespace Programming
             }
         }
 
-        private void Classes_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void RectangleListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentRectangle = _rectangle[RectangleListBox.SelectedIndex];
 
-            LengthTextBox.Text = _currentRectangle.Length.ToString();
-            WidthTextBox.Text = _currentRectangle.Width.ToString();
-            ColorTextBox.Text = _currentRectangle.Color;
+            //LengthTextBox.Text = _currentRectangle.Length.ToString();
+            //WidthTextBox.Text = _currentRectangle.Width.ToString();
+            //ColorTextBox.Text = _currentRectangle.Color;
         }
 
         private void LengthTextBox_TextChanged(object sender, EventArgs e)
@@ -246,6 +241,17 @@ namespace Programming
             {
                 Classes.BackColor = System.Drawing.Color.LightPink;
             }
+        }
+
+        private void MoviesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _currentMovie = _movie[MoviesListBox.SelectedIndex];
+
+            TitleTextBox.Text = _currentMovie.Title;
+            DurationTextBox.Text = _currentMovie.Duration.ToString();
+            YearTextBox.Text = _currentMovie.Year.ToString();
+            GenreTextBox.Text = _currentMovie.Genre;
+            ScoreTextBox.Text = _currentMovie.Score.ToString();
         }
     }
 }
