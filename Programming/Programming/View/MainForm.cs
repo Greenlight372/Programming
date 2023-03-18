@@ -132,11 +132,11 @@ namespace Programming
             try
             {
                 _currentRectangle.Length = double.Parse(LengthTextBox.Text);
-                Classes.BackColor = System.Drawing.Color.White;
+                LengthTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
             {
-                Classes.BackColor = System.Drawing.Color.LightPink;
+                LengthTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
 
@@ -145,11 +145,11 @@ namespace Programming
             try
             {
                 _currentRectangle.Width = double.Parse(WidthTextBox.Text);
-                Classes.BackColor = System.Drawing.Color.White;
+                WidthTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
             {
-                Classes.BackColor = System.Drawing.Color.LightPink;
+                WidthTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
 
@@ -204,11 +204,11 @@ namespace Programming
             try
             {
                 _currentMovie.Duration = int.Parse(DurationTextBox.Text);
-                Classes.BackColor = System.Drawing.Color.White;
+                DurationTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
             {
-                Classes.BackColor = System.Drawing.Color.LightPink;
+                DurationTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
 
@@ -217,11 +217,11 @@ namespace Programming
             try
             {
                 _currentMovie.Year = int.Parse(YearTextBox.Text);
-                Classes.BackColor = System.Drawing.Color.White;
+                YearTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
             {
-                Classes.BackColor = System.Drawing.Color.LightPink;
+                YearTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
 
@@ -235,11 +235,11 @@ namespace Programming
             try
             {
                 _currentMovie.Score = double.Parse(ScoreTextBox.Text);
-                Classes.BackColor = System.Drawing.Color.White;
+                ScoreTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
             {
-                Classes.BackColor = System.Drawing.Color.LightPink;
+                ScoreTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
 
