@@ -1,5 +1,6 @@
 using Programming.Model;
 using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
@@ -122,17 +123,20 @@ namespace Programming
         {
             _currentRectangle = _rectangle[RectangleListBox.SelectedIndex];
 
-            //LengthTextBox.Text = _currentRectangle.Length.ToString();
-            //WidthTextBox.Text = _currentRectangle.Width.ToString();
-            //ColorTextBox.Text = _currentRectangle.Color;
+            if (_currentRectangle != null)
+            {
+                LengthTextBox.Text = _currentRectangle.Length.ToString();
+                WidthTextBox.Text = _currentRectangle.Width.ToString();
+                ColorTextBox.Text = _currentRectangle.Color;
+            }
         }
 
         private void LengthTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                _currentRectangle.Length = double.Parse(LengthTextBox.Text);
                 LengthTextBox.BackColor = System.Drawing.Color.White;
+                _currentRectangle.Length = double.Parse(LengthTextBox.Text);
             }
             catch
             {
@@ -144,8 +148,8 @@ namespace Programming
         {
             try
             {
-                _currentRectangle.Width = double.Parse(WidthTextBox.Text);
                 WidthTextBox.BackColor = System.Drawing.Color.White;
+                _currentRectangle.Width = double.Parse(WidthTextBox.Text);
             }
             catch
             {
@@ -203,8 +207,8 @@ namespace Programming
         {
             try
             {
-                _currentMovie.Duration = int.Parse(DurationTextBox.Text);
                 DurationTextBox.BackColor = System.Drawing.Color.White;
+                _currentMovie.Duration = int.Parse(DurationTextBox.Text);
             }
             catch
             {
@@ -216,8 +220,8 @@ namespace Programming
         {
             try
             {
-                _currentMovie.Year = int.Parse(YearTextBox.Text);
                 YearTextBox.BackColor = System.Drawing.Color.White;
+                _currentMovie.Year = int.Parse(YearTextBox.Text);
             }
             catch
             {
@@ -234,8 +238,8 @@ namespace Programming
         {
             try
             {
-                _currentMovie.Score = double.Parse(ScoreTextBox.Text);
                 ScoreTextBox.BackColor = System.Drawing.Color.White;
+                _currentMovie.Score = double.Parse(ScoreTextBox.Text);
             }
             catch
             {

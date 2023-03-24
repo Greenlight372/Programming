@@ -15,8 +15,29 @@ namespace Programming.Model
         private string _genre;
         private double _score;
 
-        public string Title { get; set; }
-        public string Genre { get; set; }
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                _title = value;
+            }
+        }
+        public string Genre
+        {
+            get
+            {
+                return _genre;
+            }
+            set
+            {
+                _genre = value;
+            }
+        }
+
         public int Duration
         { 
             get
@@ -25,10 +46,9 @@ namespace Programming.Model
             }
             set
             {
+                _duration = value;
                 if (_duration < 0)
                     throw new ArgumentException(String.Format("{0} is not a positive number", _duration), "duration");
-
-                _duration = value;
             }
         }
         public int Year
@@ -39,10 +59,9 @@ namespace Programming.Model
             }
             set
             {
+                _year = value;
                 if (_year < 1900)
                     throw new ArgumentException(String.Format("{0} is a number out of range", _year), "year");
-
-                _year = value;
             }
         }
         public double Score
@@ -53,10 +72,9 @@ namespace Programming.Model
             }
             set
             {
+                _score = value;
                 if (_score < 0 || _score > 10)
                     throw new ArgumentException(String.Format("{0} is a number out of range", _score), "score");
-
-                _score = value;
             }
         }
 
