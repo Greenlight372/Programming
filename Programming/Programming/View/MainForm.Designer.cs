@@ -48,7 +48,6 @@
             EnumsLabel = new Label();
             EnumsListBox = new ListBox();
             Classes = new TabPage();
-            tableLayoutPanel1 = new TableLayoutPanel();
             MoviesGroupBox = new GroupBox();
             ScoreTextBox = new TextBox();
             ScoreLabel = new Label();
@@ -278,7 +277,6 @@
             // 
             // Classes
             // 
-            Classes.Controls.Add(tableLayoutPanel1);
             Classes.Controls.Add(MoviesGroupBox);
             Classes.Controls.Add(RectangleGroupBox);
             Classes.Location = new Point(4, 24);
@@ -288,21 +286,6 @@
             Classes.TabIndex = 1;
             Classes.Text = "Classes";
             Classes.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.BackColor = Color.Transparent;
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 290F));
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 47F));
-            tableLayoutPanel1.Size = new Size(570, 407);
-            tableLayoutPanel1.TabIndex = 13;
-            tableLayoutPanel1.Visible = false;
             // 
             // MoviesGroupBox
             // 
@@ -423,12 +406,13 @@
             // 
             // MoviesListBox
             // 
+            MoviesListBox.Dock = DockStyle.Left;
             MoviesListBox.FormattingEnabled = true;
             MoviesListBox.ItemHeight = 15;
             MoviesListBox.Items.AddRange(new object[] { "Movie 1", "Movie 2", "Movie 3", "Movie 4", "Movie 5" });
-            MoviesListBox.Location = new Point(5, 18);
+            MoviesListBox.Location = new Point(3, 19);
             MoviesListBox.Name = "MoviesListBox";
-            MoviesListBox.Size = new Size(137, 184);
+            MoviesListBox.Size = new Size(137, 385);
             MoviesListBox.TabIndex = 0;
             MoviesListBox.SelectedIndexChanged += MoviesListBox_SelectedIndexChanged;
             // 
@@ -513,12 +497,13 @@
             // 
             // RectangleListBox
             // 
+            RectangleListBox.Dock = DockStyle.Left;
             RectangleListBox.FormattingEnabled = true;
             RectangleListBox.ItemHeight = 15;
             RectangleListBox.Items.AddRange(new object[] { "Rectangle 1", "Rectangle 2", "Rectangle 3", "Rectangle 4", "Rectangle 5" });
-            RectangleListBox.Location = new Point(5, 18);
+            RectangleListBox.Location = new Point(3, 19);
             RectangleListBox.Name = "RectangleListBox";
-            RectangleListBox.Size = new Size(137, 184);
+            RectangleListBox.Size = new Size(137, 385);
             RectangleListBox.TabIndex = 0;
             RectangleListBox.SelectedIndexChanged += RectangleListBox_SelectedIndexChanged;
             // 
@@ -595,6 +580,5 @@
         private Label GenreLabel;
         private TextBox ScoreTextBox;
         private Label ScoreLabel;
-        private TableLayoutPanel tableLayoutPanel1;
     }
 }
