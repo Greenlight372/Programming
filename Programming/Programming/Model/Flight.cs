@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming.Model
 {
-    internal class Flight
+    public class Flight
     {
         private string _departurePoint;
         private string _destination;

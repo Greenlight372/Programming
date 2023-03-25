@@ -7,7 +7,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Programming.Model
 {
-    internal class Song
+    public class Song
     {
         private int _minutes;
         private int _seconds;
@@ -23,7 +23,7 @@ namespace Programming.Model
             set
             {
                 if (_minutes < 0 || _minutes > 60)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _minutes), "minutes");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Minutes));
 
                 _minutes = value;
             }
@@ -37,7 +37,7 @@ namespace Programming.Model
             set
             {
                 if (_seconds < 0 || _seconds > 60)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _seconds), "seconds");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Seconds));
 
                 _seconds = value;
             }

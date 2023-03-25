@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming.Model
 {
-    internal class Subject
+    public class Subject
     {
         private string _subjectName;
         private int _hours;
@@ -22,7 +22,7 @@ namespace Programming.Model
             set
             {
                 if (_hours < 0)
-                    throw new ArgumentException(String.Format("{0} is not a positive number", _hours), "hours");
+                    throw new ArgumentException($"{0} is not a positive number", nameof(Hours));
 
                 _hours = value;
             }

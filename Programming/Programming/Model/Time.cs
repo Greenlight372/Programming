@@ -21,7 +21,7 @@ namespace Programming.Model
             set
             {
                 if (_hours < 0 || _hours > 23)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _hours), "hours");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Hours));
 
                 _hours = value;
             }
@@ -35,7 +35,7 @@ namespace Programming.Model
             set
             {
                 if (_minutes < 0 || _minutes > 60)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _minutes), "minutes");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Minutes));
 
                 _minutes = value;
             }
@@ -49,7 +49,7 @@ namespace Programming.Model
             set
             {
                 if (_seconds < 0 || _seconds > 60)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _seconds), "seconds");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Seconds));
 
                 _seconds = value;
             }
