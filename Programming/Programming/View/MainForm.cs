@@ -4,17 +4,15 @@ using System.CodeDom.Compiler;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
-namespace Programming
+namespace Programming.View
 {
     public partial class MainForm : Form
     {
-        private Programming.Model.Rectangle[] _rectangle = new Programming.Model.Rectangle[5];
-        private Programming.Model.Rectangle _currentRectangle = new Programming.Model.Rectangle();
+        private Model.Rectangle[] _rectangle = new Model.Rectangle[5];
+        private Model.Rectangle _currentRectangle = new Model.Rectangle();
 
-        private Programming.Model.Movie[] _movie = new Programming.Model.Movie[5];
-        private Programming.Model.Movie _currentMovie = new Programming.Model.Movie();
-
-        Random rand = new Random();
+        private Movie[] _movie = new Model.Movie[5];
+        private Model.Movie _currentMovie = new Model.Movie();
 
         public MainForm()
         {
@@ -25,10 +23,19 @@ namespace Programming
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
             SeasonComboBox.DataSource = Enum.GetValues(typeof(Season));
 
+            Random rand = new Random();
+
             for (int i = 0; i < 5; i++)
             {
-                _rectangle[i] = new Programming.Model.Rectangle(rand.Next(0, 100), rand.Next(0, 100), "White");
-                _movie[i] = new Programming.Model.Movie("Sample Title", 30 + rand.Next(0, 120), 1900 + rand.Next(0, 123), "Sample Genre", rand.Next(0, 10));
+                _rectangle[i] = new Model.Rectangle(rand.Next(0, 100), rand.Next(0, 100), "White");
+                _movie[i] = new Model.Movie
+                (
+                    "Sample Title",
+                    30 + rand.Next(0, 120),
+                    1900 + rand.Next(0, 123),
+                    "Sample Genre",
+                    rand.Next(0, 10)
+                );
             }
         }
 
@@ -41,7 +48,7 @@ namespace Programming
             switch (selectedEnum)
             {
                 case "Color":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Programming.Model.Color));
+                    ValuesListBox.DataSource = Enum.GetValues(typeof(Model.Color));
                     break;
                 case "EducationForm":
                     ValuesListBox.DataSource = Enum.GetValues(typeof(EducationForm));
@@ -162,26 +169,26 @@ namespace Programming
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
-        private int FindRectangleWithMaxWidth(Programming.Model.Rectangle[] _rectangleArray)
+        private int FindRectangleWithMaxWidth(Model.Rectangle[] rectangleArray)
         {
             int temp = 0;
 
-            for (int i = 0; i < _rectangleArray.Length; i++)
+            for (int i = 0; i < rectangleArray.Length; i++)
             {
-                if (_rectangleArray[i].Width > _rectangleArray[temp].Width)
+                if (rectangleArray[i].Width > rectangleArray[temp].Width)
                     temp = i;
             }
 
             return temp;
         }
 
-        private int FindMovieWithMaxScore(Programming.Model.Movie[] _movieArray)
+        private int FindMovieWithMaxScore(Model.Movie[] movieArray)
         {
             int temp = 0;
 
-            for (int i = 0; i < _movieArray.Length; i++)
+            for (int i = 0; i < movieArray.Length; i++)
             {
-                if (_movieArray[i].Score > _movieArray[temp].Score)
+                if (movieArray[i].Score > movieArray[temp].Score)
                     temp = i;
             }
 

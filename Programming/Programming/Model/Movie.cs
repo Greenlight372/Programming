@@ -9,34 +9,12 @@ namespace Programming.Model
 {
     internal class Movie
     {
-        private string _title;
         private int _duration;
         private int _year;
-        private string _genre;
         private double _score;
 
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
-        }
-        public string Genre
-        {
-            get
-            {
-                return _genre;
-            }
-            set
-            {
-                _genre = value;
-            }
-        }
+        public string Title { get; set; }
+        public string Genre { get; set; }
 
         public int Duration
         { 
@@ -48,7 +26,7 @@ namespace Programming.Model
             {
                 _duration = value;
                 if (_duration < 0)
-                    throw new ArgumentException(String.Format("{0} is not a positive number", _duration), "duration");
+                    throw new ArgumentException($"{0} is not a positive number", nameof(Duration));
             }
         }
         public int Year
@@ -60,8 +38,8 @@ namespace Programming.Model
             set
             {
                 _year = value;
-                if (_year < 1900)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _year), "year");
+                if (_year < 1900 || _year > 2023)
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Year));
             }
         }
         public double Score
@@ -74,16 +52,16 @@ namespace Programming.Model
             {
                 _score = value;
                 if (_score < 0 || _score > 10)
-                    throw new ArgumentException(String.Format("{0} is a number out of range", _score), "score");
+                    throw new ArgumentException($"{0} is a number out of range", nameof(Score));
             }
         }
 
         public Movie(string titleParam, int durationParam, int yearParam, string genreParam, double scoreParam)
         {
-            _title = titleParam;
+            Title = titleParam;
             _duration = durationParam;
             _year = yearParam;
-            _genre = genreParam;
+            Genre = genreParam;
             _score = scoreParam;
         }
 

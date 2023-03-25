@@ -4,7 +4,6 @@ namespace Programming.Model
     {
         private double _length;
         private double _width;
-        private string _color;
 
         public double Length
         {
@@ -16,7 +15,7 @@ namespace Programming.Model
             {
                 _length = value;
                 if (_length < 0)
-                    throw new ArgumentException(String.Format("{0} is not a positive number", _length), "length");
+                    throw new ArgumentException($"{0} is not a positive number", nameof(Length));
             }
         }
 
@@ -30,27 +29,17 @@ namespace Programming.Model
             {
                 _width = value;
                 if (_width < 0)
-                    throw new ArgumentException(String.Format("{0} is not a positive number", _width), "width");
+                    throw new ArgumentException($"{0} is not a positive number", nameof(Width));
             }
         }
 
-        public string Color
-        {
-            get
-            {
-                return _color;
-            }
-            set
-            {
-                _color = value;
-            }
-        }
+        public string Color { get; set; }
 
         public Rectangle(double lengthParam, double widthParam, string colorParam)
         {
             _length = lengthParam;
             _width = widthParam;
-            _color = colorParam;
+            Color = colorParam;
         }
 
         public Rectangle()

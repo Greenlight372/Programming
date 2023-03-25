@@ -1,4 +1,4 @@
-﻿namespace Programming
+﻿namespace Programming.View
 {
     partial class MainForm
     {
@@ -48,6 +48,7 @@
             EnumsLabel = new Label();
             EnumsListBox = new ListBox();
             Classes = new TabPage();
+            tableLayoutPanel1 = new TableLayoutPanel();
             MoviesGroupBox = new GroupBox();
             ScoreTextBox = new TextBox();
             ScoreLabel = new Label();
@@ -210,7 +211,7 @@
             Enumerations.Margin = new Padding(3, 2, 3, 2);
             Enumerations.Name = "Enumerations";
             Enumerations.Padding = new Padding(3, 2, 3, 2);
-            Enumerations.Size = new Size(561, 227);
+            Enumerations.Size = new Size(564, 247);
             Enumerations.TabIndex = 1;
             Enumerations.TabStop = false;
             Enumerations.Text = "Enumerations";
@@ -277,6 +278,7 @@
             // 
             // Classes
             // 
+            Classes.Controls.Add(tableLayoutPanel1);
             Classes.Controls.Add(MoviesGroupBox);
             Classes.Controls.Add(RectangleGroupBox);
             Classes.Location = new Point(4, 24);
@@ -286,6 +288,21 @@
             Classes.TabIndex = 1;
             Classes.Text = "Classes";
             Classes.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.BackColor = Color.Transparent;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 290F));
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(3, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 47F));
+            tableLayoutPanel1.Size = new Size(570, 407);
+            tableLayoutPanel1.TabIndex = 13;
+            tableLayoutPanel1.Visible = false;
             // 
             // MoviesGroupBox
             // 
@@ -578,5 +595,6 @@
         private Label GenreLabel;
         private TextBox ScoreTextBox;
         private Label ScoreLabel;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }
