@@ -115,7 +115,7 @@
             SeasonHandle.Controls.Add(SeasonLabel);
             SeasonHandle.Location = new Point(297, 236);
             SeasonHandle.Name = "SeasonHandle";
-            SeasonHandle.Size = new Size(271, 169);
+            SeasonHandle.Size = new Size(271, 172);
             SeasonHandle.TabIndex = 4;
             SeasonHandle.TabStop = false;
             SeasonHandle.Text = "Season Handle";
@@ -206,11 +206,11 @@
             Enumerations.Controls.Add(ValuesLabel);
             Enumerations.Controls.Add(EnumsLabel);
             Enumerations.Controls.Add(EnumsListBox);
-            Enumerations.Location = new Point(7, 4);
+            Enumerations.Location = new Point(6, 4);
             Enumerations.Margin = new Padding(3, 2, 3, 2);
             Enumerations.Name = "Enumerations";
             Enumerations.Padding = new Padding(3, 2, 3, 2);
-            Enumerations.Size = new Size(564, 247);
+            Enumerations.Size = new Size(562, 227);
             Enumerations.TabIndex = 1;
             Enumerations.TabStop = false;
             Enumerations.Text = "Enumerations";
