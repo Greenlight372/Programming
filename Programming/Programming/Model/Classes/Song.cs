@@ -11,31 +11,23 @@ namespace Programming.Model.Classes
     {
         private int _minutes;
         private int _seconds;
-        private string _composer;
-        private string _title;
 
         public int Minutes
         {
-            get
-            {
-                return _minutes;
-            }
+            get => _minutes;
             set
             {
+                Validator.AssertValueInRange(value, 0, 60, "Minutes");
                 _minutes = value;
-                Validator.AssertValueInRange(_minutes, 0, 60);
             }
         }
         public int Seconds
         {
-            get
-            {
-                return _seconds;
-            }
+            get => _seconds;
             set
             {
+                Validator.AssertValueInRange(value, 0, 60, "Seconds");
                 _seconds = value;
-                Validator.AssertValueInRange(_seconds, 0, 60);
             }
         }
         public string Composer { get; set; }

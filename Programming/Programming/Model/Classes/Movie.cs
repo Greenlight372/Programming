@@ -18,38 +18,29 @@ namespace Programming.Model.Classes
 
         public int Duration
         {
-            get
-            {
-                return _duration;
-            }
+            get => _duration;
             set
             {
+                Validator.AssertOnPositiveValue(value, "Duration");
                 _duration = value;
-                Validator.AssertOnPositiveValue(_duration);
             }
         }
         public int Year
         {
-            get
-            {
-                return _year;
-            }
+            get => _year;
             set
             {
+                Validator.AssertValueInRange(value, 1900, 2023, "Year");
                 _year = value;
-                Validator.AssertValueInRange(_year, 1900, 2023);
             }
         }
         public double Score
         {
-            get
-            {
-                return _score;
-            }
+            get => _score;
             set
             {
+                Validator.AssertValueInRange(value, 0, 10, "Score");
                 _score = value;
-                Validator.AssertValueInRange(_score, 0, 10);
             }
         }
 

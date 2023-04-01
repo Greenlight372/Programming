@@ -8,30 +8,24 @@ namespace Programming.Model.Classes
         private int _id;
         public double Length
         {
-            get
-            {
-                return _length;
-            }
+            get => _length;
             set
             {
+                Validator.AssertOnPositiveValue(value, "Length");
                 _length = value;
-                Validator.AssertOnPositiveValue(_length);
             }
         }
         public double Width
         {
-            get
-            {
-                return _width;
-            }
+            get => _width;
             set
             {
+                Validator.AssertOnPositiveValue(value, "Width");
                 _width = value;
-                Validator.AssertOnPositiveValue(_width);
             }
         }
-        public static int AllRectanglesCount { get { return _allRectanglesCount; } }
-        public int Id { get { return _id; } }
+        public static int AllRectanglesCount { get => _allRectanglesCount; }
+        public int Id { get => _id; }
 
         public string Color { get; set; }
         public Point2D Center;

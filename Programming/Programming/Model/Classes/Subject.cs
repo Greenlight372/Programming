@@ -8,21 +8,16 @@ namespace Programming.Model.Classes
 {
     public class Subject
     {
-        private string _subjectName;
         private int _hours;
-        private bool _credit;
 
         public string SubjectName { get; set; }
         public int Hours
         {
-            get
-            {
-                return _hours;
-            }
+            get => _hours;
             set
             {
+                Validator.AssertOnPositiveValue(value, "Hours");
                 _hours = value;
-                Validator.AssertOnPositiveValue(_hours);
             }
         }
         public bool Credit { get; set; }

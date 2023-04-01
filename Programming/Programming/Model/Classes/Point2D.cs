@@ -14,26 +14,26 @@ namespace Programming.Model.Classes
         { }
         public Point2D(int x, int y)
         {
-            SetX(x);
-            SetY(y);
+            X = x;
+            Y = y;
         }
-        public int GetX
+        public int X
         {
-            get { return _x; }
+            get => _x;
+            set
+            {
+                Validator.AssertOnPositiveValue(value, "X");
+                _x = value;
+            }
         }
-        public int GetY
+        public int Y
         {
-            get { return _y; }
-        }
-        private void SetX(int value)
-        {
-            _x = value;
-            Validator.AssertOnPositiveValue(_x);
-        }
-        private void SetY(int value)
-        {
-            _y = value;
-            Validator.AssertOnPositiveValue(_y);
+            get => _y;
+            set
+            {
+                Validator.AssertOnPositiveValue(value, "Y");
+                _y = value;
+            }
         }
     }
 }

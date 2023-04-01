@@ -59,14 +59,14 @@ namespace Programming.View
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //The problematic part.
-            Type selectedItem = (Type)EnumsListBox.SelectedItem;
-            var enumValues = Enum.GetValues(selectedItem);
-            ValuesListBox.DataSource = "";
+            var selectedItem = (Type)EnumsListBox.SelectedItem.GetType();
+            var enumValues = Enum.GetValues(selectedItem.GetType());
+            ValuesListBox.Items.Clear();
             foreach (var value in enumValues)
             {
                 ValuesListBox.Items.Add(value);
             }
-            ValueTextBox.Text = "";
+            ValueTextBox.Clear();
         }
 
         private void WeekdayButton_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace Programming.View
 
             if (Enum.TryParse(typeof(Weekday), WeekdayTextBox.Text, out parsedValue) == false)
             {
-                WeekdayParsingResult.Text = "Нет такого дня недели!";
+                WeekdayParsingResult.Text = "There's no such weekday!";
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Programming.View
                     if (parsedValue.ToString() == value)
                         parseID = counter;
                 }
-                string result = "Это день недели! (" + parsedValue + " - " + parseID + ")";
+                string result = "It's a weekday! (" + parsedValue + " - " + parseID + ")";
                 WeekdayParsingResult.Text = result;
             }
         }
@@ -128,8 +128,8 @@ namespace Programming.View
                 LengthTextBox.Text = _currentRectangle.Length.ToString();
                 WidthTextBox.Text = _currentRectangle.Width.ToString();
                 ColorTextBox.Text = _currentRectangle.Color;
-                PivotXTextBox.Text = _currentRectangle.Center.GetX.ToString();
-                PivotYTextBox.Text = _currentRectangle.Center.GetY.ToString();
+                CenterXTextBox.Text = _currentRectangle.Center.X.ToString();
+                CenterYTextBox.Text = _currentRectangle.Center.Y.ToString();
                 IdTextBox.Text = _currentRectangle.Id.ToString();
             }
         }

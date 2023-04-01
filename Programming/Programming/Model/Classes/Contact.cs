@@ -11,31 +11,23 @@ namespace Programming.Model.Classes
     {
         private string _name;
         private string _surname;
-        private double _phoneNumber;
-        private string _eMail;
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             set
             {
+                AssertStringContainsOnlyLetters(value);
                 _name = value;
-                AssertStringContainsOnlyLetters(_name);
             }
         }
         public string Surname
         {
-            get
-            {
-                return _surname;
-            }
+            get => _surname;
             set
             {
+                AssertStringContainsOnlyLetters(value);
                 _surname = value;
-                AssertStringContainsOnlyLetters(_surname);
             }
         }
         public double PhoneNumber { get; set; }
@@ -46,7 +38,7 @@ namespace Programming.Model.Classes
             foreach (char c in value)
             {
                 if (!char.IsLetterOrDigit(c) || c != ' ')
-                    throw new ArgumentException($"Invalid character {0}.", nameof(c));
+                    throw new ArgumentException($"Invalid character {c}.");
             }
         }
     }

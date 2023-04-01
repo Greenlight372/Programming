@@ -14,38 +14,29 @@ namespace Programming.Model.Classes
 
         public int Hours
         {
-            get
-            {
-                return _hours;
-            }
+            get => _hours;
             set
             {
+                Validator.AssertValueInRange(value, 0, 23, "Hours");
                 _hours = value;
-                Validator.AssertValueInRange(_hours, 0, 23);
             }
         }
         public int Minutes
         {
-            get
-            {
-                return _minutes;
-            }
+            get => _minutes;
             set
             {
+                Validator.AssertValueInRange(value, 0, 60, "Minutes");
                 _minutes = value;
-                Validator.AssertValueInRange(_minutes, 0, 60);
             }
         }
         public int Seconds
         {
-            get
-            {
-                return _seconds;
-            }
+            get => _seconds;
             set
             {
+                Validator.AssertValueInRange(value, 0, 60, "Seconds");
                 _seconds = value;
-                Validator.AssertValueInRange(_seconds, 0, 60);
             }
         }
     }

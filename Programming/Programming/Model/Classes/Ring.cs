@@ -10,21 +10,17 @@ namespace Programming.Model.Classes
     {
         private int _internalRadius;
         private int _externalRadius;
-        private Point2D _center;
         private double Area()
         {
             double externalArea = Math.PI * (_externalRadius ^ 2);
             double internalArea = Math.PI * (_internalRadius ^ 2);
             return externalArea - internalArea;
         }
-        public double GetArea { get { return Area(); } }
+        public double GetArea { get => Area(); }
         public Point2D Center { get; set; }
         public int InternalRadius
         {
-            get
-            {
-                return _internalRadius;
-            }
+            get => _internalRadius;
             set
             {
                 _internalRadius = value;
@@ -35,10 +31,7 @@ namespace Programming.Model.Classes
         }
         public int ExternalRadius
         {
-            get
-            {
-                return _externalRadius;
-            }
+            get => _externalRadius;
             set
             {
                 _externalRadius = value;
@@ -53,7 +46,7 @@ namespace Programming.Model.Classes
         {
             _internalRadius = internalRadius;
             _externalRadius = externalRadius;
-            _center = center;
+            Center = center;
         }
     }
 }
