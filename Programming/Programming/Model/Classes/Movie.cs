@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming.Model.Classes
 {
     public class Movie
     {
@@ -17,7 +17,7 @@ namespace Programming.Model
         public string Genre { get; set; }
 
         public int Duration
-        { 
+        {
             get
             {
                 return _duration;

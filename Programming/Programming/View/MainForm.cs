@@ -1,4 +1,5 @@
-using Programming.Model;
+using Programming.Model.Classes;
+using Programming.Model.Enums;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Security.Cryptography.X509Certificates;
@@ -6,14 +7,22 @@ using System.Windows.Forms;
 
 namespace Programming.View
 {
-
+    public enum EnumsList
+    {
+        Color,
+        EducationForm,
+        Genre,
+        Manufacturer,
+        Season,
+        Weekday
+    }
     public partial class MainForm : Form
     {
-        private Model.Rectangle[] _rectangle = new Model.Rectangle[5];
-        private Model.Rectangle _currentRectangle = new Model.Rectangle();
+        private Model.Classes.Rectangle[] _rectangle = new Model.Classes.Rectangle[5];
+        private Model.Classes.Rectangle _currentRectangle = new Model.Classes.Rectangle();
 
-        private Movie[] _movie = new Model.Movie[5];
-        private Model.Movie _currentMovie = new Model.Movie();
+        private Movie[] _movie = new Movie[5];
+        private Movie _currentMovie = new Model.Classes.Movie();
 
         public MainForm()
         {
@@ -22,20 +31,21 @@ namespace Programming.View
             RectangleListBox.SetSelected(0, true);
 
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
+            EnumsListBox.DataSource = Enum.GetValues(typeof(EnumsList));
             SeasonComboBox.DataSource = Enum.GetValues(typeof(Season));
 
             Random rand = new Random();
 
             for (int i = 0; i < 5; i++)
             {
-                _rectangle[i] = new Model.Rectangle
+                _rectangle[i] = new Model.Classes.Rectangle
                 (
                     rand.Next(0, 100),
                     rand.Next(0, 100),
                     "White",
-                    new Model.Point2D(rand.Next(0, 100), rand.Next(0, 100))
+                    new Model.Classes.Point2D(rand.Next(0, 100), rand.Next(0, 100))
                 );
-                _movie[i] = new Model.Movie
+                _movie[i] = new Model.Classes.Movie
                 (
                     "Sample Title",
                     30 + rand.Next(0, 120),
@@ -49,8 +59,14 @@ namespace Programming.View
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //The problematic part.
-            string selectedItem = EnumsListBox.SelectedItem.ToString();
-            ValuesListBox.DataSource = Enum.GetValues(Type.GetType(selectedItem));
+            Type selectedItem = (Type)EnumsListBox.SelectedItem;
+            var enumValues = Enum.GetValues(selectedItem);
+            ValuesListBox.DataSource = "";
+            foreach (var value in enumValues)
+            {
+                ValuesListBox.Items.Add(value);
+            }
+            ValueTextBox.Text = "";
         }
 
         private void WeekdayButton_Click(object sender, EventArgs e)
@@ -149,7 +165,7 @@ namespace Programming.View
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
-        private int FindRectangleWithMaxWidth(Model.Rectangle[] rectangleArray)
+        private int FindRectangleWithMaxWidth(Model.Classes.Rectangle[] rectangleArray)
         {
             int temp = 0;
 
@@ -162,7 +178,7 @@ namespace Programming.View
             return temp;
         }
 
-        private int FindMovieWithMaxScore(Model.Movie[] movieArray)
+        private int FindMovieWithMaxScore(Movie[] movieArray)
         {
             int temp = 0;
 

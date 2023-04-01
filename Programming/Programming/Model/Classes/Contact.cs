@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming.Model.Classes
 {
     public class Contact
     {
@@ -45,7 +45,7 @@ namespace Programming.Model
         {
             foreach (char c in value)
             {
-                if (!Char.IsLetterOrDigit(c) || c != ' ')
+                if (!char.IsLetterOrDigit(c) || c != ' ')
                     throw new ArgumentException($"Invalid character {0}.", nameof(c));
             }
         }

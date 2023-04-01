@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming.Model.Classes
 {
     public static class CollisionManager
     {
@@ -26,9 +26,9 @@ namespace Programming.Model
         {
             int dX = Math.Abs(ring1.Center.GetX - ring2.Center.GetX);
             int dY = Math.Abs(ring1.Center.GetY - ring2.Center.GetY);
-            double hypotenuse = Math.Sqrt(dX^2 + dY);
+            double hypotenuse = Math.Sqrt(dX ^ 2 + dY);
 
-            if (hypotenuse < (ring1.ExternalRadius + ring2.ExternalRadius))
+            if (hypotenuse < ring1.ExternalRadius + ring2.ExternalRadius)
                 return true;
 
             return false;

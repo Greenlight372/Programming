@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace Programming.Model
+namespace Programming.Model.Classes
 {
     public class Song
     {
