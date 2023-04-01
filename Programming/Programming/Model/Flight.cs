@@ -22,10 +22,8 @@ namespace Programming.Model
             }
             set
             {
-                if (_flightTime < 0)
-                    throw new ArgumentException(String.Format("{0} is not a positive number", _flightTime), "flightTime");
-
                 _flightTime = value;
+                Validator.AssertOnPositiveValue(_flightTime);
             }
         }
     }

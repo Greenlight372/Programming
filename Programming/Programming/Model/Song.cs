@@ -22,10 +22,8 @@ namespace Programming.Model
             }
             set
             {
-                if (_minutes < 0 || _minutes > 60)
-                    throw new ArgumentException($"{0} is a number out of range", nameof(Minutes));
-
                 _minutes = value;
+                Validator.AssertValueInRange(_minutes, 0, 60);
             }
         }
         public int Seconds
@@ -36,10 +34,8 @@ namespace Programming.Model
             }
             set
             {
-                if (_seconds < 0 || _seconds > 60)
-                    throw new ArgumentException($"{0} is a number out of range", nameof(Seconds));
-
                 _seconds = value;
+                Validator.AssertValueInRange(_seconds, 0, 60);
             }
         }
         public string Composer { get; set; }

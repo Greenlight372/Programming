@@ -4,7 +4,8 @@ namespace Programming.Model
     {
         private double _length;
         private double _width;
-
+        private static int _allRectanglesCount;
+        private int _id;
         public double Length
         {
             get
@@ -14,11 +15,9 @@ namespace Programming.Model
             set
             {
                 _length = value;
-                if (_length < 0)
-                    throw new ArgumentException($"{0} is not a positive number", nameof(Length));
+                Validator.AssertOnPositiveValue(_length);
             }
         }
-
         public double Width
         {
             get
@@ -28,22 +27,28 @@ namespace Programming.Model
             set
             {
                 _width = value;
-                if (_width < 0)
-                    throw new ArgumentException($"{0} is not a positive number", nameof(Width));
+                Validator.AssertOnPositiveValue(_width);
             }
         }
+        public static int AllRectanglesCount { get { return _allRectanglesCount; } }
+        public int Id { get { return _id; } }
 
         public string Color { get; set; }
+        public Point2D Center;
 
-        public Rectangle(double lengthParam, double widthParam, string colorParam)
+        public Rectangle(double lengthParam, double widthParam, string colorParam, Point2D center)
         {
             _length = lengthParam;
             _width = widthParam;
             Color = colorParam;
+            Center = center;
+            _id = _allRectanglesCount;
+            _allRectanglesCount += 1;
         }
-
         public Rectangle()
         {
+            _id = _allRectanglesCount;
+            _allRectanglesCount += 1;
         }
     }
 }

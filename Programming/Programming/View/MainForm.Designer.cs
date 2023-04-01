@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             Classes = new TabPage();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            ClassesLayoutPanel = new TableLayoutPanel();
             MoviesGroupBox = new GroupBox();
             ScoreTextBox = new TextBox();
             ScoreLabel = new Label();
@@ -45,6 +45,12 @@
             TitleLabel = new Label();
             MoviesListBox = new ListBox();
             RectangleGroupBox = new GroupBox();
+            IdTextBox = new TextBox();
+            IdLabel = new Label();
+            PivotYTextBox = new TextBox();
+            PivotYLabel = new Label();
+            PivotXTextBox = new TextBox();
+            PivotXLabel = new Label();
             RectangleButton = new Button();
             ColorTextBox = new TextBox();
             ColorLabel = new Label();
@@ -54,15 +60,7 @@
             LengthLabel = new Label();
             RectangleListBox = new ListBox();
             Enums = new TabPage();
-            SeasonHandle = new GroupBox();
-            SeasonButton = new Button();
-            SeasonComboBox = new ComboBox();
-            SeasonLabel = new Label();
-            WeekdayParsing = new GroupBox();
-            WeekdayParsingResult = new Label();
-            WeekdayButton = new Button();
-            WeekdayTextBox = new TextBox();
-            WeekdayLabel = new Label();
+            EnumsLayoutPanel = new TableLayoutPanel();
             Enumerations = new GroupBox();
             ValueTextBox = new TextBox();
             IntValueLabel = new Label();
@@ -70,21 +68,33 @@
             ValuesLabel = new Label();
             EnumsLabel = new Label();
             EnumsListBox = new ListBox();
+            EnumsLayoutSubpanel = new TableLayoutPanel();
+            WeekdayParsing = new GroupBox();
+            WeekdayParsingResult = new Label();
+            WeekdayButton = new Button();
+            WeekdayTextBox = new TextBox();
+            WeekdayLabel = new Label();
+            SeasonHandle = new GroupBox();
+            SeasonButton = new Button();
+            SeasonComboBox = new ComboBox();
+            SeasonLabel = new Label();
             EnumsTabControl = new TabControl();
             Classes.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            ClassesLayoutPanel.SuspendLayout();
             MoviesGroupBox.SuspendLayout();
             RectangleGroupBox.SuspendLayout();
             Enums.SuspendLayout();
-            SeasonHandle.SuspendLayout();
-            WeekdayParsing.SuspendLayout();
+            EnumsLayoutPanel.SuspendLayout();
             Enumerations.SuspendLayout();
+            EnumsLayoutSubpanel.SuspendLayout();
+            WeekdayParsing.SuspendLayout();
+            SeasonHandle.SuspendLayout();
             EnumsTabControl.SuspendLayout();
             SuspendLayout();
             // 
             // Classes
             // 
-            Classes.Controls.Add(tableLayoutPanel1);
+            Classes.Controls.Add(ClassesLayoutPanel);
             Classes.Location = new Point(4, 24);
             Classes.Name = "Classes";
             Classes.Padding = new Padding(3);
@@ -93,21 +103,21 @@
             Classes.Text = "Classes";
             Classes.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // ClassesLayoutPanel
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.AutoSize = true;
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(MoviesGroupBox, 1, 0);
-            tableLayoutPanel1.Controls.Add(RectangleGroupBox, 0, 0);
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(570, 407);
-            tableLayoutPanel1.TabIndex = 0;
+            ClassesLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ClassesLayoutPanel.AutoSize = true;
+            ClassesLayoutPanel.ColumnCount = 2;
+            ClassesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            ClassesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            ClassesLayoutPanel.Controls.Add(MoviesGroupBox, 1, 0);
+            ClassesLayoutPanel.Controls.Add(RectangleGroupBox, 0, 0);
+            ClassesLayoutPanel.Location = new Point(3, 3);
+            ClassesLayoutPanel.Name = "ClassesLayoutPanel";
+            ClassesLayoutPanel.RowCount = 1;
+            ClassesLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            ClassesLayoutPanel.Size = new Size(570, 407);
+            ClassesLayoutPanel.TabIndex = 0;
             // 
             // MoviesGroupBox
             // 
@@ -167,7 +177,7 @@
             // 
             // MoviesButton
             // 
-            MoviesButton.Location = new Point(171, 272);
+            MoviesButton.Location = new Point(171, 306);
             MoviesButton.Name = "MoviesButton";
             MoviesButton.Size = new Size(100, 23);
             MoviesButton.TabIndex = 1;
@@ -241,6 +251,12 @@
             // RectangleGroupBox
             // 
             RectangleGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RectangleGroupBox.Controls.Add(IdTextBox);
+            RectangleGroupBox.Controls.Add(IdLabel);
+            RectangleGroupBox.Controls.Add(PivotYTextBox);
+            RectangleGroupBox.Controls.Add(PivotYLabel);
+            RectangleGroupBox.Controls.Add(PivotXTextBox);
+            RectangleGroupBox.Controls.Add(PivotXLabel);
             RectangleGroupBox.Controls.Add(RectangleButton);
             RectangleGroupBox.Controls.Add(ColorTextBox);
             RectangleGroupBox.Controls.Add(ColorLabel);
@@ -256,9 +272,60 @@
             RectangleGroupBox.TabStop = false;
             RectangleGroupBox.Text = "Rectangles";
             // 
+            // IdTextBox
+            // 
+            IdTextBox.Location = new Point(171, 253);
+            IdTextBox.Name = "IdTextBox";
+            IdTextBox.ReadOnly = true;
+            IdTextBox.Size = new Size(100, 23);
+            IdTextBox.TabIndex = 13;
+            // 
+            // IdLabel
+            // 
+            IdLabel.AutoSize = true;
+            IdLabel.Location = new Point(171, 235);
+            IdLabel.Name = "IdLabel";
+            IdLabel.Size = new Size(21, 15);
+            IdLabel.TabIndex = 12;
+            IdLabel.Text = "ID:";
+            // 
+            // PivotYTextBox
+            // 
+            PivotYTextBox.Location = new Point(171, 211);
+            PivotYTextBox.Name = "PivotYTextBox";
+            PivotYTextBox.ReadOnly = true;
+            PivotYTextBox.Size = new Size(100, 23);
+            PivotYTextBox.TabIndex = 11;
+            // 
+            // PivotYLabel
+            // 
+            PivotYLabel.AutoSize = true;
+            PivotYLabel.Location = new Point(171, 193);
+            PivotYLabel.Name = "PivotYLabel";
+            PivotYLabel.Size = new Size(47, 15);
+            PivotYLabel.TabIndex = 10;
+            PivotYLabel.Text = "Pivot Y:";
+            // 
+            // PivotXTextBox
+            // 
+            PivotXTextBox.Location = new Point(171, 169);
+            PivotXTextBox.Name = "PivotXTextBox";
+            PivotXTextBox.ReadOnly = true;
+            PivotXTextBox.Size = new Size(100, 23);
+            PivotXTextBox.TabIndex = 9;
+            // 
+            // PivotXLabel
+            // 
+            PivotXLabel.AutoSize = true;
+            PivotXLabel.Location = new Point(171, 151);
+            PivotXLabel.Name = "PivotXLabel";
+            PivotXLabel.Size = new Size(47, 15);
+            PivotXLabel.TabIndex = 8;
+            PivotXLabel.Text = "Pivot X:";
+            // 
             // RectangleButton
             // 
-            RectangleButton.Location = new Point(171, 272);
+            RectangleButton.Location = new Point(171, 306);
             RectangleButton.Name = "RectangleButton";
             RectangleButton.Size = new Size(100, 23);
             RectangleButton.TabIndex = 1;
@@ -331,9 +398,7 @@
             // 
             // Enums
             // 
-            Enums.Controls.Add(SeasonHandle);
-            Enums.Controls.Add(WeekdayParsing);
-            Enums.Controls.Add(Enumerations);
+            Enums.Controls.Add(EnumsLayoutPanel);
             Enums.Location = new Point(4, 24);
             Enums.Margin = new Padding(3, 2, 3, 2);
             Enums.Name = "Enums";
@@ -343,58 +408,126 @@
             Enums.Text = "Enums";
             Enums.UseVisualStyleBackColor = true;
             // 
-            // SeasonHandle
+            // EnumsLayoutPanel
             // 
-            SeasonHandle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            SeasonHandle.AutoSize = true;
-            SeasonHandle.Controls.Add(SeasonButton);
-            SeasonHandle.Controls.Add(SeasonComboBox);
-            SeasonHandle.Controls.Add(SeasonLabel);
-            SeasonHandle.Location = new Point(297, 236);
-            SeasonHandle.Name = "SeasonHandle";
-            SeasonHandle.Size = new Size(271, 172);
-            SeasonHandle.TabIndex = 4;
-            SeasonHandle.TabStop = false;
-            SeasonHandle.Text = "Season Handle";
+            EnumsLayoutPanel.ColumnCount = 1;
+            EnumsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            EnumsLayoutPanel.Controls.Add(Enumerations, 0, 0);
+            EnumsLayoutPanel.Controls.Add(EnumsLayoutSubpanel, 0, 1);
+            EnumsLayoutPanel.Dock = DockStyle.Fill;
+            EnumsLayoutPanel.Location = new Point(3, 2);
+            EnumsLayoutPanel.Name = "EnumsLayoutPanel";
+            EnumsLayoutPanel.RowCount = 2;
+            EnumsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 53.54523F));
+            EnumsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 46.45477F));
+            EnumsLayoutPanel.Size = new Size(570, 409);
+            EnumsLayoutPanel.TabIndex = 5;
             // 
-            // SeasonButton
+            // Enumerations
             // 
-            SeasonButton.Location = new Point(171, 36);
-            SeasonButton.Name = "SeasonButton";
-            SeasonButton.Size = new Size(75, 23);
-            SeasonButton.TabIndex = 2;
-            SeasonButton.Text = "Go!";
-            SeasonButton.UseVisualStyleBackColor = true;
-            SeasonButton.Click += SeasonButton_Click;
+            Enumerations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Enumerations.AutoSize = true;
+            Enumerations.Controls.Add(ValueTextBox);
+            Enumerations.Controls.Add(IntValueLabel);
+            Enumerations.Controls.Add(ValuesListBox);
+            Enumerations.Controls.Add(ValuesLabel);
+            Enumerations.Controls.Add(EnumsLabel);
+            Enumerations.Controls.Add(EnumsListBox);
+            Enumerations.Location = new Point(3, 2);
+            Enumerations.Margin = new Padding(3, 2, 3, 2);
+            Enumerations.Name = "Enumerations";
+            Enumerations.Padding = new Padding(3, 2, 3, 2);
+            Enumerations.Size = new Size(564, 215);
+            Enumerations.TabIndex = 2;
+            Enumerations.TabStop = false;
+            Enumerations.Text = "Enumerations";
             // 
-            // SeasonComboBox
+            // ValueTextBox
             // 
-            SeasonComboBox.FormattingEnabled = true;
-            SeasonComboBox.Location = new Point(6, 37);
-            SeasonComboBox.Name = "SeasonComboBox";
-            SeasonComboBox.Size = new Size(159, 23);
-            SeasonComboBox.TabIndex = 1;
+            ValueTextBox.Location = new Point(400, 54);
+            ValueTextBox.Name = "ValueTextBox";
+            ValueTextBox.ReadOnly = true;
+            ValueTextBox.Size = new Size(100, 23);
+            ValueTextBox.TabIndex = 7;
             // 
-            // SeasonLabel
+            // IntValueLabel
             // 
-            SeasonLabel.AutoSize = true;
-            SeasonLabel.Location = new Point(3, 19);
-            SeasonLabel.Name = "SeasonLabel";
-            SeasonLabel.Size = new Size(89, 15);
-            SeasonLabel.TabIndex = 0;
-            SeasonLabel.Text = "Choose season:";
+            IntValueLabel.AutoSize = true;
+            IntValueLabel.Location = new Point(400, 35);
+            IntValueLabel.Name = "IntValueLabel";
+            IntValueLabel.Size = new Size(55, 15);
+            IntValueLabel.TabIndex = 6;
+            IntValueLabel.Text = "Int value:";
+            // 
+            // ValuesListBox
+            // 
+            ValuesListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ValuesListBox.FormattingEnabled = true;
+            ValuesListBox.HorizontalScrollbar = true;
+            ValuesListBox.ItemHeight = 15;
+            ValuesListBox.Location = new Point(203, 53);
+            ValuesListBox.Margin = new Padding(3, 2, 3, 2);
+            ValuesListBox.Name = "ValuesListBox";
+            ValuesListBox.Size = new Size(151, 154);
+            ValuesListBox.TabIndex = 5;
+            // 
+            // ValuesLabel
+            // 
+            ValuesLabel.AutoSize = true;
+            ValuesLabel.Location = new Point(203, 35);
+            ValuesLabel.Name = "ValuesLabel";
+            ValuesLabel.Size = new Size(81, 15);
+            ValuesLabel.TabIndex = 4;
+            ValuesLabel.Text = "Choose value:";
+            // 
+            // EnumsLabel
+            // 
+            EnumsLabel.AutoSize = true;
+            EnumsLabel.Location = new Point(6, 35);
+            EnumsLabel.Name = "EnumsLabel";
+            EnumsLabel.Size = new Size(121, 15);
+            EnumsLabel.TabIndex = 3;
+            EnumsLabel.Text = "Choose enumeration:";
+            // 
+            // EnumsListBox
+            // 
+            EnumsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            EnumsListBox.FormattingEnabled = true;
+            EnumsListBox.HorizontalScrollbar = true;
+            EnumsListBox.ItemHeight = 15;
+            EnumsListBox.Items.AddRange(new object[] { "Color", "EducationForm", "Genre", "Manufacturer", "Season", "Weekday" });
+            EnumsListBox.Location = new Point(6, 53);
+            EnumsListBox.Margin = new Padding(3, 2, 3, 2);
+            EnumsListBox.Name = "EnumsListBox";
+            EnumsListBox.Size = new Size(151, 154);
+            EnumsListBox.TabIndex = 2;
+            // 
+            // EnumsLayoutSubpanel
+            // 
+            EnumsLayoutSubpanel.ColumnCount = 2;
+            EnumsLayoutSubpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            EnumsLayoutSubpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            EnumsLayoutSubpanel.Controls.Add(WeekdayParsing, 1, 0);
+            EnumsLayoutSubpanel.Controls.Add(SeasonHandle, 0, 0);
+            EnumsLayoutSubpanel.Dock = DockStyle.Fill;
+            EnumsLayoutSubpanel.Location = new Point(3, 222);
+            EnumsLayoutSubpanel.Name = "EnumsLayoutSubpanel";
+            EnumsLayoutSubpanel.RowCount = 1;
+            EnumsLayoutSubpanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            EnumsLayoutSubpanel.Size = new Size(564, 184);
+            EnumsLayoutSubpanel.TabIndex = 3;
             // 
             // WeekdayParsing
             // 
-            WeekdayParsing.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            WeekdayParsing.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             WeekdayParsing.AutoSize = true;
             WeekdayParsing.Controls.Add(WeekdayParsingResult);
             WeekdayParsing.Controls.Add(WeekdayButton);
             WeekdayParsing.Controls.Add(WeekdayTextBox);
             WeekdayParsing.Controls.Add(WeekdayLabel);
-            WeekdayParsing.Location = new Point(6, 236);
+            WeekdayParsing.Location = new Point(285, 3);
             WeekdayParsing.Name = "WeekdayParsing";
-            WeekdayParsing.Size = new Size(285, 172);
+            WeekdayParsing.Size = new Size(276, 178);
             WeekdayParsing.TabIndex = 2;
             WeekdayParsing.TabStop = false;
             WeekdayParsing.Text = "Weekday Parsing";
@@ -433,84 +566,46 @@
             WeekdayLabel.TabIndex = 0;
             WeekdayLabel.Text = "Type value for parsing:";
             // 
-            // Enumerations
+            // SeasonHandle
             // 
-            Enumerations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Enumerations.AutoSize = true;
-            Enumerations.Controls.Add(ValueTextBox);
-            Enumerations.Controls.Add(IntValueLabel);
-            Enumerations.Controls.Add(ValuesListBox);
-            Enumerations.Controls.Add(ValuesLabel);
-            Enumerations.Controls.Add(EnumsLabel);
-            Enumerations.Controls.Add(EnumsListBox);
-            Enumerations.Location = new Point(6, 4);
-            Enumerations.Margin = new Padding(3, 2, 3, 2);
-            Enumerations.Name = "Enumerations";
-            Enumerations.Padding = new Padding(3, 2, 3, 2);
-            Enumerations.Size = new Size(562, 227);
-            Enumerations.TabIndex = 1;
-            Enumerations.TabStop = false;
-            Enumerations.Text = "Enumerations";
+            SeasonHandle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SeasonHandle.AutoSize = true;
+            SeasonHandle.Controls.Add(SeasonButton);
+            SeasonHandle.Controls.Add(SeasonComboBox);
+            SeasonHandle.Controls.Add(SeasonLabel);
+            SeasonHandle.Location = new Point(3, 3);
+            SeasonHandle.Name = "SeasonHandle";
+            SeasonHandle.Size = new Size(276, 178);
+            SeasonHandle.TabIndex = 4;
+            SeasonHandle.TabStop = false;
+            SeasonHandle.Text = "Season Handle";
             // 
-            // ValueTextBox
+            // SeasonButton
             // 
-            ValueTextBox.Location = new Point(400, 54);
-            ValueTextBox.Name = "ValueTextBox";
-            ValueTextBox.ReadOnly = true;
-            ValueTextBox.Size = new Size(100, 23);
-            ValueTextBox.TabIndex = 7;
+            SeasonButton.Location = new Point(171, 36);
+            SeasonButton.Name = "SeasonButton";
+            SeasonButton.Size = new Size(75, 23);
+            SeasonButton.TabIndex = 2;
+            SeasonButton.Text = "Go!";
+            SeasonButton.UseVisualStyleBackColor = true;
+            SeasonButton.Click += SeasonButton_Click;
             // 
-            // IntValueLabel
+            // SeasonComboBox
             // 
-            IntValueLabel.AutoSize = true;
-            IntValueLabel.Location = new Point(400, 36);
-            IntValueLabel.Name = "IntValueLabel";
-            IntValueLabel.Size = new Size(55, 15);
-            IntValueLabel.TabIndex = 6;
-            IntValueLabel.Text = "Int value:";
+            SeasonComboBox.FormattingEnabled = true;
+            SeasonComboBox.Location = new Point(6, 37);
+            SeasonComboBox.Name = "SeasonComboBox";
+            SeasonComboBox.Size = new Size(159, 23);
+            SeasonComboBox.TabIndex = 1;
             // 
-            // ValuesListBox
+            // SeasonLabel
             // 
-            ValuesListBox.FormattingEnabled = true;
-            ValuesListBox.HorizontalScrollbar = true;
-            ValuesListBox.ItemHeight = 15;
-            ValuesListBox.Location = new Point(203, 53);
-            ValuesListBox.Margin = new Padding(3, 2, 3, 2);
-            ValuesListBox.Name = "ValuesListBox";
-            ValuesListBox.Size = new Size(151, 154);
-            ValuesListBox.TabIndex = 5;
-            ValuesListBox.SelectedIndexChanged += ValuesListBox_SelectedIndexChanged;
-            // 
-            // ValuesLabel
-            // 
-            ValuesLabel.AutoSize = true;
-            ValuesLabel.Location = new Point(203, 36);
-            ValuesLabel.Name = "ValuesLabel";
-            ValuesLabel.Size = new Size(81, 15);
-            ValuesLabel.TabIndex = 4;
-            ValuesLabel.Text = "Choose value:";
-            // 
-            // EnumsLabel
-            // 
-            EnumsLabel.AutoSize = true;
-            EnumsLabel.Location = new Point(6, 36);
-            EnumsLabel.Name = "EnumsLabel";
-            EnumsLabel.Size = new Size(121, 15);
-            EnumsLabel.TabIndex = 3;
-            EnumsLabel.Text = "Choose enumeration:";
-            // 
-            // EnumsListBox
-            // 
-            EnumsListBox.FormattingEnabled = true;
-            EnumsListBox.HorizontalScrollbar = true;
-            EnumsListBox.ItemHeight = 15;
-            EnumsListBox.Items.AddRange(new object[] { "Color", "EducationForm", "Genre", "Manufacturer", "Season", "Weekday" });
-            EnumsListBox.Location = new Point(6, 53);
-            EnumsListBox.Margin = new Padding(3, 2, 3, 2);
-            EnumsListBox.Name = "EnumsListBox";
-            EnumsListBox.Size = new Size(151, 154);
-            EnumsListBox.TabIndex = 2;
-            EnumsListBox.SelectedIndexChanged += EnumsListBox_SelectedIndexChanged;
+            SeasonLabel.AutoSize = true;
+            SeasonLabel.Location = new Point(3, 19);
+            SeasonLabel.Name = "SeasonLabel";
+            SeasonLabel.Size = new Size(89, 15);
+            SeasonLabel.TabIndex = 0;
+            SeasonLabel.Text = "Choose season:";
             // 
             // EnumsTabControl
             // 
@@ -539,19 +634,22 @@
             Text = "MainForm";
             Classes.ResumeLayout(false);
             Classes.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
+            ClassesLayoutPanel.ResumeLayout(false);
             MoviesGroupBox.ResumeLayout(false);
             MoviesGroupBox.PerformLayout();
             RectangleGroupBox.ResumeLayout(false);
             RectangleGroupBox.PerformLayout();
             Enums.ResumeLayout(false);
-            Enums.PerformLayout();
-            SeasonHandle.ResumeLayout(false);
-            SeasonHandle.PerformLayout();
-            WeekdayParsing.ResumeLayout(false);
-            WeekdayParsing.PerformLayout();
+            EnumsLayoutPanel.ResumeLayout(false);
+            EnumsLayoutPanel.PerformLayout();
             Enumerations.ResumeLayout(false);
             Enumerations.PerformLayout();
+            EnumsLayoutSubpanel.ResumeLayout(false);
+            EnumsLayoutSubpanel.PerformLayout();
+            WeekdayParsing.ResumeLayout(false);
+            WeekdayParsing.PerformLayout();
+            SeasonHandle.ResumeLayout(false);
+            SeasonHandle.PerformLayout();
             EnumsTabControl.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -559,7 +657,7 @@
         #endregion
 
         private TabPage Classes;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel ClassesLayoutPanel;
         private GroupBox MoviesGroupBox;
         private TextBox ScoreTextBox;
         private Label ScoreLabel;
@@ -584,15 +682,13 @@
         private TextBox LengthTextBox;
         private Label LengthLabel;
         private ListBox RectangleListBox;
-        private GroupBox SeasonHandle;
-        private Button SeasonButton;
-        private ComboBox SeasonComboBox;
-        private Label SeasonLabel;
-        private GroupBox WeekdayParsing;
-        private Label WeekdayParsingResult;
-        private Button WeekdayButton;
-        private TextBox WeekdayTextBox;
-        private Label WeekdayLabel;
+        private TextBox PivotYTextBox;
+        private Label PivotYLabel;
+        private TextBox PivotXTextBox;
+        private Label PivotXLabel;
+        private TextBox IdTextBox;
+        private Label IdLabel;
+        private TableLayoutPanel EnumsLayoutPanel;
         private GroupBox Enumerations;
         private TextBox ValueTextBox;
         private Label IntValueLabel;
@@ -600,5 +696,15 @@
         private Label ValuesLabel;
         private Label EnumsLabel;
         public ListBox EnumsListBox;
+        private TableLayoutPanel EnumsLayoutSubpanel;
+        private GroupBox WeekdayParsing;
+        private Label WeekdayParsingResult;
+        private Button WeekdayButton;
+        private TextBox WeekdayTextBox;
+        private Label WeekdayLabel;
+        private GroupBox SeasonHandle;
+        private Button SeasonButton;
+        private ComboBox SeasonComboBox;
+        private Label SeasonLabel;
     }
 }

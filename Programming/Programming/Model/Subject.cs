@@ -21,10 +21,8 @@ namespace Programming.Model
             }
             set
             {
-                if (_hours < 0)
-                    throw new ArgumentException($"{0} is not a positive number", nameof(Hours));
-
                 _hours = value;
+                Validator.AssertOnPositiveValue(_hours);
             }
         }
         public bool Credit { get; set; }

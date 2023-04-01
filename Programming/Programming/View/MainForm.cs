@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Programming.View
 {
+
     public partial class MainForm : Form
     {
         private Model.Rectangle[] _rectangle = new Model.Rectangle[5];
@@ -27,7 +28,13 @@ namespace Programming.View
 
             for (int i = 0; i < 5; i++)
             {
-                _rectangle[i] = new Model.Rectangle(rand.Next(0, 100), rand.Next(0, 100), "White");
+                _rectangle[i] = new Model.Rectangle
+                (
+                    rand.Next(0, 100),
+                    rand.Next(0, 100),
+                    "White",
+                    new Model.Point2D(rand.Next(0, 100), rand.Next(0, 100))
+                );
                 _movie[i] = new Model.Movie
                 (
                     "Sample Title",
@@ -39,40 +46,13 @@ namespace Programming.View
             }
         }
 
-        /// <summary>
-        /// Выбор нумерации.
-        /// </summary>
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedEnum = EnumsListBox.SelectedItem.ToString();
-            switch (selectedEnum)
-            {
-                case "Color":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Model.Color));
-                    break;
-                case "EducationForm":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(EducationForm));
-                    break;
-                case "Genre":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Genre));
-                    break;
-                case "Manufacturer":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Manufacturer));
-                    break;
-                case "Season":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Season));
-                    break;
-                case "Weekday":
-                    ValuesListBox.DataSource = Enum.GetValues(typeof(Season));
-                    break;
-                default:
-                    break;
-            }
+            //The problematic part.
+            string selectedItem = EnumsListBox.SelectedItem.ToString();
+            ValuesListBox.DataSource = Enum.GetValues(Type.GetType(selectedItem));
         }
 
-        /// <summary>
-        /// Парсинг дня недели.
-        /// </summary>
         private void WeekdayButton_Click(object sender, EventArgs e)
         {
             object parsedValue;
@@ -101,9 +81,6 @@ namespace Programming.View
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
         }
 
-        /// <summary>
-        /// Времена года.
-        /// </summary>
         private void SeasonButton_Click(object sender, EventArgs e)
         {
             string currentSeason = SeasonComboBox.Text;
@@ -135,6 +112,9 @@ namespace Programming.View
                 LengthTextBox.Text = _currentRectangle.Length.ToString();
                 WidthTextBox.Text = _currentRectangle.Width.ToString();
                 ColorTextBox.Text = _currentRectangle.Color;
+                PivotXTextBox.Text = _currentRectangle.Center.GetX.ToString();
+                PivotYTextBox.Text = _currentRectangle.Center.GetY.ToString();
+                IdTextBox.Text = _currentRectangle.Id.ToString();
             }
         }
 

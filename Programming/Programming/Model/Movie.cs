@@ -25,8 +25,7 @@ namespace Programming.Model
             set
             {
                 _duration = value;
-                if (_duration < 0)
-                    throw new ArgumentException($"{0} is not a positive number", nameof(Duration));
+                Validator.AssertOnPositiveValue(_duration);
             }
         }
         public int Year
@@ -38,8 +37,7 @@ namespace Programming.Model
             set
             {
                 _year = value;
-                if (_year < 1900 || _year > 2023)
-                    throw new ArgumentException($"{0} is a number out of range", nameof(Year));
+                Validator.AssertValueInRange(_year, 1900, 2023);
             }
         }
         public double Score
@@ -51,8 +49,7 @@ namespace Programming.Model
             set
             {
                 _score = value;
-                if (_score < 0 || _score > 10)
-                    throw new ArgumentException($"{0} is a number out of range", nameof(Score));
+                Validator.AssertValueInRange(_score, 0, 10);
             }
         }
 
