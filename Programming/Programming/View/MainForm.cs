@@ -7,22 +7,26 @@ using System.Windows.Forms;
 
 namespace Programming.View
 {
-    public enum EnumsList
-    {
-        Color,
-        EducationForm,
-        Genre,
-        Manufacturer,
-        Season,
-        Weekday
-    }
     public partial class MainForm : Form
     {
+        private object[] _enumsList = new object[]
+        {
+            typeof(Model.Enums.Color),
+            typeof(EducationForm),
+            typeof(Genre),
+            typeof(Manufacturer),
+            typeof(Season),
+            typeof(Weekday)
+        };
+
         private Model.Classes.Rectangle[] _rectangle = new Model.Classes.Rectangle[5];
         private Model.Classes.Rectangle _currentRectangle = new Model.Classes.Rectangle();
 
         private Movie[] _movie = new Movie[5];
         private Movie _currentMovie = new Model.Classes.Movie();
+
+        private List<Model.Classes.Rectangle> _rectangles;
+        public Model.Classes.Rectangle Rectangle;
 
         public MainForm()
         {
@@ -31,7 +35,7 @@ namespace Programming.View
             RectangleListBox.SetSelected(0, true);
 
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();
-            EnumsListBox.DataSource = Enum.GetValues(typeof(EnumsList));
+            EnumsListBox.DataSource = Enum.GetValues(typeof(EnumOfEnums));
             SeasonComboBox.DataSource = Enum.GetValues(typeof(Season));
 
             Random rand = new Random();
@@ -55,12 +59,10 @@ namespace Programming.View
                 );
             }
         }
-
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //The problematic part.
-            var selectedItem = (Type)EnumsListBox.SelectedItem.GetType();
-            var enumValues = Enum.GetValues(selectedItem.GetType());
+            var selectedItem = EnumsListBox.SelectedIndex;
+            var enumValues = Enum.GetValues((Type)_enumsList[selectedItem]);
             ValuesListBox.Items.Clear();
             foreach (var value in enumValues)
             {
@@ -259,6 +261,11 @@ namespace Programming.View
             YearTextBox.Text = _currentMovie.Year.ToString();
             GenreTextBox.Text = _currentMovie.Genre;
             ScoreTextBox.Text = _currentMovie.Score.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
