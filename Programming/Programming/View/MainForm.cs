@@ -25,8 +25,9 @@ namespace Programming.View
         private Movie[] _movie = new Movie[5];
         private Movie _currentMovie = new Model.Classes.Movie();
 
-        private List<Model.Classes.Rectangle> _rectangles;
+        private List<Model.Classes.Rectangle> _rectangles = new List<Model.Classes.Rectangle>();
         public Model.Classes.Rectangle Rectangle;
+        private List<Panel> _rectanglePanels;
 
         public MainForm()
         {
@@ -263,9 +264,160 @@ namespace Programming.View
             ScoreTextBox.Text = _currentMovie.Score.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AddRectangleBox_Click(object sender, EventArgs e)
         {
+            Random rand = new Random();
 
+            _rectangles.Add
+            (
+                new Model.Classes.Rectangle
+                (
+                    rand.Next(0, 100),
+                    rand.Next(0, 100),
+                    "White",
+                    new Point2D(rand.Next(0, 300), rand.Next(0, 300))
+                )
+            );
+
+            int id = _rectangles[_rectangles.Count-1].Id;
+            int x = _rectangles[_rectangles.Count-1].Center.X;
+            int y = _rectangles[_rectangles.Count-1].Center.Y;
+            double width = _rectangles[_rectangles.Count-1].Width;
+            double height = _rectangles[_rectangles.Count-1].Length;
+
+            Panel panel = new Panel();
+            panel.Location = new Point(x, y);
+            panel.Width = 10;
+            panel.Height = 10;
+            panel.ForeColor = System.Drawing.Color.FromArgb(127, 127, 255, 127);
+
+            RectanglesListBox.Items.Add
+            (
+                $"{id}: (X={x}, Y={y}, Width={width}, Height={height})"
+            );
+        }
+
+        private void RemoveRectangleBox_Click(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                _rectangles.Remove(_rectangles[RectanglesListBox.SelectedIndex]);
+                RectanglesListBox.Items.RemoveAt(RectanglesListBox.SelectedIndex);
+            }
+        }
+
+        private void RectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                int id = _rectangles[RectanglesListBox.SelectedIndex].Id;
+                int x = _rectangles[RectanglesListBox.SelectedIndex].Center.X;
+                int y = _rectangles[RectanglesListBox.SelectedIndex].Center.Y;
+                double width = _rectangles[RectanglesListBox.SelectedIndex].Width;
+                double height = _rectangles[RectanglesListBox.SelectedIndex].Length;
+
+                RectangleIDTextBox.Text = id.ToString();
+                RectangleXTextBox.Text = x.ToString();
+                RectangleYTextBox.Text = y.ToString();
+                RectangleWidthTextBox.Text = width.ToString();
+                RectangleHeightTextBox.Text = height.ToString();
+            }
+        }
+
+        private void RectangleXTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                try
+                {
+                    RectangleXTextBox.BackColor = System.Drawing.Color.White;
+                    _rectangles[RectanglesListBox.SelectedIndex].Center.X = int.Parse(RectangleXTextBox.Text);
+                }
+                catch
+                {
+                    RectangleXTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+
+                int id = _rectangles[RectanglesListBox.SelectedIndex].Id;
+                int x = _rectangles[RectanglesListBox.SelectedIndex].Center.X;
+                int y = _rectangles[RectanglesListBox.SelectedIndex].Center.Y;
+                double width = _rectangles[RectanglesListBox.SelectedIndex].Width;
+                double height = _rectangles[RectanglesListBox.SelectedIndex].Length;
+
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = $"{id}: (X={x}, Y={y}, Width={width}, Height={height})";
+            }
+        }
+
+        private void RectangleYTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                try
+                {
+                    RectangleYTextBox.BackColor = System.Drawing.Color.White;
+                    _rectangles[RectanglesListBox.SelectedIndex].Center.Y = int.Parse(RectangleYTextBox.Text);
+                }
+                catch
+                {
+                    RectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+
+                int id = _rectangles[RectanglesListBox.SelectedIndex].Id;
+                int x = _rectangles[RectanglesListBox.SelectedIndex].Center.X;
+                int y = _rectangles[RectanglesListBox.SelectedIndex].Center.Y;
+                double width = _rectangles[RectanglesListBox.SelectedIndex].Width;
+                double height = _rectangles[RectanglesListBox.SelectedIndex].Length;
+
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = $"{id}: (X={x}, Y={y}, Width={width}, Height={height})";
+            }
+        }
+
+        private void RectangleWidthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                try
+                {
+                    RectangleWidthTextBox.BackColor = System.Drawing.Color.White;
+                    _rectangles[RectanglesListBox.SelectedIndex].Width = int.Parse(RectangleWidthTextBox.Text);
+                }
+                catch
+                {
+                    RectangleWidthTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+
+                int id = _rectangles[RectanglesListBox.SelectedIndex].Id;
+                int x = _rectangles[RectanglesListBox.SelectedIndex].Center.X;
+                int y = _rectangles[RectanglesListBox.SelectedIndex].Center.Y;
+                double width = _rectangles[RectanglesListBox.SelectedIndex].Width;
+                double height = _rectangles[RectanglesListBox.SelectedIndex].Length;
+
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = $"{id}: (X={x}, Y={y}, Width={width}, Height={height})";
+            }
+        }
+
+        private void RectangleHeightTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RectanglesListBox.SelectedIndex != -1)
+            {
+                try
+                {
+                    RectangleHeightTextBox.BackColor = System.Drawing.Color.White;
+                    _rectangles[RectanglesListBox.SelectedIndex].Length = int.Parse(RectangleHeightTextBox.Text);
+                }
+                catch
+                {
+                    RectangleHeightTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+
+                int id = _rectangles[RectanglesListBox.SelectedIndex].Id;
+                int x = _rectangles[RectanglesListBox.SelectedIndex].Center.X;
+                int y = _rectangles[RectanglesListBox.SelectedIndex].Center.Y;
+                double width = _rectangles[RectanglesListBox.SelectedIndex].Width;
+                double height = _rectangles[RectanglesListBox.SelectedIndex].Length;
+
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = $"{id}: (X={x}, Y={y}, Width={width}, Height={height})";
+            }
         }
     }
 }
