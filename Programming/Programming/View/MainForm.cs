@@ -27,7 +27,7 @@ namespace Programming.View
 
         private List<Model.Classes.Rectangle> _rectangles = new List<Model.Classes.Rectangle>();
         public Model.Classes.Rectangle Rectangle;
-        private List<Panel> _rectanglePanels;
+        private List<Panel> _rectanglePanels = new List<Panel>();
 
         public MainForm()
         {
@@ -279,17 +279,21 @@ namespace Programming.View
                 )
             );
 
-            int id = _rectangles[_rectangles.Count-1].Id;
-            int x = _rectangles[_rectangles.Count-1].Center.X;
-            int y = _rectangles[_rectangles.Count-1].Center.Y;
-            double width = _rectangles[_rectangles.Count-1].Width;
-            double height = _rectangles[_rectangles.Count-1].Length;
+            int id = _rectangles[_rectangles.Count - 1].Id;
+            int x = _rectangles[_rectangles.Count - 1].Center.X;
+            int y = _rectangles[_rectangles.Count - 1].Center.Y;
+            double width = _rectangles[_rectangles.Count - 1].Width;
+            double height = _rectangles[_rectangles.Count - 1].Length;
 
             Panel panel = new Panel();
             panel.Location = new Point(x, y);
-            panel.Width = 10;
-            panel.Height = 10;
+            panel.Width = Convert.ToInt32(width);
+            panel.Height = Convert.ToInt32(height);
             panel.ForeColor = System.Drawing.Color.FromArgb(127, 127, 255, 127);
+
+            _rectanglePanels.Add(panel);
+
+            RectanglePanel.Controls.Add(_rectanglePanels[_rectanglePanels.Count - 1]);
 
             RectanglesListBox.Items.Add
             (
@@ -302,7 +306,9 @@ namespace Programming.View
             if (RectanglesListBox.SelectedIndex != -1)
             {
                 _rectangles.Remove(_rectangles[RectanglesListBox.SelectedIndex]);
+                _rectanglePanels.RemoveAt(RectanglesListBox.SelectedIndex);
                 RectanglesListBox.Items.RemoveAt(RectanglesListBox.SelectedIndex);
+                RectanglePanel.Controls.RemoveAt(RectanglesListBox.SelectedIndex);
             }
         }
 
