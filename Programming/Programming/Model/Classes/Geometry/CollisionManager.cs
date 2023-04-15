@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model.Classes
+namespace Programming.Model.Classes.Geometry
 {
     public static class CollisionManager
     {
@@ -16,7 +16,7 @@ namespace Programming.Model.Classes
             double widthDiff = Math.Abs(rectangle1.Width - rectangle2.Width) / 2;
             double lengthDiff = Math.Abs(rectangle1.Length - rectangle2.Length) / 2;
 
-            return (dX < widthDiff && dY < lengthDiff);
+            return dX < widthDiff && dY < lengthDiff;
         }
 
         public static bool IsCollision(Ring ring1, Ring ring2)
@@ -25,7 +25,7 @@ namespace Programming.Model.Classes
             int dY = Math.Abs(ring1.Center.Y - ring2.Center.Y);
             double hypotenuse = Math.Sqrt(dX ^ 2 + dY);
 
-            return (hypotenuse < ring1.ExternalRadius + ring2.ExternalRadius);
+            return hypotenuse < ring1.ExternalRadius + ring2.ExternalRadius;
         }
     }
 }
