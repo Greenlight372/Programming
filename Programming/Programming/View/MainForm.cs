@@ -42,6 +42,9 @@ namespace Programming.View
 
             Random rand = new Random();
 
+            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+
             for (int i = 0; i < 5; i++)
             {
                 _rectangle[i] = new Model.Classes.Geometry.Rectangle
@@ -494,12 +497,22 @@ namespace Programming.View
 
         private void AddRectangleBox_MouseMove(object sender, EventArgs e)
         {
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
         }
 
         private void AddRectangleBox_MouseLeave(object sender, EventArgs e)
         {
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+        }
+
+        private void RemoveRectangleBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
+        }
+
+        private void RemoveRectangleBox_MouseLeave(object sender, EventArgs e)
+        {
+            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
         }
     }
 }
