@@ -27,8 +27,8 @@ namespace Programming.View.Controls
 
             Random rand = new Random();
 
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
-            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+            AddRectangleBox.BackColor = AppColors.TransparentBlack_50;
+            RemoveRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
         private void AddRectangleBox_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Programming.View.Controls
             panel.Location = new Point(x - Convert.ToInt32(width) / 2, y - Convert.ToInt32(height) / 2);
             panel.Width = Convert.ToInt32(width);
             panel.Height = Convert.ToInt32(height);
-            panel.BackColor = System.Drawing.Color.FromArgb(127, 127, 255, 127);
+            panel.BackColor = AppColors.Green;
 
             _rectanglePanels.Add(panel);
 
@@ -98,7 +98,7 @@ namespace Programming.View.Controls
             {
                 try
                 {
-                    RectangleXTextBox.BackColor = System.Drawing.Color.White;
+                    RectangleXTextBox.BackColor = AppColors.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Center.X = int.Parse(RectangleXTextBox.Text);
 
                     UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
@@ -119,7 +119,7 @@ namespace Programming.View.Controls
                 }
                 catch
                 {
-                    RectangleXTextBox.BackColor = System.Drawing.Color.LightPink;
+                    RectangleXTextBox.BackColor = AppColors.LightPink;
                 }
             }
         }
@@ -130,7 +130,7 @@ namespace Programming.View.Controls
             {
                 try
                 {
-                    RectangleYTextBox.BackColor = System.Drawing.Color.White;
+                    RectangleYTextBox.BackColor = AppColors.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Center.Y = int.Parse(RectangleYTextBox.Text);
 
                     UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
@@ -150,7 +150,7 @@ namespace Programming.View.Controls
                 }
                 catch
                 {
-                    RectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                    RectangleYTextBox.BackColor = AppColors.LightPink;
                 }
             }
         }
@@ -161,7 +161,7 @@ namespace Programming.View.Controls
             {
                 try
                 {
-                    RectangleWidthTextBox.BackColor = System.Drawing.Color.White;
+                    RectangleWidthTextBox.BackColor = AppColors.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Width = int.Parse(RectangleWidthTextBox.Text);
 
                     UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
@@ -181,7 +181,7 @@ namespace Programming.View.Controls
                 }
                 catch
                 {
-                    RectangleWidthTextBox.BackColor = System.Drawing.Color.LightPink;
+                    RectangleWidthTextBox.BackColor = AppColors.LightPink;
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace Programming.View.Controls
             {
                 try
                 {
-                    RectangleHeightTextBox.BackColor = System.Drawing.Color.White;
+                    RectangleHeightTextBox.BackColor = AppColors.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Length = int.Parse(RectangleHeightTextBox.Text);
 
                     UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
@@ -212,7 +212,7 @@ namespace Programming.View.Controls
                 }
                 catch
                 {
-                    RectangleHeightTextBox.BackColor = System.Drawing.Color.LightPink;
+                    RectangleHeightTextBox.BackColor = AppColors.LightPink;
                 }
             }
         }
@@ -221,7 +221,7 @@ namespace Programming.View.Controls
         {
             for (int i = 0; i < _rectanglePanels.Count; i++)
             {
-                _rectanglePanels[i].BackColor = System.Drawing.Color.FromArgb(127, 127, 255, 127);
+                _rectanglePanels[i].BackColor = AppColors.Green;
             }
 
             for (int i = 0; i < _rectanglePanels.Count; i++)
@@ -230,8 +230,8 @@ namespace Programming.View.Controls
                 {
                     if (CollisionManager.IsCollision(_rectangles[i], _rectangles[j]) && i != j)
                     {
-                        _rectanglePanels[i].BackColor = System.Drawing.Color.FromArgb(127, 255, 127, 127);
-                        _rectanglePanels[j].BackColor = System.Drawing.Color.FromArgb(127, 255, 127, 127);
+                        _rectanglePanels[i].BackColor = AppColors.Red;
+                        _rectanglePanels[j].BackColor = AppColors.Red;
                     }
                 }
             }
@@ -260,22 +260,22 @@ namespace Programming.View.Controls
 
         private void AddRectangleBox_MouseLeave(object sender, EventArgs e)
         {
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+            AddRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
         private void RemoveRectangleBox_MouseMove(object sender, MouseEventArgs e)
         {
-            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
+            RemoveRectangleBox.BackColor = AppColors.TransparentBlack_25;
         }
 
         private void RemoveRectangleBox_MouseLeave(object sender, EventArgs e)
         {
-            RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+            RemoveRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
         private void AddRectangleBox_MouseMove(object sender, MouseEventArgs e)
         {
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
+            AddRectangleBox.BackColor = AppColors.TransparentBlack_25;
         }
     }
 }
