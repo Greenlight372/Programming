@@ -270,7 +270,6 @@ namespace Programming.View
 
         private void AddRectangleBox_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
 
             _rectangles.Add(Model.Classes.Geometry.RectangleFactory.Randomize(RectanglePanel));
 
@@ -338,27 +337,27 @@ namespace Programming.View
                 {
                     RectangleXTextBox.BackColor = System.Drawing.Color.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Center.X = int.Parse(RectangleXTextBox.Text);
+
+                    UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
+
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Width
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Height
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
+                    (
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.X
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.Y
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
+                    );
+
+                    FindCollisions();
                 }
                 catch
                 {
                     RectangleXTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
-
-                UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
-
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Width
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Height
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
-                (
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.X
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.Y
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
-                );
-
-                FindCollisions();
             }
         }
 
@@ -370,26 +369,26 @@ namespace Programming.View
                 {
                     RectangleYTextBox.BackColor = System.Drawing.Color.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Center.Y = int.Parse(RectangleYTextBox.Text);
+
+                    UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
+
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Width
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Height
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
+                    (
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.X
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.Y
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
+                    );
+                    FindCollisions();
                 }
                 catch
                 {
                     RectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
-
-                UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
-
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Width
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Height
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
-                (
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.X
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.Y
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
-                );
-                FindCollisions();
             }
         }
 
@@ -401,26 +400,26 @@ namespace Programming.View
                 {
                     RectangleWidthTextBox.BackColor = System.Drawing.Color.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Width = int.Parse(RectangleWidthTextBox.Text);
+
+                    UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
+
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Width
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Height
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
+                    (
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.X
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.Y
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
+                    );
+                    FindCollisions();
                 }
                 catch
                 {
                     RectangleWidthTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
-
-                UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
-
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Width
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Height
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
-                (
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.X
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.Y
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
-                );
-                FindCollisions();
             }
         }
 
@@ -432,26 +431,26 @@ namespace Programming.View
                 {
                     RectangleHeightTextBox.BackColor = System.Drawing.Color.White;
                     _rectangles[RectanglesListBox.SelectedIndex].Length = int.Parse(RectangleHeightTextBox.Text);
+
+                    UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
+
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Width
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Height
+                    = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
+                    _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
+                    (
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.X
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
+                        _rectangles[RectanglesListBox.SelectedIndex].Center.Y
+                        - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
+                    );
+                    FindCollisions();
                 }
                 catch
                 {
                     RectangleHeightTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
-
-                UpdateRectangleInfo(_rectangles[RectanglesListBox.SelectedIndex]);
-
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Width
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Height
-                = Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length);
-                _rectanglePanels[RectanglesListBox.SelectedIndex].Location = new Point
-                (
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.X
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Width / 2),
-                    _rectangles[RectanglesListBox.SelectedIndex].Center.Y
-                    - Convert.ToInt32(_rectangles[RectanglesListBox.SelectedIndex].Length / 2)
-                );
-                FindCollisions();
             }
         }
 
@@ -489,15 +488,11 @@ namespace Programming.View
 
         private void ClearRectangleInfo()
         {
+            RectangleIDTextBox.Text = "";
             RectangleXTextBox.Text = "";
             RectangleYTextBox.Text = "";
             RectangleWidthTextBox.Text = "";
             RectangleHeightTextBox.Text = "";
-        }
-
-        private void AddRectangleBox_MouseMove(object sender, EventArgs e)
-        {
-            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
         }
 
         private void AddRectangleBox_MouseLeave(object sender, EventArgs e)
@@ -513,6 +508,11 @@ namespace Programming.View
         private void RemoveRectangleBox_MouseLeave(object sender, EventArgs e)
         {
             RemoveRectangleBox.BackColor = System.Drawing.Color.FromArgb(127, 0, 0, 0);
+        }
+
+        private void AddRectangleBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            AddRectangleBox.BackColor = System.Drawing.Color.FromArgb(63, 0, 0, 0);
         }
     }
 }
