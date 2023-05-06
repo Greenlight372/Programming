@@ -11,12 +11,24 @@ using System.Windows.Forms;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления RectanglesControl.
+    /// </summary>
     public partial class RectanglesControl : UserControl
     {
-
+        /// <summary>
+        /// Массив объектов класса <see cref="Rectangle"/> на пять элементов.
+        /// </summary>
         private Model.Classes.Geometry.Rectangle[] _rectangle = new Model.Classes.Geometry.Rectangle[5];
+
+        /// <summary>
+        /// Объект класса <see cref="Rectangle"/>, выбранный пользователем.
+        /// </summary>
         private Model.Classes.Geometry.Rectangle _currentRectangle = new Model.Classes.Geometry.Rectangle();
 
+        /// <summary>
+        /// Инициализация компонентов. Заполнение массива <see cref="_rectangle"/>.
+        /// </summary>
         public RectanglesControl()
         {
             InitializeComponent();
@@ -36,6 +48,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Выводит информацию о выбранном прямоугольнике
+        /// из массива <see cref="_rectangle"/>.
+        /// </summary>
         private void RectangleListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentRectangle = _rectangle[RectangleListBox.SelectedIndex];
@@ -51,6 +67,9 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Присваивает выбранному прямоугольнику измененную длину.
+        /// </summary>
         private void LengthTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -64,6 +83,9 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Присваивает выбранному прямоугольнику измененную ширину.
+        /// </summary>
         private void WidthTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -77,11 +99,20 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Присваивает выбранному прямоугольнику измененный цвет.
+        /// </summary>
         private void ColorTextBox_TextChanged(object sender, EventArgs e)
         {
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
+        /// <summary>
+        /// Ищет объект класса <see cref="Rectangle"/> с наибольшей шириной.
+        /// </summary>
+        /// <param name="rectangleArray">Массив объектов типа <see cref="Rectangle"/>.</param>
+        /// <returns>Уникальный идентификатор прямоугольника с
+        /// наибольшей шириной.</returns>
         private int FindRectangleWithMaxWidth(Model.Classes.Geometry.Rectangle[] rectangleArray)
         {
             int temp = 0;
@@ -95,19 +126,9 @@ namespace Programming.View.Controls
             return temp;
         }
 
-        private int FindMovieWithMaxScore(Movie[] movieArray)
-        {
-            int temp = 0;
-
-            for (int i = 0; i < movieArray.Length; i++)
-            {
-                if (movieArray[i].Score > movieArray[temp].Score)
-                    temp = i;
-            }
-
-            return temp;
-        }
-
+        /// <summary>
+        /// Вызывает поиск прямоугольника с наибольшей шириной.
+        /// </summary>
         private void RectangleButton_Click(object sender, EventArgs e)
         {
             RectangleListBox.SelectedIndex = FindRectangleWithMaxWidth(_rectangle);

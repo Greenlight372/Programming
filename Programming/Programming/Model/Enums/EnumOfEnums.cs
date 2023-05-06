@@ -1,9 +1,15 @@
-﻿public enum EnumOfEnums
+﻿namespace Programming.Model.Enums
 {
-    Color,
-    EducationForm,
-    Genre,
-    Manufacturer,
-    Season,
-    Weekday
+    /// <summary>
+    /// Содержит названия перечислений.
+    /// </summary>
+    public enum EnumOfEnums
+    {
+        Color,
+        EducationForm,
+        Genre,
+        Manufacturer,
+        Season,
+        Weekday
+    }
 }

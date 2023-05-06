@@ -12,12 +12,24 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления MoviesControl.
+    /// </summary>
     public partial class MoviesControl : UserControl
     {
-
+        /// <summary>
+        /// Массив объектов класса <see cref="Movie"/>.
+        /// </summary>
         private Movie[] _movie = new Movie[5];
+
+        /// <summary>
+        /// Выбранный объект из массива <see cref="_movie"/>.
+        /// </summary>
         private Movie _currentMovie = new Model.Classes.Movie();
 
+        /// <summary>
+        /// Инициализация компонентов. Заполнение массива <see cref="_movie"/>.
+        /// </summary>
         public MoviesControl()
         {
             InitializeComponent();
@@ -37,6 +49,11 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Ищет фильм с наивысшей оценкой из массива.
+        /// </summary>
+        /// <param name="movieArray">Массив объектов класса <see cref="Movie"/>.</param>
+        /// <returns>Уникальный идентификатор фильма с наивысшей оценкой.</returns>
         private int FindMovieWithMaxScore(Movie[] movieArray)
         {
             int temp = 0;
@@ -50,16 +67,25 @@ namespace Programming.View.Controls
             return temp;
         }
 
+        /// <summary>
+        /// Вызывает поиск фильма с наивысшей оценкой.
+        /// </summary>
         private void MoviesButton_Click(object sender, EventArgs e)
         {
             MoviesListBox.SelectedIndex = FindMovieWithMaxScore(_movie);
         }
 
+        /// <summary>
+        /// Изменение названия выбранного фильма.
+        /// </summary>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
             _currentMovie.Title = TitleTextBox.Text;
         }
 
+        /// <summary>
+        /// Изменение продолжительности выбранного фильма.
+        /// </summary>
         private void DurationTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -73,6 +99,9 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Изменения года выхода выбранного фильма.
+        /// </summary>
         private void YearTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -86,11 +115,17 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Изменение жанра выбранного фильма.
+        /// </summary>
         private void GenreTextBox_TextChanged(object sender, EventArgs e)
         {
             _currentMovie.Genre = GenreTextBox.Text;
         }
 
+        /// <summary>
+        /// Изменение оценки выбранного фильма.
+        /// </summary>
         private void ScoreTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -104,6 +139,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Выводит информацию о выбранном фильме
+        /// из массива <see cref="_movie"/>.
+        /// </summary>
         private void MoviesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentMovie = _movie[MoviesListBox.SelectedIndex];

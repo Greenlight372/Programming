@@ -14,23 +14,40 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления RectanglesCollisionControl.
+    /// </summary>
     public partial class RectanglesCollisionControl : UserControl
     {
-
+        /// <summary>
+        /// Список объектов класса <see cref="Model.Classes.Geometry.Rectangle"/>.
+        /// </summary>
         private List<Model.Classes.Geometry.Rectangle> _rectangles = new List<Model.Classes.Geometry.Rectangle>();
+
+        /// <summary>
+        /// Выбранный объект класса <see cref="Model.Classes.Geometry.Rectangle"/> из массива.
+        /// </summary>
         public Model.Classes.Geometry.Rectangle Rectangle;
+
+        /// <summary>
+        /// Список объектов класса <see cref="Model.Classes.Geometry.Rectangle"/> в виде панелей.
+        /// </summary>
         private List<Panel> _rectanglePanels = new List<Panel>();
 
+        /// <summary>
+        /// Инициализация компонентов.
+        /// </summary>
         public RectanglesCollisionControl()
         {
             InitializeComponent();
-
-            Random rand = new Random();
 
             AddRectangleBox.BackColor = AppColors.TransparentBlack_50;
             RemoveRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
+        /// <summary>
+        /// Добавляет новый объект класса <see cref="Model.Classes.Geometry.Rectangle"/> в массив.
+        /// </summary>
         private void AddRectangleBox_Click(object sender, EventArgs e)
         {
 
@@ -60,6 +77,9 @@ namespace Programming.View.Controls
             FindCollisions();
         }
 
+        /// <summary>
+        /// Удаляет выбранный объект класса <see cref="Model.Classes.Geometry.Rectangle"/> из массива.
+        /// </summary>
         private void RemoveRectangleBox_Click(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -74,6 +94,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае выбора нового элемента
+        /// в RectanglesListBox.
+        /// </summary>
         private void RectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -92,6 +116,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае изменения положения
+        /// по оси OX прямоугольника, выбранного из массива.
+        /// </summary>
         private void RectangleXTextBox_TextChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -124,6 +152,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае изменения положения
+        /// по оси OY прямоугольника, выбранного из массива.
+        /// </summary>
         private void RectangleYTextBox_TextChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -155,6 +187,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае изменения ширины
+        /// прямоугольника, выбранного из массива.
+        /// </summary>
         private void RectangleWidthTextBox_TextChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -186,6 +222,10 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае изменения высоты
+        /// прямоугольника, выбранного из массива.
+        /// </summary>
         private void RectangleHeightTextBox_TextChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex != -1)
@@ -217,6 +257,9 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Поиск пересечений среди прямоугольников из массива.
+        /// </summary>
         private void FindCollisions()
         {
             for (int i = 0; i < _rectanglePanels.Count; i++)
@@ -237,6 +280,11 @@ namespace Programming.View.Controls
             }
         }
 
+        /// <summary>
+        /// Обновляет информацию о выбранном прямоугольнике
+        /// из массива.
+        /// </summary>
+        /// <param name="rectangle">Выбранный прямоугольник.</param>
         private void UpdateRectangleInfo(Model.Classes.Geometry.Rectangle rectangle)
         {
             int id = rectangle.Id;
@@ -249,6 +297,9 @@ namespace Programming.View.Controls
             = $"{id}: (X={x}, Y={y}, Width={width}, Height={height})";
         }
 
+        /// <summary>
+        /// Очищает информацию о выбранном прямоугольнике.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             RectangleIDTextBox.Text = "";
@@ -258,21 +309,37 @@ namespace Programming.View.Controls
             RectangleHeightTextBox.Text = "";
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае отведения курсора
+        /// с кнопки AddRectangleBox.
+        /// </summary>
         private void AddRectangleBox_MouseLeave(object sender, EventArgs e)
         {
             AddRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае наведения курсора
+        /// на кнопку RemoveRectangleBox.
+        /// </summary>
         private void RemoveRectangleBox_MouseMove(object sender, MouseEventArgs e)
         {
             RemoveRectangleBox.BackColor = AppColors.TransparentBlack_25;
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае отведения курсора
+        /// с кнопки RemoveRectangleBox.
+        /// </summary>
         private void RemoveRectangleBox_MouseLeave(object sender, EventArgs e)
         {
             RemoveRectangleBox.BackColor = AppColors.TransparentBlack_50;
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае наведения курсора
+        /// на кнопку AddRectangleBox.
+        /// </summary>
         private void AddRectangleBox_MouseMove(object sender, MouseEventArgs e)
         {
             AddRectangleBox.BackColor = AppColors.TransparentBlack_25;

@@ -1,5 +1,8 @@
 ﻿namespace Programming.Model.Enums
 {
+    /// <summary>
+    /// Содержит названия цветов.
+    /// </summary>
     public enum Color
     {
         Red,

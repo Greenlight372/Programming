@@ -12,9 +12,14 @@ using System.Windows.Forms;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления EnumerationsControl.
+    /// </summary>
     public partial class EnumerationsControl : UserControl
     {
-
+        /// <summary>
+        /// Перечисление перечислений.
+        /// </summary>
         private object[] _enumsList = new object[]
         {
             typeof(Model.Enums.Color),
@@ -25,6 +30,9 @@ namespace Programming.View.Controls
             typeof(Weekday)
         };
 
+        /// <summary>
+        /// Инициализация компонентов.
+        /// </summary>
         public EnumerationsControl()
         {
             InitializeComponent();
@@ -34,6 +42,9 @@ namespace Programming.View.Controls
             EnumsListBox.DataSource = Enum.GetValues(typeof(EnumOfEnums));
         }
 
+        /// <summary>
+        /// Вывод элементов выбранного перечисления.
+        /// </summary>
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedItem = EnumsListBox.SelectedIndex;
@@ -46,6 +57,9 @@ namespace Programming.View.Controls
             ValueTextBox.Clear();
         }
 
+        /// <summary>
+        /// Вывод индекса выбранного элемента из перечисления.
+        /// </summary>
         private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ValueTextBox.Text = ValuesListBox.SelectedIndex.ToString();

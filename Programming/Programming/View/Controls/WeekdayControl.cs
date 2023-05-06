@@ -12,13 +12,23 @@ using System.Windows.Forms;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления WeekdayControl.
+    /// </summary>
     public partial class WeekdayControl : UserControl
     {
+        /// <summary>
+        /// Инициализация компонентов.
+        /// </summary>
         public WeekdayControl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Проверка введенного значения на соответствие
+        /// дню недели.
+        /// </summary>
         private void WeekdayButton_Click(object sender, EventArgs e)
         {
             object parsedValue;
@@ -26,7 +36,7 @@ namespace Programming.View.Controls
 
             if (Enum.TryParse(typeof(Weekday), WeekdayTextBox.Text, out parsedValue) == false)
             {
-                WeekdayParsingResult.Text = "There's no such weekday!";
+                WeekdayParsingResult.Text = "Такого дня недели не существует!";
             }
             else
             {
@@ -37,7 +47,7 @@ namespace Programming.View.Controls
                     if (parsedValue.ToString() == value)
                         parseID = counter;
                 }
-                string result = "It's a weekday! (" + parsedValue + " - " + parseID + ")";
+                string result = "Это день недели! (" + parsedValue + " - " + parseID + ")";
                 WeekdayParsingResult.Text = result;
             }
         }

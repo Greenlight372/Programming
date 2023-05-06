@@ -11,13 +11,22 @@ using System.Windows.Forms;
 
 namespace Programming.View.Controls
 {
+    /// <summary>
+    /// Хранит данные об элементе пользовательского управления SeasonsHandleControl.
+    /// </summary>
     public partial class SeasonsHandleControl : UserControl
     {
+        /// <summary>
+        /// Инициализация компонентов.
+        /// </summary>
         public SeasonsHandleControl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Алгоритм действий в случае нажатия на кнопку SeasonButton.
+        /// </summary>
         private void SeasonButton_Click(object sender, EventArgs e)
         {
             string currentSeason = SeasonComboBox.Text;
