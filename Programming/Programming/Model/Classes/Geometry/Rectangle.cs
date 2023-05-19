@@ -80,7 +80,8 @@ namespace Programming.Model.Classes.Geometry
         /// <param name="widthParam">Ўирина.</param>
         /// <param name="colorParam">÷вет.</param>
         /// <param name="center">÷ентральна€ точка.</param>
-        public Rectangle(double lengthParam, double widthParam, string colorParam, Point2D center)
+        public Rectangle(
+            double lengthParam, double widthParam, string colorParam, Point2D center)
         {
             _length = lengthParam;
             _width = widthParam;
