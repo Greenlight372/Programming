@@ -208,9 +208,15 @@ namespace NotesApp.View
                     _notes[NoteListBox.SelectedIndex].CreationData = DateTime.Now;
                     NoteCreationDataTextBox.Text
                     = _notes[NoteListBox.SelectedIndex].CreationData.ToString();
+
+                    ApplyChangesPictureBox.Visible = true;
+                    ApplyChangesPictureBox.Enabled = true;
                 }
-                catch
+                catch (ArgumentException)
                 {
+                    ApplyChangesPictureBox.Visible = false;
+                    ApplyChangesPictureBox.Enabled = false;
+
                     NoteNameTextBox.BackColor = Color.FromArgb(255, 255, 127, 127);
                 }
             }

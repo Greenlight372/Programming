@@ -65,12 +65,10 @@ namespace NotesApp.Model
                 
                 return notes;
             }
-            catch
+            catch (FileNotFoundException)
             {
-                throw new FileNotFoundException("Указанного пути не существует!"
-                    , nameof(activeFilename));
-
                 List<Note> notes = new List<Note>();
+                File.WriteAllText(activeFilename, "");
 
                 return notes;
             }
