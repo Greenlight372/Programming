@@ -13,8 +13,17 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        /// <summary>
+        /// Список объектов класса <see cref="Item"></see>.
+        /// </summary>
         private List<Item> _items = new();
+        /// <summary>
+        /// Индекс выбранного объекта в списке.
+        /// </summary>
         private int _selectedIndex;
+        /// <summary>
+        /// Инициализация компонентов.
+        /// </summary>
         public ItemsTab()
         {
             InitializeComponent();
@@ -30,6 +39,11 @@ namespace ObjectOrientedPractics.View.Tabs
             itemsListBox.DisplayMember = "Name";
         }
 
+        /// <summary>
+        /// Выводит информацию о выбранном объекте.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
@@ -47,6 +61,11 @@ namespace ObjectOrientedPractics.View.Tabs
             descriptionTextBox.Enabled = true;
         }
 
+        /// <summary>
+        /// Добавляет новый объект в список.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
             _items.Add(new Item("Название", "Описание.", 100));
@@ -63,6 +82,11 @@ namespace ObjectOrientedPractics.View.Tabs
             descriptionTextBox.BackColor = System.Drawing.Color.White;
         }
 
+        /// <summary>
+        /// Удаляет выбранный объект из списка.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (itemsListBox.SelectedIndex > -1)
@@ -87,6 +111,11 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Вносит изменения в цену выбранного объекта.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void costTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -101,6 +130,11 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Вносит изменения в название выбранного объекта.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -118,6 +152,11 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Вносит изменения в описание выбранного объекта.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
             try

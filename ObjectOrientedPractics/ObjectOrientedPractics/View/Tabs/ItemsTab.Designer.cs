@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.backgroundPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.selectedItemsPanel = new System.Windows.Forms.Panel();
+            this.selectedItemPanel = new System.Windows.Forms.Panel();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
@@ -38,14 +38,14 @@
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.costLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
-            this.selectedItemsLabel = new System.Windows.Forms.Label();
+            this.selectedItemLabel = new System.Windows.Forms.Label();
             this.itemsPanel = new System.Windows.Forms.Panel();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.itemsListBox = new System.Windows.Forms.ListBox();
             this.itemsLabel = new System.Windows.Forms.Label();
             this.backgroundPanel.SuspendLayout();
-            this.selectedItemsPanel.SuspendLayout();
+            this.selectedItemPanel.SuspendLayout();
             this.itemsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             this.backgroundPanel.ColumnCount = 2;
             this.backgroundPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.60156F));
             this.backgroundPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.39844F));
-            this.backgroundPanel.Controls.Add(this.selectedItemsPanel, 1, 0);
+            this.backgroundPanel.Controls.Add(this.selectedItemPanel, 1, 0);
             this.backgroundPanel.Controls.Add(this.itemsPanel, 0, 0);
             this.backgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
@@ -64,33 +64,34 @@
             this.backgroundPanel.Size = new System.Drawing.Size(512, 448);
             this.backgroundPanel.TabIndex = 0;
             // 
-            // selectedItemsPanel
+            // selectedItemPanel
             // 
-            this.selectedItemsPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.selectedItemsPanel.Controls.Add(this.descriptionTextBox);
-            this.selectedItemsPanel.Controls.Add(this.descriptionLabel);
-            this.selectedItemsPanel.Controls.Add(this.nameTextBox);
-            this.selectedItemsPanel.Controls.Add(this.nameLabel);
-            this.selectedItemsPanel.Controls.Add(this.costTextBox);
-            this.selectedItemsPanel.Controls.Add(this.idTextBox);
-            this.selectedItemsPanel.Controls.Add(this.costLabel);
-            this.selectedItemsPanel.Controls.Add(this.idLabel);
-            this.selectedItemsPanel.Controls.Add(this.selectedItemsLabel);
-            this.selectedItemsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedItemsPanel.Location = new System.Drawing.Point(215, 3);
-            this.selectedItemsPanel.Name = "selectedItemsPanel";
-            this.selectedItemsPanel.Size = new System.Drawing.Size(294, 442);
-            this.selectedItemsPanel.TabIndex = 1;
+            this.selectedItemPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.selectedItemPanel.Controls.Add(this.descriptionTextBox);
+            this.selectedItemPanel.Controls.Add(this.descriptionLabel);
+            this.selectedItemPanel.Controls.Add(this.nameTextBox);
+            this.selectedItemPanel.Controls.Add(this.nameLabel);
+            this.selectedItemPanel.Controls.Add(this.costTextBox);
+            this.selectedItemPanel.Controls.Add(this.idTextBox);
+            this.selectedItemPanel.Controls.Add(this.costLabel);
+            this.selectedItemPanel.Controls.Add(this.idLabel);
+            this.selectedItemPanel.Controls.Add(this.selectedItemLabel);
+            this.selectedItemPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectedItemPanel.Location = new System.Drawing.Point(215, 3);
+            this.selectedItemPanel.Name = "selectedItemPanel";
+            this.selectedItemPanel.Size = new System.Drawing.Size(294, 442);
+            this.selectedItemPanel.TabIndex = 1;
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionTextBox.Location = new System.Drawing.Point(3, 222);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionTextBox.Size = new System.Drawing.Size(288, 151);
+            this.descriptionTextBox.Size = new System.Drawing.Size(288, 163);
             this.descriptionTextBox.TabIndex = 8;
             this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
             // 
@@ -128,7 +129,7 @@
             // 
             this.costTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.costTextBox.Location = new System.Drawing.Point(43, 56);
+            this.costTextBox.Location = new System.Drawing.Point(64, 56);
             this.costTextBox.Name = "costTextBox";
             this.costTextBox.Size = new System.Drawing.Size(133, 23);
             this.costTextBox.TabIndex = 4;
@@ -138,7 +139,7 @@
             // 
             this.idTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.idTextBox.Location = new System.Drawing.Point(43, 27);
+            this.idTextBox.Location = new System.Drawing.Point(64, 27);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(133, 23);
@@ -162,15 +163,15 @@
             this.idLabel.TabIndex = 1;
             this.idLabel.Text = "ID:";
             // 
-            // selectedItemsLabel
+            // selectedItemLabel
             // 
-            this.selectedItemsLabel.AutoSize = true;
-            this.selectedItemsLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.selectedItemsLabel.Location = new System.Drawing.Point(3, 3);
-            this.selectedItemsLabel.Name = "selectedItemsLabel";
-            this.selectedItemsLabel.Size = new System.Drawing.Size(97, 17);
-            this.selectedItemsLabel.TabIndex = 0;
-            this.selectedItemsLabel.Text = "Selected Items";
+            this.selectedItemLabel.AutoSize = true;
+            this.selectedItemLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.selectedItemLabel.Location = new System.Drawing.Point(3, 3);
+            this.selectedItemLabel.Name = "selectedItemLabel";
+            this.selectedItemLabel.Size = new System.Drawing.Size(97, 17);
+            this.selectedItemLabel.TabIndex = 0;
+            this.selectedItemLabel.Text = "Selected Items";
             // 
             // itemsPanel
             // 
@@ -217,7 +218,7 @@
             this.itemsListBox.Location = new System.Drawing.Point(3, 24);
             this.itemsListBox.Name = "itemsListBox";
             this.itemsListBox.ScrollAlwaysVisible = true;
-            this.itemsListBox.Size = new System.Drawing.Size(200, 349);
+            this.itemsListBox.Size = new System.Drawing.Size(200, 361);
             this.itemsListBox.TabIndex = 1;
             this.itemsListBox.SelectedIndexChanged += new System.EventHandler(this.itemsListBox_SelectedIndexChanged);
             // 
@@ -235,14 +236,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.backgroundPanel);
             this.MinimumSize = new System.Drawing.Size(512, 448);
             this.Name = "ItemsTab";
             this.Size = new System.Drawing.Size(512, 448);
             this.backgroundPanel.ResumeLayout(false);
-            this.selectedItemsPanel.ResumeLayout(false);
-            this.selectedItemsPanel.PerformLayout();
+            this.selectedItemPanel.ResumeLayout(false);
+            this.selectedItemPanel.PerformLayout();
             this.itemsPanel.ResumeLayout(false);
             this.itemsPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -252,8 +252,8 @@
         #endregion
 
         private TableLayoutPanel backgroundPanel;
-        private Panel selectedItemsPanel;
-        private Label selectedItemsLabel;
+        private Panel selectedItemPanel;
+        private Label selectedItemLabel;
         private Panel itemsPanel;
         private Label itemsLabel;
         private Button removeButton;
