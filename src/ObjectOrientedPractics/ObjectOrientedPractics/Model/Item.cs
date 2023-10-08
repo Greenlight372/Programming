@@ -37,6 +37,11 @@ namespace ObjectOrientedPractics.Model
         /// Получает уникальный идентификатор товара.
         /// </summary>
         public int GetId { get => _id; }
+
+        /// <summary>
+        /// Категория товара.
+        /// </summary>
+        public Category Category { get; set; }
         
         /// <summary>
         /// Получает и заполняет название товара.
@@ -81,12 +86,14 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Создает экземпляр объекта класса <see cref="Item"></see>.
         /// </summary>
+        /// <param name="category">Категория товара.</param>>
         /// <param name="name">Название товара.</param>
         /// <param name="info">Информация о товаре.</param>
         /// <param name="cost">Цена товара.</param>
-        public Item(string name, string info, double cost)
+        public Item(Category category, string name, string info, double cost)
         {
             _id = _idCounter++;
+            Category = category;
             Name = name;
             Info = info;
             Cost = cost;

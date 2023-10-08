@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список объектов класса <see cref="Customer"></see>.
         /// </summary>
-        private List<Customer> _customers = new();
+        private List<Customer> _customers = new List<Customer>();
         /// <summary>
         /// Индекс выбранного объекта в списке.
         /// </summary>
@@ -28,11 +29,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
             fullnameTextBox.BackColor = System.Drawing.Color.White;
-            addressTextBox.BackColor = System.Drawing.Color.White;
 
             idTextBox.Enabled = false;
             fullnameTextBox.Enabled = false;
-            addressTextBox.Enabled = false;
+            customerAddressControl.Enabled = false;
 
             customersListBox.DisplayMember = "Fullname";
         }
@@ -46,14 +46,13 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             idTextBox.Text = _customers[customersListBox.SelectedIndex].GetId.ToString();
             fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
-            addressTextBox.Text = _customers[customersListBox.SelectedIndex].Address;
+            customerAddressControl.AddressProperty = _customers[customersListBox.SelectedIndex].CustomerAddress;
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
-            addressTextBox.BackColor = System.Drawing.Color.White;
 
             idTextBox.Enabled = true;
             fullnameTextBox.Enabled = true;
-            addressTextBox.Enabled = true;
+            customerAddressControl.Enabled = true;
         }
 
         /// <summary>
@@ -63,16 +62,19 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            _customers.Add(new Customer("Иванов И. И.", "Ул. Тверская, дом 89, кв. 199"));
+            _customers.Add(new Customer("Иванов И. И.", new Address("001234", "Aussie", "Sydnry", "Grove Street, Home", "123", "123")));
             customersListBox.Items.Clear();
             customersListBox.Items.AddRange(_customers.ToArray());
 
             idTextBox.Text = "";
             fullnameTextBox.Text = "";
-            addressTextBox.Text = "";
+            customerAddressControl.AddressProperty = new Address();
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
-            addressTextBox.BackColor = System.Drawing.Color.White;
+
+            idTextBox.Enabled = false;
+            fullnameTextBox.Enabled = false;
+            customerAddressControl.Enabled = false;
         }
 
         /// <summary>
@@ -90,14 +92,13 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 idTextBox.Text = "";
                 fullnameTextBox.Text = "";
-                addressTextBox.Text = "";
+                customerAddressControl.AddressProperty = new Address();
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
-                addressTextBox.BackColor = System.Drawing.Color.White;
 
                 idTextBox.Enabled = false;
                 fullnameTextBox.Enabled = false;
-                addressTextBox.Enabled = false;
+                customerAddressControl.Enabled = false;
             }
         }
 
@@ -120,24 +121,6 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 fullnameTextBox.BackColor = System.Drawing.Color.Red;
-            }
-        }
-
-        /// <summary>
-        /// Вносит изменения в адрес выбранного покупателя.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void addressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                _customers[customersListBox.SelectedIndex].Address = addressTextBox.Text;
-                addressTextBox.BackColor = System.Drawing.Color.White;
-            }
-            catch
-            {
-                addressTextBox.BackColor = System.Drawing.Color.Red;
             }
         }
     }

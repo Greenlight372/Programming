@@ -16,7 +16,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список объектов класса <see cref="Item"></see>.
         /// </summary>
-        private List<Item> _items = new();
+        private List<Item> _items = new List<Item>();
         /// <summary>
         /// Индекс выбранного объекта в списке.
         /// </summary>
@@ -30,13 +30,16 @@ namespace ObjectOrientedPractics.View.Tabs
             costTextBox.BackColor = System.Drawing.Color.White;
             nameTextBox.BackColor = System.Drawing.Color.White;
             descriptionTextBox.BackColor = System.Drawing.Color.White;
+            categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
 
             idTextBox.Enabled = false;
             costTextBox.Enabled = false;
             nameTextBox.Enabled = false;
             descriptionTextBox.Enabled = false;
+            categoryComboBox.Enabled = false;
 
             itemsListBox.DisplayMember = "Name";
+            categoryComboBox.DisplayMember = "";
         }
 
         /// <summary>
@@ -50,6 +53,7 @@ namespace ObjectOrientedPractics.View.Tabs
             costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
             nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
             descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
+            categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
 
             costTextBox.BackColor = System.Drawing.Color.White;
             nameTextBox.BackColor = System.Drawing.Color.White;
@@ -59,6 +63,7 @@ namespace ObjectOrientedPractics.View.Tabs
             costTextBox.Enabled = true;
             nameTextBox.Enabled = true;
             descriptionTextBox.Enabled = true;
+            categoryComboBox.Enabled = true;
         }
 
         /// <summary>
@@ -68,7 +73,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            _items.Add(new Item("Название", "Описание.", 100));
+            _items.Add(new Item(Category.Others, "Название", "Описание.", 100));
             itemsListBox.Items.Clear();
             itemsListBox.Items.AddRange(_items.ToArray());
 
@@ -76,10 +81,17 @@ namespace ObjectOrientedPractics.View.Tabs
             costTextBox.Text = "";
             nameTextBox.Text = "";
             descriptionTextBox.Text = "";
+            categoryComboBox.Text = "";
 
             costTextBox.BackColor = System.Drawing.Color.White;
             nameTextBox.BackColor = System.Drawing.Color.White;
             descriptionTextBox.BackColor = System.Drawing.Color.White;
+
+            idTextBox.Enabled = false;
+            costTextBox.Enabled = false;
+            nameTextBox.Enabled = false;
+            descriptionTextBox.Enabled = false;
+            categoryComboBox.Enabled = false;
         }
 
         /// <summary>
@@ -99,6 +111,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 costTextBox.Text = "";
                 nameTextBox.Text = "";
                 descriptionTextBox.Text = "";
+                categoryComboBox.Text = "";
 
                 costTextBox.BackColor = System.Drawing.Color.White;
                 nameTextBox.BackColor = System.Drawing.Color.White;
@@ -108,6 +121,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 costTextBox.Enabled = false;
                 nameTextBox.Enabled = false;
                 descriptionTextBox.Enabled = false;
+                categoryComboBox.Enabled = false;
             }
         }
 
@@ -120,7 +134,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _items[itemsListBox.SelectedIndex].Cost 
+                _items[itemsListBox.SelectedIndex].Cost
                     = Convert.ToDouble(costTextBox.Text);
                 costTextBox.BackColor = System.Drawing.Color.White;
             }
@@ -167,6 +181,21 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 descriptionTextBox.BackColor = System.Drawing.Color.Red;
+            }
+        }
+
+        /// <summary>
+        /// Вносит изменения в категорию выбранного объекта.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void categoryComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (itemsListBox.SelectedIndex > -1)
+            {
+                _items[itemsListBox.SelectedIndex].Category
+                    = (Category)Enum.Parse(typeof(Category),
+                    categoryComboBox.SelectedItem.ToString());
             }
         }
     }

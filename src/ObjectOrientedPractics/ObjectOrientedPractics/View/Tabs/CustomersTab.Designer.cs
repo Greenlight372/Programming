@@ -1,4 +1,6 @@
-﻿namespace ObjectOrientedPractics.View.Tabs
+﻿using ObjectOrientedPractics.View.Controls;
+
+namespace ObjectOrientedPractics.View.Tabs
 {
     partial class CustomersTab
     {
@@ -28,227 +30,213 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.itemsPanel = new System.Windows.Forms.Panel();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
-            this.customersListBox = new System.Windows.Forms.ListBox();
-            this.customersLabel = new System.Windows.Forms.Label();
-            this.selectedCustomerBackgroundPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.selectedCustomerPanel = new System.Windows.Forms.Panel();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.AddressLabel = new System.Windows.Forms.Label();
-            this.fullnameTextBox = new System.Windows.Forms.TextBox();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.fullnameLabel = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
-            this.selectedCustomerLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.backgroundPanel.SuspendLayout();
-            this.itemsPanel.SuspendLayout();
-            this.selectedCustomerBackgroundPanel.SuspendLayout();
-            this.selectedCustomerPanel.SuspendLayout();
-            this.SuspendLayout();
+            Model.Address address1 = new Model.Address();
+            backgroundPanel = new TableLayoutPanel();
+            itemsPanel = new Panel();
+            removeButton = new Button();
+            addButton = new Button();
+            customersListBox = new ListBox();
+            customersLabel = new Label();
+            selectedCustomerBackgroundPanel = new TableLayoutPanel();
+            selectedCustomerPanel = new Panel();
+            fullnameTextBox = new TextBox();
+            idTextBox = new TextBox();
+            fullnameLabel = new Label();
+            idLabel = new Label();
+            selectedCustomerLabel = new Label();
+            addressControlPanel = new Panel();
+            customerAddressControl = new AddressControl();
+            backgroundPanel.SuspendLayout();
+            itemsPanel.SuspendLayout();
+            selectedCustomerBackgroundPanel.SuspendLayout();
+            selectedCustomerPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // backgroundPanel
             // 
-            this.backgroundPanel.ColumnCount = 2;
-            this.backgroundPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.60156F));
-            this.backgroundPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.39844F));
-            this.backgroundPanel.Controls.Add(this.itemsPanel, 0, 0);
-            this.backgroundPanel.Controls.Add(this.selectedCustomerBackgroundPanel, 1, 0);
-            this.backgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
-            this.backgroundPanel.Name = "backgroundPanel";
-            this.backgroundPanel.RowCount = 1;
-            this.backgroundPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.backgroundPanel.Size = new System.Drawing.Size(512, 448);
-            this.backgroundPanel.TabIndex = 1;
+            backgroundPanel.ColumnCount = 2;
+            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.40625F));
+            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 58.59375F));
+            backgroundPanel.Controls.Add(itemsPanel, 0, 0);
+            backgroundPanel.Controls.Add(selectedCustomerBackgroundPanel, 1, 0);
+            backgroundPanel.Dock = DockStyle.Fill;
+            backgroundPanel.Location = new Point(0, 0);
+            backgroundPanel.Name = "backgroundPanel";
+            backgroundPanel.RowCount = 1;
+            backgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            backgroundPanel.Size = new Size(512, 448);
+            backgroundPanel.TabIndex = 1;
             // 
             // itemsPanel
             // 
-            this.itemsPanel.Controls.Add(this.removeButton);
-            this.itemsPanel.Controls.Add(this.addButton);
-            this.itemsPanel.Controls.Add(this.customersListBox);
-            this.itemsPanel.Controls.Add(this.customersLabel);
-            this.itemsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.itemsPanel.Location = new System.Drawing.Point(3, 3);
-            this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(206, 442);
-            this.itemsPanel.TabIndex = 0;
+            itemsPanel.Controls.Add(removeButton);
+            itemsPanel.Controls.Add(addButton);
+            itemsPanel.Controls.Add(customersListBox);
+            itemsPanel.Controls.Add(customersLabel);
+            itemsPanel.Dock = DockStyle.Fill;
+            itemsPanel.Location = new Point(3, 3);
+            itemsPanel.Name = "itemsPanel";
+            itemsPanel.Size = new Size(206, 442);
+            itemsPanel.TabIndex = 0;
             // 
             // removeButton
             // 
-            this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.removeButton.Location = new System.Drawing.Point(79, 391);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(75, 45);
-            this.removeButton.TabIndex = 3;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
+            removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            removeButton.Location = new Point(79, 391);
+            removeButton.Name = "removeButton";
+            removeButton.Size = new Size(75, 45);
+            removeButton.TabIndex = 3;
+            removeButton.Text = "Remove";
+            removeButton.UseVisualStyleBackColor = true;
+            removeButton.Click += removeButton_Click;
             // 
             // addButton
             // 
-            this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addButton.Location = new System.Drawing.Point(3, 391);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 45);
-            this.addButton.TabIndex = 2;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            addButton.Location = new Point(3, 391);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(75, 45);
+            addButton.TabIndex = 2;
+            addButton.Text = "Add";
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += addButton_Click;
             // 
             // customersListBox
             // 
-            this.customersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.customersListBox.FormattingEnabled = true;
-            this.customersListBox.IntegralHeight = false;
-            this.customersListBox.ItemHeight = 15;
-            this.customersListBox.Location = new System.Drawing.Point(3, 24);
-            this.customersListBox.Name = "customersListBox";
-            this.customersListBox.ScrollAlwaysVisible = true;
-            this.customersListBox.Size = new System.Drawing.Size(200, 361);
-            this.customersListBox.TabIndex = 1;
-            this.customersListBox.SelectedIndexChanged += new System.EventHandler(this.customersListBox_SelectedIndexChanged);
+            customersListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            customersListBox.FormattingEnabled = true;
+            customersListBox.IntegralHeight = false;
+            customersListBox.ItemHeight = 15;
+            customersListBox.Location = new Point(3, 24);
+            customersListBox.Name = "customersListBox";
+            customersListBox.ScrollAlwaysVisible = true;
+            customersListBox.Size = new Size(200, 361);
+            customersListBox.TabIndex = 1;
+            customersListBox.SelectedIndexChanged += customersListBox_SelectedIndexChanged;
             // 
             // customersLabel
             // 
-            this.customersLabel.AutoSize = true;
-            this.customersLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.customersLabel.Location = new System.Drawing.Point(3, 3);
-            this.customersLabel.Name = "customersLabel";
-            this.customersLabel.Size = new System.Drawing.Size(73, 17);
-            this.customersLabel.TabIndex = 0;
-            this.customersLabel.Text = "Customers";
+            customersLabel.AutoSize = true;
+            customersLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            customersLabel.Location = new Point(3, 3);
+            customersLabel.Name = "customersLabel";
+            customersLabel.Size = new Size(73, 17);
+            customersLabel.TabIndex = 0;
+            customersLabel.Text = "Customers";
             // 
             // selectedCustomerBackgroundPanel
             // 
-            this.selectedCustomerBackgroundPanel.ColumnCount = 1;
-            this.selectedCustomerBackgroundPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.selectedCustomerBackgroundPanel.Controls.Add(this.selectedCustomerPanel, 0, 0);
-            this.selectedCustomerBackgroundPanel.Controls.Add(this.panel2, 0, 1);
-            this.selectedCustomerBackgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedCustomerBackgroundPanel.Location = new System.Drawing.Point(215, 3);
-            this.selectedCustomerBackgroundPanel.Name = "selectedCustomerBackgroundPanel";
-            this.selectedCustomerBackgroundPanel.RowCount = 2;
-            this.selectedCustomerBackgroundPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.16742F));
-            this.selectedCustomerBackgroundPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.83258F));
-            this.selectedCustomerBackgroundPanel.Size = new System.Drawing.Size(294, 442);
-            this.selectedCustomerBackgroundPanel.TabIndex = 1;
+            selectedCustomerBackgroundPanel.ColumnCount = 1;
+            selectedCustomerBackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            selectedCustomerBackgroundPanel.Controls.Add(selectedCustomerPanel, 0, 0);
+            selectedCustomerBackgroundPanel.Controls.Add(addressControlPanel, 0, 1);
+            selectedCustomerBackgroundPanel.Dock = DockStyle.Fill;
+            selectedCustomerBackgroundPanel.Location = new Point(215, 3);
+            selectedCustomerBackgroundPanel.Name = "selectedCustomerBackgroundPanel";
+            selectedCustomerBackgroundPanel.RowCount = 2;
+            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 76.47059F));
+            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 23.5294113F));
+            selectedCustomerBackgroundPanel.Size = new Size(294, 442);
+            selectedCustomerBackgroundPanel.TabIndex = 1;
             // 
             // selectedCustomerPanel
             // 
-            this.selectedCustomerPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.selectedCustomerPanel.Controls.Add(this.addressTextBox);
-            this.selectedCustomerPanel.Controls.Add(this.AddressLabel);
-            this.selectedCustomerPanel.Controls.Add(this.fullnameTextBox);
-            this.selectedCustomerPanel.Controls.Add(this.idTextBox);
-            this.selectedCustomerPanel.Controls.Add(this.fullnameLabel);
-            this.selectedCustomerPanel.Controls.Add(this.idLabel);
-            this.selectedCustomerPanel.Controls.Add(this.selectedCustomerLabel);
-            this.selectedCustomerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedCustomerPanel.Location = new System.Drawing.Point(3, 3);
-            this.selectedCustomerPanel.Name = "selectedCustomerPanel";
-            this.selectedCustomerPanel.Size = new System.Drawing.Size(288, 229);
-            this.selectedCustomerPanel.TabIndex = 2;
-            // 
-            // addressTextBox
-            // 
-            this.addressTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addressTextBox.Location = new System.Drawing.Point(61, 82);
-            this.addressTextBox.Multiline = true;
-            this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.addressTextBox.Size = new System.Drawing.Size(221, 141);
-            this.addressTextBox.TabIndex = 6;
-            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
-            // 
-            // AddressLabel
-            // 
-            this.AddressLabel.AutoSize = true;
-            this.AddressLabel.Location = new System.Drawing.Point(0, 85);
-            this.AddressLabel.Name = "AddressLabel";
-            this.AddressLabel.Size = new System.Drawing.Size(52, 15);
-            this.AddressLabel.TabIndex = 5;
-            this.AddressLabel.Text = "Address:";
+            selectedCustomerPanel.BackColor = SystemColors.ControlLightLight;
+            selectedCustomerPanel.Controls.Add(customerAddressControl);
+            selectedCustomerPanel.Controls.Add(fullnameTextBox);
+            selectedCustomerPanel.Controls.Add(idTextBox);
+            selectedCustomerPanel.Controls.Add(fullnameLabel);
+            selectedCustomerPanel.Controls.Add(idLabel);
+            selectedCustomerPanel.Controls.Add(selectedCustomerLabel);
+            selectedCustomerPanel.Dock = DockStyle.Fill;
+            selectedCustomerPanel.Location = new Point(3, 3);
+            selectedCustomerPanel.Name = "selectedCustomerPanel";
+            selectedCustomerPanel.Size = new Size(288, 332);
+            selectedCustomerPanel.TabIndex = 2;
             // 
             // fullnameTextBox
             // 
-            this.fullnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fullnameTextBox.Location = new System.Drawing.Point(61, 53);
-            this.fullnameTextBox.Name = "fullnameTextBox";
-            this.fullnameTextBox.Size = new System.Drawing.Size(221, 23);
-            this.fullnameTextBox.TabIndex = 4;
-            this.fullnameTextBox.TextChanged += new System.EventHandler(this.fullnameTextBox_TextChanged);
+            fullnameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            fullnameTextBox.Location = new Point(61, 53);
+            fullnameTextBox.Name = "fullnameTextBox";
+            fullnameTextBox.Size = new Size(221, 23);
+            fullnameTextBox.TabIndex = 4;
+            fullnameTextBox.TextChanged += fullnameTextBox_TextChanged;
             // 
             // idTextBox
             // 
-            this.idTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.idTextBox.Location = new System.Drawing.Point(61, 24);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.ReadOnly = true;
-            this.idTextBox.Size = new System.Drawing.Size(133, 23);
-            this.idTextBox.TabIndex = 3;
+            idTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            idTextBox.Location = new Point(61, 24);
+            idTextBox.Name = "idTextBox";
+            idTextBox.ReadOnly = true;
+            idTextBox.Size = new Size(133, 23);
+            idTextBox.TabIndex = 3;
             // 
             // fullnameLabel
             // 
-            this.fullnameLabel.AutoSize = true;
-            this.fullnameLabel.Location = new System.Drawing.Point(0, 56);
-            this.fullnameLabel.Name = "fullnameLabel";
-            this.fullnameLabel.Size = new System.Drawing.Size(59, 15);
-            this.fullnameLabel.TabIndex = 2;
-            this.fullnameLabel.Text = "Fullname:";
+            fullnameLabel.AutoSize = true;
+            fullnameLabel.Location = new Point(0, 56);
+            fullnameLabel.Name = "fullnameLabel";
+            fullnameLabel.Size = new Size(59, 15);
+            fullnameLabel.TabIndex = 2;
+            fullnameLabel.Text = "Fullname:";
             // 
             // idLabel
             // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(0, 27);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(21, 15);
-            this.idLabel.TabIndex = 1;
-            this.idLabel.Text = "ID:";
+            idLabel.AutoSize = true;
+            idLabel.Location = new Point(0, 27);
+            idLabel.Name = "idLabel";
+            idLabel.Size = new Size(21, 15);
+            idLabel.TabIndex = 1;
+            idLabel.Text = "ID:";
             // 
             // selectedCustomerLabel
             // 
-            this.selectedCustomerLabel.AutoSize = true;
-            this.selectedCustomerLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.selectedCustomerLabel.Location = new System.Drawing.Point(0, 0);
-            this.selectedCustomerLabel.Name = "selectedCustomerLabel";
-            this.selectedCustomerLabel.Size = new System.Drawing.Size(122, 17);
-            this.selectedCustomerLabel.TabIndex = 0;
-            this.selectedCustomerLabel.Text = "Selected Customer";
+            selectedCustomerLabel.AutoSize = true;
+            selectedCustomerLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            selectedCustomerLabel.Location = new Point(0, 0);
+            selectedCustomerLabel.Name = "selectedCustomerLabel";
+            selectedCustomerLabel.Size = new Size(122, 17);
+            selectedCustomerLabel.TabIndex = 0;
+            selectedCustomerLabel.Text = "Selected Customer";
             // 
-            // panel2
+            // addressControlPanel
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 238);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(288, 201);
-            this.panel2.TabIndex = 3;
+            addressControlPanel.Dock = DockStyle.Fill;
+            addressControlPanel.Location = new Point(3, 341);
+            addressControlPanel.Name = "addressControlPanel";
+            addressControlPanel.Size = new Size(288, 98);
+            addressControlPanel.TabIndex = 3;
+            // 
+            // customerAddressControl
+            // 
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = "";
+            address1.Street = "";
+            customerAddressControl.AddressProperty = address1;
+            customerAddressControl.Location = new Point(0, 82);
+            customerAddressControl.Name = "customerAddressControl";
+            customerAddressControl.Size = new Size(291, 247);
+            customerAddressControl.TabIndex = 5;
             // 
             // CustomersTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.backgroundPanel);
-            this.MinimumSize = new System.Drawing.Size(512, 448);
-            this.Name = "CustomersTab";
-            this.Size = new System.Drawing.Size(512, 448);
-            this.backgroundPanel.ResumeLayout(false);
-            this.itemsPanel.ResumeLayout(false);
-            this.itemsPanel.PerformLayout();
-            this.selectedCustomerBackgroundPanel.ResumeLayout(false);
-            this.selectedCustomerPanel.ResumeLayout(false);
-            this.selectedCustomerPanel.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(backgroundPanel);
+            MinimumSize = new Size(512, 448);
+            Name = "CustomersTab";
+            Size = new Size(512, 448);
+            backgroundPanel.ResumeLayout(false);
+            itemsPanel.ResumeLayout(false);
+            itemsPanel.PerformLayout();
+            selectedCustomerBackgroundPanel.ResumeLayout(false);
+            selectedCustomerPanel.ResumeLayout(false);
+            selectedCustomerPanel.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -261,13 +249,12 @@
         private Label customersLabel;
         private TableLayoutPanel selectedCustomerBackgroundPanel;
         private Panel selectedCustomerPanel;
-        private TextBox addressTextBox;
-        private Label AddressLabel;
         private TextBox fullnameTextBox;
         private TextBox idTextBox;
         private Label fullnameLabel;
         private Label idLabel;
         private Label selectedCustomerLabel;
-        private Panel panel2;
+        private Panel addressControlPanel;
+        private AddressControl customerAddressControl;
     }
 }
