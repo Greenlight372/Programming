@@ -22,6 +22,7 @@ namespace Programming.View.Controls
         public SeasonsHandleControl()
         {
             InitializeComponent();
+            SeasonComboBox.DataSource = Enum.GetNames(typeof(Model.Enums.Season));
         }
 
         /// <summary>
@@ -47,6 +48,13 @@ namespace Programming.View.Controls
                     MessageBox.Show("So cold... Why is it so cold?..");
                     break;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 forme = new Form2();
+
+            forme.ShowDialog();
         }
     }
 }
