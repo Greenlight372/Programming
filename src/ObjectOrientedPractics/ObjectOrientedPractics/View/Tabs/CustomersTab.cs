@@ -17,11 +17,33 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список объектов класса <see cref="Customer"></see>.
         /// </summary>
-        private List<Customer> _customers = new List<Customer>();
+        private List<Customer> _customers;
         /// <summary>
         /// Индекс выбранного объекта в списке.
         /// </summary>
         private int _selectedIndex;
+        /// <summary>
+        /// Значение, указывающее на то, происходит ли редактирование.
+        /// </summary>
+        private bool _isEdited = false;
+        /// <summary>
+        /// Экземпляр класса <see cref="Customer"></see>.
+        /// </summary>
+        private Customer _customerInstance = new Customer("", new Address());
+        /// <summary>
+        /// Свойство для редактирования и доступа к
+        /// списку объектов класса <see cref="Customer"></see>.
+        /// </summary>
+        public List<Customer> Customers
+        {
+            get => _customers;
+            set
+            {
+                _customers = value;
+            }
+        }
+
+        private bool _isExceptionThrown = false;
         /// <summary>
         /// Инициализация компонентов.
         /// </summary>
@@ -30,9 +52,7 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
             fullnameTextBox.BackColor = System.Drawing.Color.White;
 
-            idTextBox.Enabled = false;
-            fullnameTextBox.Enabled = false;
-            customerAddressControl.Enabled = false;
+            selectedCustomerBackgroundPanel.Enabled = _isEdited;
 
             customersListBox.DisplayMember = "Fullname";
         }
@@ -46,13 +66,9 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             idTextBox.Text = _customers[customersListBox.SelectedIndex].GetId.ToString();
             fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
-            customerAddressControl.AddressProperty = _customers[customersListBox.SelectedIndex].CustomerAddress;
+            addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
-
-            idTextBox.Enabled = true;
-            fullnameTextBox.Enabled = true;
-            customerAddressControl.Enabled = true;
         }
 
         /// <summary>
@@ -62,19 +78,15 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            _customers.Add(new Customer("Иванов И. И.", new Address("001234", "Aussie", "Sydnry", "Grove Street, Home", "123", "123")));
+            _customers.Add(new Customer("Иванов И. И.", new Address()));
             customersListBox.Items.Clear();
             customersListBox.Items.AddRange(_customers.ToArray());
 
             idTextBox.Text = "";
             fullnameTextBox.Text = "";
-            customerAddressControl.AddressProperty = new Address();
+            addressControl.Address = new Address();
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
-
-            idTextBox.Enabled = false;
-            fullnameTextBox.Enabled = false;
-            customerAddressControl.Enabled = false;
         }
 
         /// <summary>
@@ -92,13 +104,9 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 idTextBox.Text = "";
                 fullnameTextBox.Text = "";
-                customerAddressControl.AddressProperty = new Address();
+                addressControl.Address = new Address();
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
-
-                idTextBox.Enabled = false;
-                fullnameTextBox.Enabled = false;
-                customerAddressControl.Enabled = false;
             }
         }
 
@@ -111,17 +119,115 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _selectedIndex = customersListBox.SelectedIndex;
-                _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
+                _customerInstance.Fullname = fullnameTextBox.Text;
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
-                customersListBox.Items.Clear();
-                customersListBox.Items.AddRange(_customers.ToArray());
-                customersListBox.SelectedIndex = _selectedIndex;
             }
             catch
             {
                 fullnameTextBox.BackColor = System.Drawing.Color.Red;
             }
+        }
+
+        /// <summary>
+        /// Позволяет редактировать параметры выбранного покупателя.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (customersListBox.SelectedIndex != -1)
+            {
+                _selectedIndex = customersListBox.SelectedIndex;
+                _customerInstance = new Customer("", new Address());
+                _isEdited = true;
+                selectedCustomerBackgroundPanel.Enabled = _isEdited;
+                itemsPanel.Enabled = !_isEdited;
+            }
+        }
+
+        /// <summary>
+        /// Сохраняет внесенные изменения для выбранного покупателя
+        /// и выходит из меню редактирования.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+            if (_isExceptionThrown == false && fullnameTextBox.BackColor 
+                != System.Drawing.Color.Red)
+            {
+                _isEdited = false;
+
+                backgroundPanel.TabIndex = 0;
+                addressControl.TabIndex = 0;
+
+                selectedCustomerBackgroundPanel.Enabled = _isEdited;
+                itemsPanel.Enabled = !_isEdited;
+
+                _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
+                _customers[customersListBox.SelectedIndex].Address
+                    = addressControl.Address;
+
+                customersListBox.Items.Clear();
+                customersListBox.Items.AddRange(_customers.ToArray());
+
+                customersListBox.SelectedIndex = _selectedIndex;
+            }
+            else
+            {
+                MessageBox.Show("Введены неверные значения!");
+            }
+        }
+
+        /// <summary>
+        /// Отменяет внесенные изменения для выбранного
+        /// покупателя и выходит из меню редактирования.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            _isEdited = false;
+
+            backgroundPanel.TabIndex = 0;
+            addressControl.TabIndex = 0;
+
+            _isExceptionThrown = false;
+            selectedCustomerBackgroundPanel.Enabled = _isEdited;
+            itemsPanel.Enabled = !_isEdited;
+
+            _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
+            _customers[customersListBox.SelectedIndex].Address
+                = addressControl.Address;
+
+            customersListBox.Items.Clear();
+            customersListBox.Items.AddRange(_customers.ToArray());
+
+            customersListBox.SelectedIndex = _selectedIndex;
+        }
+
+        /// <summary>
+        /// Проверяет наличие исключений на пользовательском
+        /// элементе управления <see cref="addressControl"></see>
+        /// после выхода из него.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addressControl_Leave(object sender, EventArgs e)
+        {
+            _isExceptionThrown = addressControl.GetException;
+        }
+
+        /// <summary>
+        /// Проверяет наличие исключений на пользовательском
+        /// элементе управления <see cref="addressControl"></see>
+        /// после его активации.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addressControl_Enter(object sender, EventArgs e)
+        {
+            _isExceptionThrown = addressControl.GetException;
         }
     }
 }

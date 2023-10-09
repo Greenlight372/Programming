@@ -20,8 +20,22 @@ namespace ObjectOrientedPractics.Services
         /// <exception cref="ArgumentException"></exception>
         static public void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if (value.Length > maxLength)
+            if (value != null && value.Length > maxLength)
                 throw new ArgumentException($"{propertyName} должен быть меньше {maxLength} символов.");
+        }
+
+        /// <summary>
+        /// Проводит валидацию строки.
+        /// </summary>
+        /// <param name="value">Строка.</param>
+        /// <param name="maxLength">Максимальная допустимая длина строки.</param>
+        /// <param name="propertyName">Название проверяемого свойства.</param>
+        /// <exception cref="ArgumentException"></exception>
+        static public void AssertStringOnLength(string value, int minLength, int maxLength, string propertyName)
+        {
+            if ((value != null) && (value.Length < minLength || value.Length > maxLength))
+                throw new ArgumentException($"{propertyName} должен быть меньше " +
+                    $"{maxLength} символов и больше {minLength} символов.");
         }
     }
 }

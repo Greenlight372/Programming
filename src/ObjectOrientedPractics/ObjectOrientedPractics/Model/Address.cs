@@ -45,7 +45,7 @@ namespace ObjectOrientedPractics.Model
             get => _index;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 6, nameof(Index));
+                ValueValidator.AssertStringOnLength(value, 6, 6, nameof(Index));
                 _index = value;
             }
         }
@@ -120,6 +120,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Address()
         {
+            Index = "000000";
         }
 
         /// <summary>

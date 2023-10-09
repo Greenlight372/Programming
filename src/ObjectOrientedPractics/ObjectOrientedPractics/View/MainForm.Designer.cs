@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             shopTabControl = new TabControl();
             itemsPage = new TabPage();
-            itemsUserControl = new Tabs.ItemsTab();
+            itemsControl = new Tabs.ItemsTab();
             customersPage = new TabPage();
             customersControl = new Tabs.CustomersTab();
             shopTabControl.SuspendLayout();
@@ -52,7 +52,7 @@
             // 
             // itemsPage
             // 
-            itemsPage.Controls.Add(itemsUserControl);
+            itemsPage.Controls.Add(itemsControl);
             itemsPage.Location = new Point(4, 24);
             itemsPage.Name = "itemsPage";
             itemsPage.Padding = new Padding(3);
@@ -61,14 +61,15 @@
             itemsPage.Text = "Items";
             itemsPage.UseVisualStyleBackColor = true;
             // 
-            // itemsUserControl
+            // itemsControl
             // 
-            itemsUserControl.Dock = DockStyle.Fill;
-            itemsUserControl.Location = new Point(3, 3);
-            itemsUserControl.MinimumSize = new Size(512, 448);
-            itemsUserControl.Name = "itemsUserControl";
-            itemsUserControl.Size = new Size(570, 448);
-            itemsUserControl.TabIndex = 0;
+            itemsControl.Dock = DockStyle.Fill;
+            itemsControl.Items = null;
+            itemsControl.Location = new Point(3, 3);
+            itemsControl.MinimumSize = new Size(512, 448);
+            itemsControl.Name = "itemsControl";
+            itemsControl.Size = new Size(570, 448);
+            itemsControl.TabIndex = 0;
             // 
             // customersPage
             // 
@@ -83,6 +84,7 @@
             // 
             // customersControl
             // 
+            customersControl.Customers = null;
             customersControl.Dock = DockStyle.Fill;
             customersControl.Location = new Point(3, 3);
             customersControl.MinimumSize = new Size(512, 448);
@@ -114,9 +116,9 @@
         private Tabs.ItemsTab itemsTab;
         private TabPage customersPage;
         private Tabs.CustomersTab customersTab;
-        private Tabs.ItemsTab itemsUserControl;
-        private Tabs.CustomersTab customersUserControl;
-        private Tabs.CustomersTab customersTab2;
+        private Tabs.ItemsTab itemsControl;
         private Tabs.CustomersTab customersControl;
+        private Tabs.CustomersTab customersTab2;
+        private Tabs.CustomersTab customersUserControl;
     }
 }
