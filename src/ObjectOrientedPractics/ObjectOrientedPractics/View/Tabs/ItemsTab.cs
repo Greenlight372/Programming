@@ -16,11 +16,31 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список объектов класса <see cref="Item"></see>.
         /// </summary>
-        private List<Item> _items = new List<Item>();
+        private List<Item> _items;
         /// <summary>
         /// Индекс выбранного объекта в списке.
         /// </summary>
         private int _selectedIndex;
+        /// <summary>
+        /// Значение, указывающее на то, происходит ли редактирование.
+        /// </summary>
+        private bool _isEdited = false;
+        /// <summary>
+        /// Экземпляр класса <see cref="Item"></see>.
+        /// </summary>
+        private Item _itemInstance = new Item(Category.Others, "", "", 0);
+        /// <summary>
+        /// Свойство для редактирования и доступа к
+        /// Списку объектов класса <see cref="Item"></see>.
+        /// </summary>
+        public List<Item> Items
+        {
+            get => _items;
+            set
+            {
+                _items = value;
+            }
+        }
         /// <summary>
         /// Инициализация компонентов.
         /// </summary>
@@ -32,11 +52,7 @@ namespace ObjectOrientedPractics.View.Tabs
             descriptionTextBox.BackColor = System.Drawing.Color.White;
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
 
-            idTextBox.Enabled = false;
-            costTextBox.Enabled = false;
-            nameTextBox.Enabled = false;
-            descriptionTextBox.Enabled = false;
-            categoryComboBox.Enabled = false;
+            selectedItemLayoutPanel.Enabled = false;
 
             itemsListBox.DisplayMember = "Name";
             categoryComboBox.DisplayMember = "";
@@ -58,12 +74,6 @@ namespace ObjectOrientedPractics.View.Tabs
             costTextBox.BackColor = System.Drawing.Color.White;
             nameTextBox.BackColor = System.Drawing.Color.White;
             descriptionTextBox.BackColor = System.Drawing.Color.White;
-
-            idTextBox.Enabled = true;
-            costTextBox.Enabled = true;
-            nameTextBox.Enabled = true;
-            descriptionTextBox.Enabled = true;
-            categoryComboBox.Enabled = true;
         }
 
         /// <summary>
@@ -87,11 +97,7 @@ namespace ObjectOrientedPractics.View.Tabs
             nameTextBox.BackColor = System.Drawing.Color.White;
             descriptionTextBox.BackColor = System.Drawing.Color.White;
 
-            idTextBox.Enabled = false;
-            costTextBox.Enabled = false;
-            nameTextBox.Enabled = false;
-            descriptionTextBox.Enabled = false;
-            categoryComboBox.Enabled = false;
+            selectedItemLayoutPanel.Enabled = false;
         }
 
         /// <summary>
@@ -117,11 +123,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 nameTextBox.BackColor = System.Drawing.Color.White;
                 descriptionTextBox.BackColor = System.Drawing.Color.White;
 
-                idTextBox.Enabled = false;
-                costTextBox.Enabled = false;
-                nameTextBox.Enabled = false;
-                descriptionTextBox.Enabled = false;
-                categoryComboBox.Enabled = false;
+                selectedItemLayoutPanel.Enabled = false;
             }
         }
 
@@ -134,8 +136,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _items[itemsListBox.SelectedIndex].Cost
-                    = Convert.ToDouble(costTextBox.Text);
+                _itemInstance.Cost = Convert.ToInt32(costTextBox.Text);
                 costTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
@@ -153,12 +154,8 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _selectedIndex = itemsListBox.SelectedIndex;
-                _items[itemsListBox.SelectedIndex].Name = nameTextBox.Text;
+                _itemInstance.Name = descriptionTextBox.Text;
                 nameTextBox.BackColor = System.Drawing.Color.White;
-                itemsListBox.Items.Clear();
-                itemsListBox.Items.AddRange(_items.ToArray());
-                itemsListBox.SelectedIndex = _selectedIndex;
             }
             catch
             {
@@ -175,7 +172,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _items[itemsListBox.SelectedIndex].Info = descriptionTextBox.Text;
+                _itemInstance.Info = descriptionTextBox.Text;
                 descriptionTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
@@ -193,10 +190,86 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
-                _items[itemsListBox.SelectedIndex].Category
-                    = (Category)Enum.Parse(typeof(Category),
+                _itemInstance.Category = (Category)Enum.Parse(typeof(Category),
                     categoryComboBox.SelectedItem.ToString());
             }
+        }
+
+        /// <summary>
+        /// Позволяет редактировать параметры выбранного товара.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (itemsListBox.SelectedIndex > -1)
+            {
+                _selectedIndex = itemsListBox.SelectedIndex;
+                _itemInstance = new Item(Category.Others, "", "", 0);
+                _isEdited = true;
+                selectedItemLayoutPanel.Enabled = _isEdited;
+                itemsPanel.Enabled = !_isEdited;
+            }
+        }
+
+        /// <summary>
+        /// Сохраняет внесенные изменения для выбранного товара
+        /// и выходит из меню редактирования.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+            if (descriptionTextBox.BackColor != System.Drawing.Color.Red
+                && nameTextBox.BackColor != System.Drawing.Color.Red
+                && costTextBox.BackColor != System.Drawing.Color.Red)
+            {
+                _items[itemsListBox.SelectedIndex].Cost = Convert.ToInt32(costTextBox.Text);
+                _items[itemsListBox.SelectedIndex].Name = nameTextBox.Text;
+                _items[itemsListBox.SelectedIndex].Info = descriptionTextBox.Text;
+                _items[itemsListBox.SelectedIndex].Category
+                        = (Category)Enum.Parse(typeof(Category),
+                        categoryComboBox.SelectedItem.ToString());
+                itemsListBox.Items.Clear();
+                itemsListBox.Items.AddRange(_items.ToArray());
+
+                _isEdited = false;
+                selectedItemLayoutPanel.Enabled = _isEdited;
+                itemsPanel.Enabled = !_isEdited;
+
+                itemsListBox.SelectedIndex = _selectedIndex;
+
+                idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
+                costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
+                nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
+                descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
+                categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Введены неверные значения!");
+            }
+        }
+
+        /// <summary>
+        /// Отменяет внесенные изменения для выбранного товара
+        /// и выходит из меню редактирования.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            _isEdited = false;
+            selectedItemLayoutPanel.Enabled = _isEdited;
+            itemsPanel.Enabled = !_isEdited;
+
+            itemsListBox.SelectedIndex = _selectedIndex;
+
+            idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
+            costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
+            nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
+            descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
+            categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
         }
     }
 }

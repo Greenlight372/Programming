@@ -28,7 +28,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес доставки для покупателя.
         /// </summary>
-        private Address _customerAddress;
+        private Address _address;
 
         /// <summary>
         /// Получает уникальный идентификатор покупателя.
@@ -51,12 +51,12 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Получает и заполняет адрес доставки для покупателя.
         /// </summary>
-        public Address CustomerAddress
+        public Address Address
         {
-            get => _customerAddress;
+            get => _address;
             set
             {
-                _customerAddress = value;
+                _address = value;
             }
         }
 
@@ -64,12 +64,12 @@ namespace ObjectOrientedPractics.Model
         /// Создает экземпляр объекта класса <see cref="Customer"></see>.
         /// </summary>
         /// <param name="fullname">ФИО покупателя.</param>
-        /// <param name="customerAddress">Адрес доставки покупателя.</param>
-        public Customer(string fullname, Address customerAddress)
+        /// <param name="address">Адрес доставки покупателя.</param>
+        public Customer(string fullname, Address address)
         {
             _id = _idCounter++;
             Fullname = fullname;
-            CustomerAddress = customerAddress;
+            Address = address;
         }
     }
 }

@@ -186,16 +186,16 @@
 
         private Label deliveryAddressLabel;
         private Label postIndexLabel;
-        private TextBox postIndexTextBox;
         private Label countryLabel;
-        private TextBox countryTextBox;
         private Label cityLabel;
-        private TextBox cityTextBox;
         private Label streetLabel;
+        private Label buildingLabel;
+        private Label apartmentLabel;
+        private TextBox postIndexTextBox;
+        private TextBox countryTextBox;
+        private TextBox cityTextBox;
         private TextBox streetTextBox;
         private TextBox buildingTextBox;
         private TextBox apartmentTextBox;
-        private Label buildingLabel;
-        private Label apartmentLabel;
     }
 }
