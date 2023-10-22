@@ -29,7 +29,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Экземпляр класса <see cref="Customer"></see>.
         /// </summary>
-        private Customer _customerInstance = new Customer("", new Address());
+        private Customer _customerInstance = new Customer("");
         /// <summary>
         /// Свойство для редактирования и доступа к
         /// списку объектов класса <see cref="Customer"></see>.
@@ -43,6 +43,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Определяет, выкинуто ли исключения в программе.
+        /// </summary>
         private bool _isExceptionThrown = false;
         /// <summary>
         /// Инициализация компонентов.
@@ -55,6 +58,8 @@ namespace ObjectOrientedPractics.View.Tabs
             selectedCustomerBackgroundPanel.Enabled = _isEdited;
 
             customersListBox.DisplayMember = "Fullname";
+
+            addressControl.Address = new Address();
         }
 
         /// <summary>
@@ -78,7 +83,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            _customers.Add(new Customer("Иванов И. И.", new Address()));
+            _customers.Add(new Customer("Иванов И. И."));
             customersListBox.Items.Clear();
             customersListBox.Items.AddRange(_customers.ToArray());
 
@@ -138,8 +143,11 @@ namespace ObjectOrientedPractics.View.Tabs
             if (customersListBox.SelectedIndex != -1)
             {
                 _selectedIndex = customersListBox.SelectedIndex;
-                _customerInstance = new Customer("", new Address());
+                _customerInstance = new Customer("Иванов И. И.");
                 _isEdited = true;
+
+                addressControl.Enabled = _isEdited;
+                idTextBox.Enabled = _isEdited;
                 selectedCustomerBackgroundPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
             }
@@ -153,25 +161,29 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void applyButton_Click(object sender, EventArgs e)
         {
-            if (_isExceptionThrown == false && fullnameTextBox.BackColor 
-                != System.Drawing.Color.Red)
+            if (_isExceptionThrown == false
+                && fullnameTextBox.BackColor != System.Drawing.Color.Red)
             {
                 _isEdited = false;
-
-                backgroundPanel.TabIndex = 0;
-                addressControl.TabIndex = 0;
-
-                selectedCustomerBackgroundPanel.Enabled = _isEdited;
-                itemsPanel.Enabled = !_isEdited;
 
                 _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
                 _customers[customersListBox.SelectedIndex].Address
                     = addressControl.Address;
 
+                addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
+                fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
+                idTextBox.Text
+                    = _customers[customersListBox.SelectedIndex].GetId.ToString();
+
                 customersListBox.Items.Clear();
                 customersListBox.Items.AddRange(_customers.ToArray());
 
                 customersListBox.SelectedIndex = _selectedIndex;
+
+                addressControl.Enabled = _isEdited;
+                idTextBox.Enabled = _isEdited;
+                selectedCustomerBackgroundPanel.Enabled = _isEdited;
+                itemsPanel.Enabled = !_isEdited;
             }
             else
             {
@@ -189,21 +201,26 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             _isEdited = false;
 
-            backgroundPanel.TabIndex = 0;
-            addressControl.TabIndex = 0;
-
             _isExceptionThrown = false;
-            selectedCustomerBackgroundPanel.Enabled = _isEdited;
-            itemsPanel.Enabled = !_isEdited;
 
             _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
             _customers[customersListBox.SelectedIndex].Address
                 = addressControl.Address;
 
+            addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
+            fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
+            idTextBox.Text
+                = _customers[customersListBox.SelectedIndex].GetId.ToString();
+
             customersListBox.Items.Clear();
             customersListBox.Items.AddRange(_customers.ToArray());
 
             customersListBox.SelectedIndex = _selectedIndex;
+
+            addressControl.Enabled = _isEdited;
+            idTextBox.Enabled = _isEdited;
+            selectedCustomerBackgroundPanel.Enabled = _isEdited;
+            itemsPanel.Enabled = !_isEdited;
         }
 
         /// <summary>
@@ -215,7 +232,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addressControl_Leave(object sender, EventArgs e)
         {
-            _isExceptionThrown = addressControl.GetException;
+            _isExceptionThrown = addressControl.GetExceptionThrown;
         }
 
         /// <summary>
@@ -227,7 +244,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addressControl_Enter(object sender, EventArgs e)
         {
-            _isExceptionThrown = addressControl.GetException;
+            _isExceptionThrown = addressControl.GetExceptionThrown;
         }
     }
 }

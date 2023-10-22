@@ -28,7 +28,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Экземпляр класса <see cref="Item"></see>.
         /// </summary>
-        private Item _itemInstance = new Item(Category.Others, "", "", 0);
+        private Item _itemInstance = new Item("", "", 0);
         /// <summary>
         /// Свойство для редактирования и доступа к
         /// Списку объектов класса <see cref="Item"></see>.
@@ -83,7 +83,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            _items.Add(new Item(Category.Others, "Название", "Описание.", 100));
+            _items.Add(new Item("Название", "Описание.", 100));
             itemsListBox.Items.Clear();
             itemsListBox.Items.AddRange(_items.ToArray());
 
@@ -154,7 +154,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _itemInstance.Name = descriptionTextBox.Text;
+                _itemInstance.Name = nameTextBox.Text;
                 nameTextBox.BackColor = System.Drawing.Color.White;
             }
             catch
@@ -205,7 +205,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (itemsListBox.SelectedIndex > -1)
             {
                 _selectedIndex = itemsListBox.SelectedIndex;
-                _itemInstance = new Item(Category.Others, "", "", 0);
+                _itemInstance = new Item("", "", 0);
                 _isEdited = true;
                 selectedItemLayoutPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
@@ -230,6 +230,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _items[itemsListBox.SelectedIndex].Category
                         = (Category)Enum.Parse(typeof(Category),
                         categoryComboBox.SelectedItem.ToString());
+
                 itemsListBox.Items.Clear();
                 itemsListBox.Items.AddRange(_items.ToArray());
 

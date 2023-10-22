@@ -27,7 +27,7 @@ namespace ObjectOrientedPractics.View.Controls
         /// Возвращает значение, определяющее,
         /// выкинуто ли исключение в программе.
         /// </summary>
-        public bool GetException
+        public bool GetExceptionThrown
         {
             get => _isExceptionThrown;
         }

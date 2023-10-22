@@ -90,10 +90,9 @@ namespace ObjectOrientedPractics.Model
         /// <param name="name">Название товара.</param>
         /// <param name="info">Информация о товаре.</param>
         /// <param name="cost">Цена товара.</param>
-        public Item(Category category, string name, string info, double cost)
+        public Item(string name, string info, double cost)
         {
             _id = _idCounter++;
-            Category = category;
             Name = name;
             Info = info;
             Cost = cost;
