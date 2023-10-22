@@ -28,7 +28,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес доставки для покупателя.
         /// </summary>
-        private Address _address;
+        private Address _address = new Address();
 
         /// <summary>
         /// Получает уникальный идентификатор покупателя.
@@ -65,11 +65,10 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">ФИО покупателя.</param>
         /// <param name="address">Адрес доставки покупателя.</param>
-        public Customer(string fullname, Address address)
+        public Customer(string fullname)
         {
             _id = _idCounter++;
             Fullname = fullname;
-            Address = address;
         }
     }
 }

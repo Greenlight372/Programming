@@ -121,6 +121,11 @@ namespace ObjectOrientedPractics.Model
         public Address()
         {
             Index = "000000";
+            Country = " ";
+            City = " ";
+            Street = " ";
+            Building = " ";
+            Apartment = " ";
         }
 
         /// <summary>
