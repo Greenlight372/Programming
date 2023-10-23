@@ -34,21 +34,26 @@
             itemsControl = new Tabs.ItemsTab();
             customersPage = new TabPage();
             customersControl = new Tabs.CustomersTab();
+            Carts = new TabPage();
+            cartsControl = new Tabs.CartsTab();
             shopTabControl.SuspendLayout();
             itemsPage.SuspendLayout();
             customersPage.SuspendLayout();
+            Carts.SuspendLayout();
             SuspendLayout();
             // 
             // shopTabControl
             // 
             shopTabControl.Controls.Add(itemsPage);
             shopTabControl.Controls.Add(customersPage);
+            shopTabControl.Controls.Add(Carts);
             shopTabControl.Dock = DockStyle.Fill;
             shopTabControl.Location = new Point(0, 0);
             shopTabControl.Name = "shopTabControl";
             shopTabControl.SelectedIndex = 0;
             shopTabControl.Size = new Size(584, 473);
             shopTabControl.TabIndex = 0;
+            shopTabControl.SelectedIndexChanged += shopTabControl_SelectedIndexChanged;
             // 
             // itemsPage
             // 
@@ -92,6 +97,27 @@
             customersControl.Size = new Size(570, 448);
             customersControl.TabIndex = 0;
             // 
+            // Carts
+            // 
+            Carts.Controls.Add(cartsControl);
+            Carts.Location = new Point(4, 24);
+            Carts.Name = "Carts";
+            Carts.Padding = new Padding(3);
+            Carts.Size = new Size(576, 445);
+            Carts.TabIndex = 2;
+            Carts.Text = "Carts";
+            Carts.UseVisualStyleBackColor = true;
+            // 
+            // cartsControl
+            // 
+            cartsControl.Customers = null;
+            cartsControl.Dock = DockStyle.Fill;
+            cartsControl.Items = null;
+            cartsControl.Location = new Point(3, 3);
+            cartsControl.Name = "cartsControl";
+            cartsControl.Size = new Size(570, 439);
+            cartsControl.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -106,6 +132,7 @@
             shopTabControl.ResumeLayout(false);
             itemsPage.ResumeLayout(false);
             customersPage.ResumeLayout(false);
+            Carts.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -120,5 +147,7 @@
         private Tabs.CustomersTab customersControl;
         private Tabs.CustomersTab customersTab2;
         private Tabs.CustomersTab customersUserControl;
+        private TabPage Carts;
+        private Tabs.CartsTab cartsControl;
     }
 }

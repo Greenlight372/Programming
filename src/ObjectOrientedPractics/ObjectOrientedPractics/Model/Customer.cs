@@ -31,6 +31,16 @@ namespace ObjectOrientedPractics.Model
         private Address _address = new Address();
 
         /// <summary>
+        /// Корзина с товарами покупателя.
+        /// </summary>
+        private Cart _cart;
+
+        /// <summary>
+        /// Список заказов покупателя.
+        /// </summary>
+        private List<Order> _order;
+
+        /// <summary>
         /// Получает уникальный идентификатор покупателя.
         /// </summary>
         public int GetId { get => _id; }
@@ -61,6 +71,30 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Получает и заполняет корзину покупателя.
+        /// </summary>
+        public Cart Cart
+        {
+            get => _cart;
+            set
+            {
+                _cart = value;
+            }
+        }
+
+        /// <summary>
+        /// Получает и заполняет список заказов покупателя.
+        /// </summary>
+        public List<Order> Order
+        {
+            get => _order;
+            set
+            {
+                _order = value;
+            }
+        }
+
+        /// <summary>
         /// Создает экземпляр объекта класса <see cref="Customer"></see>.
         /// </summary>
         /// <param name="fullname">ФИО покупателя.</param>
@@ -69,6 +103,8 @@ namespace ObjectOrientedPractics.Model
         {
             _id = _idCounter++;
             Fullname = fullname;
+            Cart = new Cart();
+            Order = new List<Order>();
         }
     }
 }

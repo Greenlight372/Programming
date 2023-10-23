@@ -17,6 +17,17 @@ namespace ObjectOrientedPractics.View
 
             itemsControl.Items = _store.Items;
             customersControl.Customers = _store.Customers;
+            cartsControl.Items = _store.Items;
+            cartsControl.Customers = _store.Customers;
+        }
+        /// <summary>
+        /// Обновляет данные в <see cref="cartsControl"></see>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shopTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cartsControl.RefreshData();
         }
     }
 }
