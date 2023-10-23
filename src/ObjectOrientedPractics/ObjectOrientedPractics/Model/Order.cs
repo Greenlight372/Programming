@@ -36,6 +36,8 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         private List<Item> _items;
 
+        private string _fullname;
+
         /// <summary>
         /// Возвращает уникальный идентификатор товара.
         /// </summary>
@@ -74,33 +76,33 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Вычисляет общую стоимость товаров в корзине. 
         /// </summary>
-        public double Amount
+        public double Amount()
         {
-            get
+            double sum = 0.0;
+            if (_items == null || _items.Count == 0)
             {
-                double sum = 0.0;
-                if (Items == null || Items.Count == 0)
-                {
-                    return sum;
-                }
-
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    sum += Items[i].Cost;
-                }
                 return sum;
             }
+
+            for (int i = 0; i < _items.Count; i++)
+            {
+                sum += _items[i].Cost;
+            }
+            return sum;
         }
+
+        public string GetFullname { get => _fullname; }
 
         /// <summary>
         /// Создает объект класса <see cref="Order"></see>.
         /// </summary>
-        public Order()
+        public Order(Address address, List<Item> items, string fullname)
         {
             _id = _idCounter++;
             _date = DateTime.Now;
-            Address = new Address();
-            Items = new List<Item>();
+            Address = address;
+            Items = items;
+            _fullname = fullname;
         }
     }
 }

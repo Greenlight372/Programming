@@ -62,7 +62,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            if (itemsListBox.SelectedIndex != -1)
+            if (itemsListBox.SelectedIndex != -1 && customerComboBox.SelectedIndex != -1)
             {
                 Customers[customerComboBox.SelectedIndex].Cart.Items.Add
                     (Items[itemsListBox.SelectedIndex]);
@@ -123,6 +123,22 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 customerComboBox.Items.Clear();
                 customerComboBox.Items.AddRange(Customers.ToArray());
+            }
+        }
+
+        private void createButton_Click(object sender, EventArgs e)
+        {
+            if (customerComboBox.SelectedIndex != -1)
+            {
+                Customers[customerComboBox.SelectedIndex].Order.Add(new Order
+                    (
+                        Customers[customerComboBox.SelectedIndex].Address,
+                        Customers[customerComboBox.SelectedIndex].Cart.Items,
+                        Customers[customerComboBox.SelectedIndex].Fullname
+                    ));
+                Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
+                cartListBox.Items.Clear();
+                money.Text = "";
             }
         }
     }

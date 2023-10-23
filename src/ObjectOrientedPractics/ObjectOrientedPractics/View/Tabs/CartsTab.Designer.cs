@@ -131,6 +131,7 @@
             createButton.TabIndex = 11;
             createButton.Text = "Create Order";
             createButton.UseVisualStyleBackColor = true;
+            createButton.Click += createButton_Click;
             // 
             // removeButton
             // 
@@ -164,7 +165,6 @@
             money.Size = new Size(25, 30);
             money.TabIndex = 8;
             money.Text = "0";
-            money.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // amountLabel
             // 

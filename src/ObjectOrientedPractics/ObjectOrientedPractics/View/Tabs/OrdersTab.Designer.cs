@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address4 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             ordersLayoutPanel = new TableLayoutPanel();
             ordersPanel = new Panel();
-            dataGridView1 = new DataGridView();
+            ordersDataGridView = new DataGridView();
             id = new DataGridViewTextBoxColumn();
             Created = new DataGridViewTextBoxColumn();
             OrderStatus = new DataGridViewTextBoxColumn();
             CustomerFullname = new DataGridViewTextBoxColumn();
+            Amount = new DataGridViewTextBoxColumn();
+            DeliveryAddress = new DataGridViewTextBoxColumn();
             ordersLabel = new Label();
             infoLayoutPanel = new TableLayoutPanel();
             orderItemsPanel = new Panel();
-            orderItemsLabel = new Label();
-            itemsListBox = new ListBox();
-            amountLabel = new Label();
             money = new Label();
+            amountLabel = new Label();
+            itemsListBox = new ListBox();
+            orderItemsLabel = new Label();
             addressPanel = new Panel();
             addressControl = new Controls.AddressControl();
             selectedOrderPanel = new Panel();
-            selectedOrderLabel = new Label();
-            idLabel = new Label();
-            createdLabel = new Label();
-            statusLabel = new Label();
-            idTextBox = new TextBox();
-            createdTextBox = new TextBox();
             statusComboBox = new ComboBox();
-            Amount = new DataGridViewTextBoxColumn();
-            DeliveryAddress = new DataGridViewTextBoxColumn();
+            createdTextBox = new TextBox();
+            idTextBox = new TextBox();
+            statusLabel = new Label();
+            createdLabel = new Label();
+            idLabel = new Label();
+            selectedOrderLabel = new Label();
             ordersLayoutPanel.SuspendLayout();
             ordersPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ordersDataGridView).BeginInit();
             infoLayoutPanel.SuspendLayout();
             orderItemsPanel.SuspendLayout();
             addressPanel.SuspendLayout();
@@ -82,7 +82,7 @@
             // 
             // ordersPanel
             // 
-            ordersPanel.Controls.Add(dataGridView1);
+            ordersPanel.Controls.Add(ordersDataGridView);
             ordersPanel.Controls.Add(ordersLabel);
             ordersPanel.Dock = DockStyle.Fill;
             ordersPanel.Location = new Point(3, 3);
@@ -90,37 +90,43 @@
             ordersPanel.Size = new Size(318, 506);
             ordersPanel.TabIndex = 0;
             // 
-            // dataGridView1
+            // ordersDataGridView
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeight = 24;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id, Created, OrderStatus, CustomerFullname, Amount, DeliveryAddress });
-            dataGridView1.Location = new Point(3, 20);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 24;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.ScrollBars = ScrollBars.Horizontal;
-            dataGridView1.Size = new Size(312, 483);
-            dataGridView1.TabIndex = 2;
+            ordersDataGridView.AllowUserToAddRows = false;
+            ordersDataGridView.AllowUserToDeleteRows = false;
+            ordersDataGridView.AllowUserToResizeColumns = false;
+            ordersDataGridView.AllowUserToResizeRows = false;
+            ordersDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ordersDataGridView.ColumnHeadersHeight = 24;
+            ordersDataGridView.Columns.AddRange(new DataGridViewColumn[] { id, Created, OrderStatus, CustomerFullname, Amount, DeliveryAddress });
+            ordersDataGridView.Location = new Point(3, 20);
+            ordersDataGridView.MultiSelect = false;
+            ordersDataGridView.Name = "ordersDataGridView";
+            ordersDataGridView.RowHeadersVisible = false;
+            ordersDataGridView.RowHeadersWidth = 24;
+            ordersDataGridView.RowTemplate.Height = 25;
+            ordersDataGridView.ScrollBars = ScrollBars.Horizontal;
+            ordersDataGridView.Size = new Size(312, 483);
+            ordersDataGridView.TabIndex = 2;
             // 
             // id
             // 
+            id.DataPropertyName = "GetId";
             id.FillWeight = 32F;
             id.HeaderText = "id";
             id.Name = "id";
+            id.ReadOnly = true;
+            id.SortMode = DataGridViewColumnSortMode.NotSortable;
             id.Width = 32;
             // 
             // Created
             // 
+            Created.DataPropertyName = "GetDate";
             Created.FillWeight = 75F;
             Created.HeaderText = "Created";
             Created.Name = "Created";
+            Created.ReadOnly = true;
+            Created.SortMode = DataGridViewColumnSortMode.NotSortable;
             Created.Width = 75;
             // 
             // OrderStatus
@@ -128,14 +134,34 @@
             OrderStatus.FillWeight = 80F;
             OrderStatus.HeaderText = "Order Status";
             OrderStatus.Name = "OrderStatus";
+            OrderStatus.SortMode = DataGridViewColumnSortMode.NotSortable;
             OrderStatus.Width = 80;
             // 
             // CustomerFullname
             // 
+            CustomerFullname.DataPropertyName = "Fullname";
             CustomerFullname.FillWeight = 140F;
             CustomerFullname.HeaderText = "Customer Full Name";
             CustomerFullname.Name = "CustomerFullname";
+            CustomerFullname.ReadOnly = true;
+            CustomerFullname.SortMode = DataGridViewColumnSortMode.NotSortable;
             CustomerFullname.Width = 140;
+            // 
+            // Amount
+            // 
+            Amount.DataPropertyName = "Amount";
+            Amount.HeaderText = "Amount";
+            Amount.Name = "Amount";
+            Amount.ReadOnly = true;
+            Amount.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // DeliveryAddress
+            // 
+            DeliveryAddress.DataPropertyName = "Address";
+            DeliveryAddress.HeaderText = "Delivery Address";
+            DeliveryAddress.Name = "DeliveryAddress";
+            DeliveryAddress.ReadOnly = true;
+            DeliveryAddress.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // ordersLabel
             // 
@@ -176,26 +202,16 @@
             orderItemsPanel.Size = new Size(364, 213);
             orderItemsPanel.TabIndex = 0;
             // 
-            // orderItemsLabel
+            // money
             // 
-            orderItemsLabel.AutoSize = true;
-            orderItemsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            orderItemsLabel.Location = new Point(3, 0);
-            orderItemsLabel.Name = "orderItemsLabel";
-            orderItemsLabel.Size = new Size(81, 17);
-            orderItemsLabel.TabIndex = 2;
-            orderItemsLabel.Text = "Order items";
-            // 
-            // itemsListBox
-            // 
-            itemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            itemsListBox.FormattingEnabled = true;
-            itemsListBox.IntegralHeight = false;
-            itemsListBox.ItemHeight = 15;
-            itemsListBox.Location = new Point(3, 20);
-            itemsListBox.Name = "itemsListBox";
-            itemsListBox.Size = new Size(358, 139);
-            itemsListBox.TabIndex = 3;
+            money.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            money.AutoSize = true;
+            money.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            money.Location = new Point(336, 179);
+            money.Name = "money";
+            money.Size = new Size(25, 30);
+            money.TabIndex = 9;
+            money.Text = "0";
             // 
             // amountLabel
             // 
@@ -208,17 +224,26 @@
             amountLabel.TabIndex = 4;
             amountLabel.Text = "Amount:";
             // 
-            // money
+            // itemsListBox
             // 
-            money.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            money.AutoSize = true;
-            money.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            money.Location = new Point(336, 179);
-            money.Name = "money";
-            money.Size = new Size(25, 30);
-            money.TabIndex = 9;
-            money.Text = "0";
-            money.TextAlign = ContentAlignment.MiddleLeft;
+            itemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemsListBox.FormattingEnabled = true;
+            itemsListBox.IntegralHeight = false;
+            itemsListBox.ItemHeight = 15;
+            itemsListBox.Location = new Point(3, 20);
+            itemsListBox.Name = "itemsListBox";
+            itemsListBox.Size = new Size(358, 139);
+            itemsListBox.TabIndex = 3;
+            // 
+            // orderItemsLabel
+            // 
+            orderItemsLabel.AutoSize = true;
+            orderItemsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            orderItemsLabel.Location = new Point(3, 0);
+            orderItemsLabel.Name = "orderItemsLabel";
+            orderItemsLabel.Size = new Size(81, 17);
+            orderItemsLabel.TabIndex = 2;
+            orderItemsLabel.Text = "Order items";
             // 
             // addressPanel
             // 
@@ -231,14 +256,14 @@
             // 
             // addressControl
             // 
-            address4.Apartment = " ";
-            address4.Building = " ";
-            address4.City = " ";
-            address4.Country = " ";
-            address4.Index = "000000";
-            address4.Street = " ";
-            addressControl.Address = address4;
-            addressControl.Dock = DockStyle.Fill;
+            address1.Apartment = " ";
+            address1.Building = " ";
+            address1.City = " ";
+            address1.Country = " ";
+            address1.Index = "000000";
+            address1.Street = " ";
+            addressControl.Address = address1;
+            addressControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             addressControl.Location = new Point(0, 0);
             addressControl.Name = "addressControl";
             addressControl.Size = new Size(364, 151);
@@ -259,42 +284,23 @@
             selectedOrderPanel.Size = new Size(364, 124);
             selectedOrderPanel.TabIndex = 2;
             // 
-            // selectedOrderLabel
+            // statusComboBox
             // 
-            selectedOrderLabel.AutoSize = true;
-            selectedOrderLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            selectedOrderLabel.Location = new Point(3, 0);
-            selectedOrderLabel.Name = "selectedOrderLabel";
-            selectedOrderLabel.Size = new Size(98, 17);
-            selectedOrderLabel.TabIndex = 3;
-            selectedOrderLabel.Text = "Selected Order";
+            statusComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            statusComboBox.FormattingEnabled = true;
+            statusComboBox.Location = new Point(72, 88);
+            statusComboBox.Name = "statusComboBox";
+            statusComboBox.Size = new Size(167, 23);
+            statusComboBox.TabIndex = 9;
             // 
-            // idLabel
+            // createdTextBox
             // 
-            idLabel.AutoSize = true;
-            idLabel.Location = new Point(3, 33);
-            idLabel.Name = "idLabel";
-            idLabel.Size = new Size(21, 15);
-            idLabel.TabIndex = 4;
-            idLabel.Text = "ID:";
-            // 
-            // createdLabel
-            // 
-            createdLabel.AutoSize = true;
-            createdLabel.Location = new Point(3, 62);
-            createdLabel.Name = "createdLabel";
-            createdLabel.Size = new Size(51, 15);
-            createdLabel.TabIndex = 5;
-            createdLabel.Text = "Created:";
-            // 
-            // statusLabel
-            // 
-            statusLabel.AutoSize = true;
-            statusLabel.Location = new Point(3, 91);
-            statusLabel.Name = "statusLabel";
-            statusLabel.Size = new Size(42, 15);
-            statusLabel.TabIndex = 6;
-            statusLabel.Text = "Status:";
+            createdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            createdTextBox.Location = new Point(72, 59);
+            createdTextBox.Name = "createdTextBox";
+            createdTextBox.ReadOnly = true;
+            createdTextBox.Size = new Size(167, 23);
+            createdTextBox.TabIndex = 8;
             // 
             // idTextBox
             // 
@@ -305,32 +311,42 @@
             idTextBox.Size = new Size(167, 23);
             idTextBox.TabIndex = 7;
             // 
-            // createdTextBox
+            // statusLabel
             // 
-            createdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            createdTextBox.Location = new Point(72, 59);
-            createdTextBox.Name = "createdTextBox";
-            createdTextBox.Size = new Size(167, 23);
-            createdTextBox.TabIndex = 8;
+            statusLabel.AutoSize = true;
+            statusLabel.Location = new Point(3, 91);
+            statusLabel.Name = "statusLabel";
+            statusLabel.Size = new Size(42, 15);
+            statusLabel.TabIndex = 6;
+            statusLabel.Text = "Status:";
             // 
-            // statusComboBox
+            // createdLabel
             // 
-            statusComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            statusComboBox.FormattingEnabled = true;
-            statusComboBox.Location = new Point(72, 88);
-            statusComboBox.Name = "statusComboBox";
-            statusComboBox.Size = new Size(167, 23);
-            statusComboBox.TabIndex = 9;
+            createdLabel.AutoSize = true;
+            createdLabel.Location = new Point(3, 62);
+            createdLabel.Name = "createdLabel";
+            createdLabel.Size = new Size(51, 15);
+            createdLabel.TabIndex = 5;
+            createdLabel.Text = "Created:";
             // 
-            // Amount
+            // idLabel
             // 
-            Amount.HeaderText = "Amount";
-            Amount.Name = "Amount";
+            idLabel.AutoSize = true;
+            idLabel.Location = new Point(3, 33);
+            idLabel.Name = "idLabel";
+            idLabel.Size = new Size(21, 15);
+            idLabel.TabIndex = 4;
+            idLabel.Text = "ID:";
             // 
-            // DeliveryAddress
+            // selectedOrderLabel
             // 
-            DeliveryAddress.HeaderText = "Delivery Address";
-            DeliveryAddress.Name = "DeliveryAddress";
+            selectedOrderLabel.AutoSize = true;
+            selectedOrderLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            selectedOrderLabel.Location = new Point(3, 0);
+            selectedOrderLabel.Name = "selectedOrderLabel";
+            selectedOrderLabel.Size = new Size(98, 17);
+            selectedOrderLabel.TabIndex = 3;
+            selectedOrderLabel.Text = "Selected Order";
             // 
             // OrdersTab
             // 
@@ -342,7 +358,7 @@
             ordersLayoutPanel.ResumeLayout(false);
             ordersPanel.ResumeLayout(false);
             ordersPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ordersDataGridView).EndInit();
             infoLayoutPanel.ResumeLayout(false);
             orderItemsPanel.ResumeLayout(false);
             orderItemsPanel.PerformLayout();
@@ -356,11 +372,7 @@
 
         private TableLayoutPanel ordersLayoutPanel;
         private Panel ordersPanel;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn Created;
-        private DataGridViewTextBoxColumn OrderStatus;
-        private DataGridViewTextBoxColumn CustomerFullname;
+        private DataGridView ordersDataGridView;
         private Label ordersLabel;
         private TableLayoutPanel infoLayoutPanel;
         private Panel orderItemsPanel;
@@ -378,6 +390,10 @@
         private Label statusLabel;
         private Label createdLabel;
         private Label idLabel;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn Created;
+        private DataGridViewTextBoxColumn OrderStatus;
+        private DataGridViewTextBoxColumn CustomerFullname;
         private DataGridViewTextBoxColumn Amount;
         private DataGridViewTextBoxColumn DeliveryAddress;
     }
