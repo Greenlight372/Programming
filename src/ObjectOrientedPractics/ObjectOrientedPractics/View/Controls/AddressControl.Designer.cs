@@ -178,6 +178,7 @@
             Controls.Add(deliveryAddressLabel);
             Name = "AddressControl";
             Size = new Size(308, 152);
+            Load += AddressControl_Load;
             ResumeLayout(false);
             PerformLayout();
         }

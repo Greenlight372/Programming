@@ -65,15 +65,18 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
-            costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
-            nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
-            descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
-            categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
+            if (itemsListBox.SelectedIndex > -1)
+            {
+                idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
+                costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
+                nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
+                descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
+                categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
 
-            costTextBox.BackColor = System.Drawing.Color.White;
-            nameTextBox.BackColor = System.Drawing.Color.White;
-            descriptionTextBox.BackColor = System.Drawing.Color.White;
+                costTextBox.BackColor = System.Drawing.Color.White;
+                nameTextBox.BackColor = System.Drawing.Color.White;
+                descriptionTextBox.BackColor = System.Drawing.Color.White;
+            }
         }
 
         /// <summary>
@@ -109,6 +112,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
+                _itemInstance = _items[itemsListBox.SelectedIndex];
                 _items.RemoveAt(itemsListBox.SelectedIndex);
                 itemsListBox.Items.Clear();
                 itemsListBox.Items.AddRange(_items.ToArray());
@@ -134,14 +138,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void costTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (_isEdited == true)
             {
-                _itemInstance.Cost = Convert.ToInt32(costTextBox.Text);
-                costTextBox.BackColor = System.Drawing.Color.White;
-            }
-            catch
-            {
-                costTextBox.BackColor = System.Drawing.Color.Red;
+                try
+                {
+                    _itemInstance.Cost = Convert.ToInt32(costTextBox.Text);
+                    costTextBox.BackColor = System.Drawing.Color.White;
+                }
+                catch
+                {
+                    costTextBox.BackColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -152,14 +159,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (_isEdited == true)
             {
-                _itemInstance.Name = nameTextBox.Text;
-                nameTextBox.BackColor = System.Drawing.Color.White;
-            }
-            catch
-            {
-                nameTextBox.BackColor = System.Drawing.Color.Red;
+                try
+                {
+                    _itemInstance.Name = nameTextBox.Text;
+                    nameTextBox.BackColor = System.Drawing.Color.White;
+                }
+                catch
+                {
+                    nameTextBox.BackColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -170,14 +180,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (_isEdited == true)
             {
-                _itemInstance.Info = descriptionTextBox.Text;
-                descriptionTextBox.BackColor = System.Drawing.Color.White;
-            }
-            catch
-            {
-                descriptionTextBox.BackColor = System.Drawing.Color.Red;
+                try
+                {
+                    _itemInstance.Info = descriptionTextBox.Text;
+                    descriptionTextBox.BackColor = System.Drawing.Color.White;
+                }
+                catch
+                {
+                    descriptionTextBox.BackColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -188,10 +201,13 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void categoryComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (itemsListBox.SelectedIndex > -1)
+            if (_isEdited == true)
             {
-                _itemInstance.Category = (Category)Enum.Parse(typeof(Category),
-                    categoryComboBox.SelectedItem.ToString());
+                if (_selectedIndex > -1)
+                {
+                    _itemInstance.Category = (Category)Enum.Parse(typeof(Category),
+                        categoryComboBox.SelectedItem.ToString());
+                }
             }
         }
 
@@ -205,7 +221,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (itemsListBox.SelectedIndex > -1)
             {
                 _selectedIndex = itemsListBox.SelectedIndex;
-                _itemInstance = new Item("", "", 0);
+                _itemInstance = _items[_selectedIndex];
                 _isEdited = true;
                 selectedItemLayoutPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
@@ -224,12 +240,10 @@ namespace ObjectOrientedPractics.View.Tabs
                 && nameTextBox.BackColor != System.Drawing.Color.Red
                 && costTextBox.BackColor != System.Drawing.Color.Red)
             {
-                _items[itemsListBox.SelectedIndex].Cost = Convert.ToInt32(costTextBox.Text);
-                _items[itemsListBox.SelectedIndex].Name = nameTextBox.Text;
-                _items[itemsListBox.SelectedIndex].Info = descriptionTextBox.Text;
-                _items[itemsListBox.SelectedIndex].Category
-                        = (Category)Enum.Parse(typeof(Category),
-                        categoryComboBox.SelectedItem.ToString());
+                _items[_selectedIndex].Cost = _itemInstance.Cost;
+                _items[_selectedIndex].Name = _itemInstance.Name;
+                _items[_selectedIndex].Info = _itemInstance.Info;
+                _items[_selectedIndex].Category = _itemInstance.Category;
 
                 itemsListBox.Items.Clear();
                 itemsListBox.Items.AddRange(_items.ToArray());
@@ -240,11 +254,11 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 itemsListBox.SelectedIndex = _selectedIndex;
 
-                idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
-                costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
-                nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
-                descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
-                categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
+                idTextBox.Text = _items[_selectedIndex].GetId.ToString();
+                costTextBox.Text = _items[_selectedIndex].Cost.ToString();
+                nameTextBox.Text = _items[_selectedIndex].Name;
+                descriptionTextBox.Text = _items[_selectedIndex].Info;
+                categoryComboBox.Text = _items[_selectedIndex].Category.ToString();
             }
             else
             {
@@ -266,11 +280,11 @@ namespace ObjectOrientedPractics.View.Tabs
 
             itemsListBox.SelectedIndex = _selectedIndex;
 
-            idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
-            costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
-            nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
-            descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
-            categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
+            idTextBox.Text = _items[_selectedIndex].GetId.ToString();
+            costTextBox.Text = _items[_selectedIndex].Cost.ToString();
+            nameTextBox.Text = _items[_selectedIndex].Name;
+            descriptionTextBox.Text = _items[_selectedIndex].Info;
+            categoryComboBox.Text = _items[_selectedIndex].Category.ToString();
         }
     }
 }

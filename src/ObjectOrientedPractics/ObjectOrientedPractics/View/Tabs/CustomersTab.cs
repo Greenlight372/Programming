@@ -69,11 +69,14 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void customersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            idTextBox.Text = _customers[customersListBox.SelectedIndex].GetId.ToString();
-            fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
-            addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
+            if (customersListBox.SelectedIndex > -1)
+            {
+                idTextBox.Text = _customers[customersListBox.SelectedIndex].GetId.ToString();
+                fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
+                addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
 
-            fullnameTextBox.BackColor = System.Drawing.Color.White;
+                fullnameTextBox.BackColor = System.Drawing.Color.White;
+            }
         }
 
         /// <summary>
@@ -122,14 +125,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void fullnameTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (_isEdited == true)
             {
-                _customerInstance.Fullname = fullnameTextBox.Text;
-                fullnameTextBox.BackColor = System.Drawing.Color.White;
-            }
-            catch
-            {
-                fullnameTextBox.BackColor = System.Drawing.Color.Red;
+                try
+                {
+                    _customerInstance.Fullname = fullnameTextBox.Text;
+                    fullnameTextBox.BackColor = System.Drawing.Color.White;
+                }
+                catch
+                {
+                    fullnameTextBox.BackColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -143,7 +149,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (customersListBox.SelectedIndex != -1)
             {
                 _selectedIndex = customersListBox.SelectedIndex;
-                _customerInstance = new Customer("Иванов И. И.");
+                _customerInstance = _customers[customersListBox.SelectedIndex];
                 _isEdited = true;
 
                 addressControl.Enabled = _isEdited;

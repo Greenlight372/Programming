@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectOrientedPractics.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,9 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         private List<Item> _items;
 
+        /// <summary>
+        /// ФИО заказчика.
+        /// </summary>
         private string _fullname;
 
         /// <summary>
@@ -74,35 +78,47 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Вычисляет общую стоимость товаров в корзине. 
+        /// Вычисляет общую стоимость товаров в заказе.
         /// </summary>
-        public double Amount()
+        public double Amount
         {
-            double sum = 0.0;
-            if (_items == null || _items.Count == 0)
+            get
             {
+                double sum = 0.0;
+                if (Items == null || Items.Count == 0)
+                {
+                    return sum;
+                }
+
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    sum += Items[i].Cost;
+                }
                 return sum;
             }
-
-            for (int i = 0; i < _items.Count; i++)
-            {
-                sum += _items[i].Cost;
-            }
-            return sum;
         }
 
+        /// <summary>
+        /// Возвращает ФИО покупателя.
+        /// </summary>
         public string GetFullname { get => _fullname; }
+
+        /// <summary>
+        /// Возвращает статус заказа.
+        /// </summary>
+        public OrderStatus Status { get; set; }
 
         /// <summary>
         /// Создает объект класса <see cref="Order"></see>.
         /// </summary>
-        public Order(Address address, List<Item> items, string fullname)
+        public Order(Address address, string fullname, List<Item> items)
         {
             _id = _idCounter++;
             _date = DateTime.Now;
             Address = address;
             Items = items;
             _fullname = fullname;
+            Status = OrderStatus.New;
         }
     }
 }

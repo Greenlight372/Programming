@@ -59,7 +59,7 @@
             cartsTabLayoutPanel.Location = new Point(0, 0);
             cartsTabLayoutPanel.Name = "cartsTabLayoutPanel";
             cartsTabLayoutPanel.RowCount = 1;
-            cartsTabLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            cartsTabLayoutPanel.RowStyles.Add(new RowStyle());
             cartsTabLayoutPanel.Size = new Size(600, 448);
             cartsTabLayoutPanel.TabIndex = 0;
             // 
@@ -77,7 +77,7 @@
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            addButton.Location = new Point(3, 397);
+            addButton.Location = new Point(3, 400);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 42);
             addButton.TabIndex = 4;
@@ -91,8 +91,9 @@
             itemsListBox.FormattingEnabled = true;
             itemsListBox.IntegralHeight = false;
             itemsListBox.ItemHeight = 15;
-            itemsListBox.Location = new Point(3, 20);
+            itemsListBox.Location = new Point(3, 23);
             itemsListBox.Name = "itemsListBox";
+            itemsListBox.ScrollAlwaysVisible = true;
             itemsListBox.Size = new Size(195, 371);
             itemsListBox.TabIndex = 3;
             // 
@@ -100,7 +101,7 @@
             // 
             itemsLabel.AutoSize = true;
             itemsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            itemsLabel.Location = new Point(3, 0);
+            itemsLabel.Location = new Point(3, 3);
             itemsLabel.Name = "itemsLabel";
             itemsLabel.Size = new Size(42, 17);
             itemsLabel.TabIndex = 2;
@@ -125,7 +126,8 @@
             // 
             // createButton
             // 
-            createButton.Location = new Point(3, 323);
+            createButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            createButton.Location = new Point(3, 400);
             createButton.Name = "createButton";
             createButton.Size = new Size(88, 42);
             createButton.TabIndex = 11;
@@ -135,8 +137,8 @@
             // 
             // removeButton
             // 
-            removeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            removeButton.Location = new Point(202, 323);
+            removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            removeButton.Location = new Point(202, 400);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(88, 42);
             removeButton.TabIndex = 10;
@@ -146,8 +148,8 @@
             // 
             // clearButton
             // 
-            clearButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            clearButton.Location = new Point(296, 323);
+            clearButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            clearButton.Location = new Point(296, 400);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(88, 42);
             clearButton.TabIndex = 9;
@@ -157,21 +159,23 @@
             // 
             // money
             // 
-            money.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            money.AutoSize = true;
+            money.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             money.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            money.Location = new Point(359, 290);
+            money.Location = new Point(171, 364);
             money.Name = "money";
-            money.Size = new Size(25, 30);
+            money.RightToLeft = RightToLeft.No;
+            money.Size = new Size(213, 30);
             money.TabIndex = 8;
             money.Text = "0";
+            money.TextAlign = ContentAlignment.MiddleRight;
+            money.UseMnemonic = false;
             // 
             // amountLabel
             // 
-            amountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            amountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             amountLabel.AutoSize = true;
             amountLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            amountLabel.Location = new Point(322, 273);
+            amountLabel.Location = new Point(322, 347);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(62, 17);
             amountLabel.TabIndex = 7;
@@ -179,13 +183,14 @@
             // 
             // cartListBox
             // 
-            cartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cartListBox.FormattingEnabled = true;
             cartListBox.IntegralHeight = false;
             cartListBox.ItemHeight = 15;
             cartListBox.Location = new Point(3, 72);
             cartListBox.Name = "cartListBox";
-            cartListBox.Size = new Size(381, 198);
+            cartListBox.ScrollAlwaysVisible = true;
+            cartListBox.Size = new Size(381, 272);
             cartListBox.TabIndex = 6;
             // 
             // cartLabel
@@ -201,7 +206,9 @@
             // customerComboBox
             // 
             customerComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            customerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             customerComboBox.FormattingEnabled = true;
+            customerComboBox.ImeMode = ImeMode.Off;
             customerComboBox.Location = new Point(81, 20);
             customerComboBox.Name = "customerComboBox";
             customerComboBox.Size = new Size(303, 23);

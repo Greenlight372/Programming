@@ -35,7 +35,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
-                double sum = 0.00;
+                double sum = 0.0;
                 if (Items == null || Items.Count == 0)
                 {
                     return sum;
@@ -54,7 +54,6 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Cart()
         {
-            _items = new List<Item>();
         }
     }
 }

@@ -89,7 +89,7 @@
             // editButton
             // 
             editButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            editButton.Location = new Point(135, 391);
+            editButton.Location = new Point(142, 397);
             editButton.Name = "editButton";
             editButton.Size = new Size(64, 45);
             editButton.TabIndex = 4;
@@ -100,7 +100,7 @@
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            removeButton.Location = new Point(69, 391);
+            removeButton.Location = new Point(73, 397);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(64, 45);
             removeButton.TabIndex = 3;
@@ -111,7 +111,7 @@
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            addButton.Location = new Point(3, 391);
+            addButton.Location = new Point(3, 397);
             addButton.Name = "addButton";
             addButton.Size = new Size(64, 45);
             addButton.TabIndex = 2;
@@ -128,7 +128,7 @@
             itemsListBox.Location = new Point(3, 24);
             itemsListBox.Name = "itemsListBox";
             itemsListBox.ScrollAlwaysVisible = true;
-            itemsListBox.Size = new Size(200, 361);
+            itemsListBox.Size = new Size(200, 367);
             itemsListBox.TabIndex = 1;
             itemsListBox.SelectedIndexChanged += itemsListBox_SelectedIndexChanged;
             // 
@@ -152,8 +152,8 @@
             selectedItemLayoutPanel.Location = new Point(215, 3);
             selectedItemLayoutPanel.Name = "selectedItemLayoutPanel";
             selectedItemLayoutPanel.RowCount = 2;
-            selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 88.46154F));
-            selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 11.5384617F));
+            selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 93.43891F));
+            selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 6.561086F));
             selectedItemLayoutPanel.Size = new Size(294, 442);
             selectedItemLayoutPanel.TabIndex = 1;
             // 
@@ -174,7 +174,7 @@
             selectedItemPanel.Dock = DockStyle.Fill;
             selectedItemPanel.Location = new Point(3, 3);
             selectedItemPanel.Name = "selectedItemPanel";
-            selectedItemPanel.Size = new Size(288, 385);
+            selectedItemPanel.Size = new Size(288, 407);
             selectedItemPanel.TabIndex = 2;
             // 
             // categoryComboBox
@@ -185,7 +185,7 @@
             categoryComboBox.ImeMode = ImeMode.Off;
             categoryComboBox.Location = new Point(61, 82);
             categoryComboBox.Name = "categoryComboBox";
-            categoryComboBox.Size = new Size(221, 23);
+            categoryComboBox.Size = new Size(224, 23);
             categoryComboBox.TabIndex = 10;
             categoryComboBox.SelectedValueChanged += categoryComboBox_SelectedValueChanged;
             // 
@@ -205,7 +205,7 @@
             descriptionTextBox.Multiline = true;
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.ScrollBars = ScrollBars.Vertical;
-            descriptionTextBox.Size = new Size(282, 131);
+            descriptionTextBox.Size = new Size(285, 153);
             descriptionTextBox.TabIndex = 8;
             descriptionTextBox.TextChanged += descriptionTextBox_TextChanged;
             // 
@@ -225,7 +225,7 @@
             nameTextBox.Multiline = true;
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ScrollBars = ScrollBars.Vertical;
-            nameTextBox.Size = new Size(282, 90);
+            nameTextBox.Size = new Size(285, 90);
             nameTextBox.TabIndex = 6;
             nameTextBox.TextChanged += nameTextBox_TextChanged;
             // 
@@ -243,7 +243,7 @@
             costTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             costTextBox.Location = new Point(61, 53);
             costTextBox.Name = "costTextBox";
-            costTextBox.Size = new Size(221, 23);
+            costTextBox.Size = new Size(224, 23);
             costTextBox.TabIndex = 4;
             costTextBox.TextChanged += costTextBox_TextChanged;
             // 
@@ -253,7 +253,7 @@
             idTextBox.Location = new Point(61, 24);
             idTextBox.Name = "idTextBox";
             idTextBox.ReadOnly = true;
-            idTextBox.Size = new Size(221, 23);
+            idTextBox.Size = new Size(224, 23);
             idTextBox.TabIndex = 3;
             // 
             // costLabel
@@ -289,15 +289,15 @@
             buttonsPanel.Controls.Add(applyButton);
             buttonsPanel.Controls.Add(cancelButton);
             buttonsPanel.Dock = DockStyle.Fill;
-            buttonsPanel.Location = new Point(3, 394);
+            buttonsPanel.Location = new Point(3, 416);
             buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Size = new Size(288, 45);
+            buttonsPanel.Size = new Size(288, 23);
             buttonsPanel.TabIndex = 3;
             // 
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            applyButton.Location = new Point(129, 19);
+            applyButton.Location = new Point(129, 3);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 5;
@@ -308,7 +308,7 @@
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cancelButton.Location = new Point(210, 19);
+            cancelButton.Location = new Point(210, 3);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 4;

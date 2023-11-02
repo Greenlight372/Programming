@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Содержит статус заказа покупателя
+    /// в магазине.
+    /// </summary>
     public enum OrderStatus
     {
         New,

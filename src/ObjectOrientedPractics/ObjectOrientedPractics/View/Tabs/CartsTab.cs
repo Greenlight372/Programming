@@ -24,9 +24,9 @@ namespace ObjectOrientedPractics.View.Tabs
         public List<Item> Items { get; set; }
 
         /// <summary>
-        /// Выбранные покупатель.
+        /// 
         /// </summary>
-        private Customer _currentCustomer;
+        private List<Cart> _carts = new List<Cart>();
 
         /// <summary>
         /// Инициализация компонентов.
@@ -50,8 +50,24 @@ namespace ObjectOrientedPractics.View.Tabs
             cartListBox.Items.Clear();
             if (customerComboBox.SelectedItem != null)
             {
+                if (Customers[customerComboBox.SelectedIndex].Cart.Items == null)
+                {
+                    Customers[customerComboBox.SelectedIndex].Cart.Items = new List<Item>();
+                }
+
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
+                Customers[customerComboBox.SelectedIndex].Cart
+                    = _carts[customerComboBox.SelectedIndex];
                 cartListBox.Items.AddRange
-                    (Customers[customerComboBox.SelectedIndex].Cart.Items.ToArray());
+                    (_carts[customerComboBox.SelectedIndex].Items.ToArray());
+
+                money.Text = String.Format("{0:0.00}",
+                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
             }
         }
 
@@ -64,14 +80,23 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex != -1 && customerComboBox.SelectedIndex != -1)
             {
-                Customers[customerComboBox.SelectedIndex].Cart.Items.Add
-                    (Items[itemsListBox.SelectedIndex]);
+                Customers[customerComboBox.SelectedIndex].Cart.Items.Add(Items[itemsListBox.SelectedIndex]);
 
                 cartListBox.Items.Clear();
                 cartListBox.Items.AddRange
                     (Customers[customerComboBox.SelectedIndex].Cart.Items.ToArray());
 
-                money.Text = Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString();
+                money.Text = String.Format("{0:0.00}",
+                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
+                Customers[customerComboBox.SelectedIndex].Cart
+                    = _carts[customerComboBox.SelectedIndex];
             }
         }
 
@@ -91,7 +116,17 @@ namespace ObjectOrientedPractics.View.Tabs
                 cartListBox.Items.AddRange
                     (Customers[customerComboBox.SelectedIndex].Cart.Items.ToArray());
 
-                money.Text = Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString();
+                money.Text = String.Format("{0:0.00}",
+                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
+                Customers[customerComboBox.SelectedIndex].Cart
+                    = _carts[customerComboBox.SelectedIndex];
             }
         }
 
@@ -102,10 +137,59 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void clearButton_Click(object sender, EventArgs e)
         {
-            Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
-            cartListBox.Items.Clear();
+            if (customerComboBox.SelectedItem != null)
+            {
+                Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
+                cartListBox.Items.Clear();
 
-            money.Text = Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString();
+                money.Text = String.Format("{0:0.00}",
+                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
+                Customers[customerComboBox.SelectedIndex].Cart
+                    = _carts[customerComboBox.SelectedIndex];
+            }
+        }
+
+        /// <summary>
+        /// Создает заказ покупателя и очищает
+        /// содержимое корзины.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void createButton_Click(object sender, EventArgs e)
+        {
+            if (customerComboBox.SelectedIndex != -1
+                && Customers[customerComboBox.SelectedIndex].Cart.Items.Count() != 0)
+            {
+                List<Item> items = new List<Item>();
+                items.AddRange(Customers[customerComboBox.SelectedIndex].Cart.Items);
+
+                Customers[customerComboBox.SelectedIndex].Order.Add(new Order
+                (
+                    Customers[customerComboBox.SelectedIndex].Address,
+                    Customers[customerComboBox.SelectedIndex].Fullname,
+                    items
+                ));
+
+                Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
+                cartListBox.Items.Clear();
+                money.Text = "0";
+
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
+                Customers[customerComboBox.SelectedIndex].Cart
+                    = _carts[customerComboBox.SelectedIndex];
+            }
         }
 
         /// <summary>
@@ -113,6 +197,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public void RefreshData()
         {
+            customerComboBox.SelectedIndex = -1;
             if (Items != null)
             {
                 itemsListBox.Items.Clear();
@@ -121,25 +206,17 @@ namespace ObjectOrientedPractics.View.Tabs
 
             if (Customers != null)
             {
+                _carts.Clear();
+                for (int i = 0; i < Customers.Count(); i++)
+                {
+                    _carts.Add(Customers[i].Cart);
+                }
+
                 customerComboBox.Items.Clear();
                 customerComboBox.Items.AddRange(Customers.ToArray());
             }
-        }
 
-        private void createButton_Click(object sender, EventArgs e)
-        {
-            if (customerComboBox.SelectedIndex != -1)
-            {
-                Customers[customerComboBox.SelectedIndex].Order.Add(new Order
-                    (
-                        Customers[customerComboBox.SelectedIndex].Address,
-                        Customers[customerComboBox.SelectedIndex].Cart.Items,
-                        Customers[customerComboBox.SelectedIndex].Fullname
-                    ));
-                Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
-                cartListBox.Items.Clear();
-                money.Text = "";
-            }
+            money.Text = "0";
         }
     }
 }

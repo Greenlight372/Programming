@@ -29,6 +29,7 @@ namespace ObjectOrientedPractics.View
         private void shopTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             cartsControl.RefreshData();
+            ordersControl.RefreshData();
             ordersControl.UpdateOrders();
         }
     }

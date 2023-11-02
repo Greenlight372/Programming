@@ -30,7 +30,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address1 = new Model.Address();
+            Model.Address address2 = new Model.Address();
             backgroundPanel = new TableLayoutPanel();
             itemsPanel = new Panel();
             editButton = new Button();
@@ -89,7 +89,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // editButton
             // 
             editButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            editButton.Location = new Point(135, 391);
+            editButton.Location = new Point(142, 397);
             editButton.Name = "editButton";
             editButton.Size = new Size(64, 45);
             editButton.TabIndex = 4;
@@ -100,7 +100,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            removeButton.Location = new Point(69, 391);
+            removeButton.Location = new Point(73, 397);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(64, 45);
             removeButton.TabIndex = 3;
@@ -111,7 +111,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            addButton.Location = new Point(3, 391);
+            addButton.Location = new Point(3, 397);
             addButton.Name = "addButton";
             addButton.Size = new Size(64, 45);
             addButton.TabIndex = 2;
@@ -128,7 +128,7 @@ namespace ObjectOrientedPractics.View.Tabs
             customersListBox.Location = new Point(3, 24);
             customersListBox.Name = "customersListBox";
             customersListBox.ScrollAlwaysVisible = true;
-            customersListBox.Size = new Size(200, 361);
+            customersListBox.Size = new Size(200, 367);
             customersListBox.TabIndex = 1;
             customersListBox.SelectedIndexChanged += customersListBox_SelectedIndexChanged;
             // 
@@ -230,14 +230,15 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // addressControl
             // 
-            address1.Apartment = null;
-            address1.Building = null;
-            address1.City = null;
-            address1.Country = null;
-            address1.Index = null;
-            address1.Street = null;
-            addressControl.Address = address1;
+            address2.Apartment = null;
+            address2.Building = null;
+            address2.City = null;
+            address2.Country = null;
+            address2.Index = null;
+            address2.Street = null;
+            addressControl.Address = address2;
             addressControl.Dock = DockStyle.Fill;
+            addressControl.IsReadOnly = false;
             addressControl.Location = new Point(0, 0);
             addressControl.Name = "addressControl";
             addressControl.Size = new Size(288, 310);
@@ -258,7 +259,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cancelButton.Location = new Point(210, 5);
+            cancelButton.Location = new Point(210, 11);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 1;
@@ -270,7 +271,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            applyButton.Location = new Point(129, 5);
+            applyButton.Location = new Point(129, 11);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 0;

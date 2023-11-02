@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
-    /// Перечисление, содержащее категории товаров
+    /// Содержит категории товаров
     /// в магазине.
     /// </summary>
     public enum Category
