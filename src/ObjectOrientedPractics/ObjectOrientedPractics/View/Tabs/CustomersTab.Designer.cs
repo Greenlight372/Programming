@@ -30,7 +30,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             backgroundPanel = new TableLayoutPanel();
             itemsPanel = new Panel();
             editButton = new Button();
@@ -230,13 +230,13 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // addressControl
             // 
-            address2.Apartment = null;
-            address2.Building = null;
-            address2.City = null;
-            address2.Country = null;
-            address2.Index = null;
-            address2.Street = null;
-            addressControl.Address = address2;
+            address1.Apartment = null;
+            address1.Building = null;
+            address1.City = null;
+            address1.Country = null;
+            address1.Index = null;
+            address1.Street = null;
+            addressControl.Address = address1;
             addressControl.Dock = DockStyle.Fill;
             addressControl.IsReadOnly = false;
             addressControl.Location = new Point(0, 0);
@@ -259,7 +259,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cancelButton.Location = new Point(210, 11);
+            cancelButton.Location = new Point(210, 7);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 1;
@@ -271,7 +271,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            applyButton.Location = new Point(129, 11);
+            applyButton.Location = new Point(129, 7);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 0;

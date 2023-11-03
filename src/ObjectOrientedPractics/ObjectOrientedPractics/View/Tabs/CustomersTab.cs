@@ -29,7 +29,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Экземпляр класса <see cref="Customer"></see>.
         /// </summary>
-        private Customer _customerInstance = new Customer("");
+        private Customer _customerInstance = new Customer();
         /// <summary>
         /// Свойство для редактирования и доступа к
         /// списку объектов класса <see cref="Customer"></see>.
@@ -73,7 +73,15 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 idTextBox.Text = _customers[customersListBox.SelectedIndex].GetId.ToString();
                 fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
-                addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
+                addressControl.Address = new Address
+                    (
+                        _customers[customersListBox.SelectedIndex].Address.Index,
+                        _customers[customersListBox.SelectedIndex].Address.Country,
+                        _customers[customersListBox.SelectedIndex].Address.City,
+                        _customers[customersListBox.SelectedIndex].Address.Street,
+                        _customers[customersListBox.SelectedIndex].Address.Building,
+                        _customers[customersListBox.SelectedIndex].Address.Apartment
+                    );
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
             }
@@ -149,7 +157,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (customersListBox.SelectedIndex != -1)
             {
                 _selectedIndex = customersListBox.SelectedIndex;
-                _customerInstance = _customers[customersListBox.SelectedIndex];
+                _customerInstance = new Customer();
                 _isEdited = true;
 
                 addressControl.Enabled = _isEdited;
@@ -172,14 +180,21 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _isEdited = false;
 
-                _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
-                _customers[customersListBox.SelectedIndex].Address
-                    = addressControl.Address;
+                if (_customerInstance.Fullname != null)
+                    _customers[_selectedIndex].Fullname
+                        = _customerInstance.Fullname;
 
+                _customers[_selectedIndex].Address
+                    = new Address
+                    (
+                         addressControl.Address.Index,
+                         addressControl.Address.Country,
+                         addressControl.Address.City,
+                         addressControl.Address.Street,
+                         addressControl.Address.Building,
+                         addressControl.Address.Apartment
+                    );
                 addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
-                fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
-                idTextBox.Text
-                    = _customers[customersListBox.SelectedIndex].GetId.ToString();
 
                 customersListBox.Items.Clear();
                 customersListBox.Items.AddRange(_customers.ToArray());
@@ -209,14 +224,19 @@ namespace ObjectOrientedPractics.View.Tabs
 
             _isExceptionThrown = false;
 
-            _customers[customersListBox.SelectedIndex].Fullname = fullnameTextBox.Text;
-            _customers[customersListBox.SelectedIndex].Address
-                = addressControl.Address;
-
-            addressControl.Address = _customers[customersListBox.SelectedIndex].Address;
-            fullnameTextBox.Text = _customers[customersListBox.SelectedIndex].Fullname;
+            addressControl.Address
+                = new Address
+                (
+                    _customers[_selectedIndex].Address.Index,
+                    _customers[_selectedIndex].Address.Country,
+                    _customers[_selectedIndex].Address.City,
+                    _customers[_selectedIndex].Address.Street,
+                    _customers[_selectedIndex].Address.Building,
+                    _customers[_selectedIndex].Address.Apartment
+                );
+            fullnameTextBox.Text = _customers[_selectedIndex].Fullname;
             idTextBox.Text
-                = _customers[customersListBox.SelectedIndex].GetId.ToString();
+                = _customers[_selectedIndex].GetId.ToString();
 
             customersListBox.Items.Clear();
             customersListBox.Items.AddRange(_customers.ToArray());

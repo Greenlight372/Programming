@@ -24,7 +24,7 @@ namespace ObjectOrientedPractics.View.Tabs
         public List<Item> Items { get; set; }
 
         /// <summary>
-        /// 
+        /// Список корзин покупателей.
         /// </summary>
         private List<Cart> _carts = new List<Cart>();
 
@@ -50,24 +50,33 @@ namespace ObjectOrientedPractics.View.Tabs
             cartListBox.Items.Clear();
             if (customerComboBox.SelectedItem != null)
             {
-                if (Customers[customerComboBox.SelectedIndex].Cart.Items == null)
-                {
-                    Customers[customerComboBox.SelectedIndex].Cart.Items = new List<Item>();
-                }
-
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                        _carts[i].Items
+                            = new List<Item>();
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                        _carts[i].Items
+                            = Customers[i].Cart.Items;
+                    }
                 }
 
                 Customers[customerComboBox.SelectedIndex].Cart
                     = _carts[customerComboBox.SelectedIndex];
-                cartListBox.Items.AddRange
-                    (_carts[customerComboBox.SelectedIndex].Items.ToArray());
+                if (_carts[customerComboBox.SelectedIndex].Items != null)
+                {
+                    cartListBox.Items.AddRange
+                        (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
-                money.Text = String.Format("{0:0.00}",
-                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+                    money.Text = String.Format("{0:0.00}",
+                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                }
             }
         }
 
@@ -80,19 +89,35 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex != -1 && customerComboBox.SelectedIndex != -1)
             {
-                Customers[customerComboBox.SelectedIndex].Cart.Items.Add(Items[itemsListBox.SelectedIndex]);
+                _carts[customerComboBox.SelectedIndex].Items
+                    .Add(Items[itemsListBox.SelectedIndex]);
 
                 cartListBox.Items.Clear();
-                cartListBox.Items.AddRange
-                    (Customers[customerComboBox.SelectedIndex].Cart.Items.ToArray());
+                if (_carts[customerComboBox.SelectedIndex].Items != null)
+                {
+                    cartListBox.Items.AddRange
+                        (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
-                money.Text = String.Format("{0:0.00}",
-                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+                    money.Text = String.Format("{0:0.00}",
+                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                }
 
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                    }
+
+                    if (_carts[i].Items == null)
+                    {
+                        _carts[i].Items = new List<Item>();
+                    }
                 }
 
                 Customers[customerComboBox.SelectedIndex].Cart
@@ -109,20 +134,37 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (cartListBox.SelectedIndex != -1)
             {
-                Customers[customerComboBox.SelectedIndex].Cart.Items.RemoveAt
+                _carts[customerComboBox.SelectedIndex].Items.RemoveAt
                     (cartListBox.SelectedIndex);
 
                 cartListBox.Items.Clear();
-                cartListBox.Items.AddRange
-                    (Customers[customerComboBox.SelectedIndex].Cart.Items.ToArray());
+                if (_carts[customerComboBox.SelectedIndex].Items != null)
+                {
+                    cartListBox.Items.AddRange
+                        (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
-                money.Text = String.Format("{0:0.00}",
-                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+                    money.Text = String.Format("{0:0.00}",
+                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                }
 
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                        _carts[i].Items
+                            = new List<Item>();
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                    }
+
+                    if (_carts[i].Items == null)
+                    {
+                        _carts[i].Items = new List<Item>();
+                    }
                 }
 
                 Customers[customerComboBox.SelectedIndex].Cart
@@ -139,17 +181,37 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (customerComboBox.SelectedItem != null)
             {
-                Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
-                cartListBox.Items.Clear();
+                _carts[customerComboBox.SelectedIndex].Items.Clear();
+                if (_carts[customerComboBox.SelectedIndex].Items != null)
+                {
+                    cartListBox.Items.AddRange
+                        (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
-                money.Text = String.Format("{0:0.00}",
-                    Customers[customerComboBox.SelectedIndex].Cart.Amount.ToString());
+                    money.Text = String.Format("{0:0.00}",
+                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                }
 
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                        _carts[i].Items
+                            = new List<Item>();
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                    }
+
+                    if (_carts[i].Items == null)
+                    {
+                        _carts[i].Items = new List<Item>();
+                    }
                 }
+
+                cartListBox.Items.Clear();
 
                 Customers[customerComboBox.SelectedIndex].Cart
                     = _carts[customerComboBox.SelectedIndex];
@@ -168,7 +230,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 && Customers[customerComboBox.SelectedIndex].Cart.Items.Count() != 0)
             {
                 List<Item> items = new List<Item>();
-                items.AddRange(Customers[customerComboBox.SelectedIndex].Cart.Items);
+                items.AddRange(_carts[customerComboBox.SelectedIndex].Items);
 
                 Customers[customerComboBox.SelectedIndex].Order.Add(new Order
                 (
@@ -184,7 +246,21 @@ namespace ObjectOrientedPractics.View.Tabs
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                        _carts[i].Items
+                            = new List<Item>();
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                    }
+
+                    if (_carts[i].Items == null)
+                    {
+                        _carts[i].Items = new List<Item>();
+                    }
                 }
 
                 Customers[customerComboBox.SelectedIndex].Cart
@@ -209,7 +285,21 @@ namespace ObjectOrientedPractics.View.Tabs
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
                 {
-                    _carts.Add(Customers[i].Cart);
+                    if (Customers[i].Cart == null)
+                    {
+                        _carts.Add(new Cart());
+                        _carts[i].Items
+                            = new List<Item>();
+                    }
+                    else
+                    {
+                        _carts.Add(Customers[i].Cart);
+                    }
+
+                    if (_carts[i].Items == null)
+                    {
+                        _carts[i].Items = new List<Item>();
+                    }
                 }
 
                 customerComboBox.Items.Clear();

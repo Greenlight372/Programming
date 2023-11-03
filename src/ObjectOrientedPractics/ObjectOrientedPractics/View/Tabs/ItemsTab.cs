@@ -28,7 +28,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Экземпляр класса <see cref="Item"></see>.
         /// </summary>
-        private Item _itemInstance = new Item("", "", 0);
+        private Item _itemInstance = new Item();
         /// <summary>
         /// Свойство для редактирования и доступа к
         /// Списку объектов класса <see cref="Item"></see>.
@@ -112,7 +112,6 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
-                _itemInstance = _items[itemsListBox.SelectedIndex];
                 _items.RemoveAt(itemsListBox.SelectedIndex);
                 itemsListBox.Items.Clear();
                 itemsListBox.Items.AddRange(_items.ToArray());
@@ -221,7 +220,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (itemsListBox.SelectedIndex > -1)
             {
                 _selectedIndex = itemsListBox.SelectedIndex;
-                _itemInstance = _items[_selectedIndex];
+                _itemInstance = new Item();
                 _isEdited = true;
                 selectedItemLayoutPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
@@ -240,10 +239,17 @@ namespace ObjectOrientedPractics.View.Tabs
                 && nameTextBox.BackColor != System.Drawing.Color.Red
                 && costTextBox.BackColor != System.Drawing.Color.Red)
             {
-                _items[_selectedIndex].Cost = _itemInstance.Cost;
-                _items[_selectedIndex].Name = _itemInstance.Name;
-                _items[_selectedIndex].Info = _itemInstance.Info;
-                _items[_selectedIndex].Category = _itemInstance.Category;
+                if (_itemInstance.Cost != null)
+                    _items[_selectedIndex].Cost = _itemInstance.Cost;
+
+                if (_itemInstance.Name != null)
+                    _items[_selectedIndex].Name = _itemInstance.Name;
+                
+                if (_itemInstance.Info != null)
+                    _items[_selectedIndex].Info = _itemInstance.Info;
+                
+                if (_itemInstance.Category != null)
+                    _items[_selectedIndex].Category = _itemInstance.Category;
 
                 itemsListBox.Items.Clear();
                 itemsListBox.Items.AddRange(_items.ToArray());

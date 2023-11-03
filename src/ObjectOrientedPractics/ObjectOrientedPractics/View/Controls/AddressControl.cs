@@ -83,14 +83,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.Index = postIndexTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                postIndexTextBox.BackColor = System.Drawing.Color.White;
 
                 if (countryTextBox.BackColor != System.Drawing.Color.Red
                     && cityTextBox.BackColor != System.Drawing.Color.Red
@@ -118,14 +111,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.Country = countryTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                countryTextBox.BackColor = System.Drawing.Color.White;
 
                 if (postIndexTextBox.BackColor != System.Drawing.Color.Red
                     && cityTextBox.BackColor != System.Drawing.Color.Red
@@ -153,14 +139,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.City = cityTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                cityTextBox.BackColor = System.Drawing.Color.White;
 
                 if (postIndexTextBox.BackColor != System.Drawing.Color.Red
                     && countryTextBox.BackColor != System.Drawing.Color.Red
@@ -188,14 +167,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.Street = streetTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                streetTextBox.BackColor = System.Drawing.Color.White;
 
                 if (postIndexTextBox.BackColor != System.Drawing.Color.Red
                     && countryTextBox.BackColor != System.Drawing.Color.Red
@@ -224,14 +196,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.Building = buildingTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                buildingTextBox.BackColor = System.Drawing.Color.White;
 
                 if (postIndexTextBox.BackColor != System.Drawing.Color.Red
                     && countryTextBox.BackColor != System.Drawing.Color.Red
@@ -259,14 +224,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 Address.Apartment = apartmentTextBox.Text;
-                if (IsReadOnly == false)
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                }
+                apartmentTextBox.BackColor = System.Drawing.Color.White;
 
                 if (postIndexTextBox.BackColor != System.Drawing.Color.Red
                      && countryTextBox.BackColor != System.Drawing.Color.Red
@@ -300,24 +258,12 @@ namespace ObjectOrientedPractics.View.Controls
             buildingTextBox.ReadOnly = IsReadOnly;
             apartmentTextBox.ReadOnly = IsReadOnly;
 
-            if (IsReadOnly == true)
-            {
-                postIndexTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                countryTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                cityTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                streetTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                buildingTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-                apartmentTextBox.BackColor = System.Drawing.Color.FromArgb(255, 240, 240, 240);
-            }
-            else
-            {
-                postIndexTextBox.BackColor = System.Drawing.Color.White;
-                countryTextBox.BackColor = System.Drawing.Color.White;
-                cityTextBox.BackColor = System.Drawing.Color.White;
-                streetTextBox.BackColor = System.Drawing.Color.White;
-                buildingTextBox.BackColor = System.Drawing.Color.White;
-                apartmentTextBox.BackColor = System.Drawing.Color.White;
-            }
+            postIndexTextBox.BackColor = System.Drawing.Color.White;
+            countryTextBox.BackColor = System.Drawing.Color.White;
+            cityTextBox.BackColor = System.Drawing.Color.White;
+            streetTextBox.BackColor = System.Drawing.Color.White;
+            buildingTextBox.BackColor = System.Drawing.Color.White;
+            apartmentTextBox.BackColor = System.Drawing.Color.White;
         }
     }
 }

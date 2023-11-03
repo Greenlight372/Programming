@@ -106,5 +106,12 @@ namespace ObjectOrientedPractics.Model
             Cart = new Cart();
             Order = new List<Order>();
         }
+
+        /// <summary>
+        /// Выделяет память под объекта класса <see cref="Customer"></see>.
+        /// </summary>
+        public Customer()
+        {
+        }
     }
 }

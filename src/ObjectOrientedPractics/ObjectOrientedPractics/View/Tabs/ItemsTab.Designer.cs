@@ -297,7 +297,7 @@
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            applyButton.Location = new Point(129, 3);
+            applyButton.Location = new Point(129, -1);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 5;
@@ -308,7 +308,7 @@
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cancelButton.Location = new Point(210, 3);
+            cancelButton.Location = new Point(210, -1);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 4;

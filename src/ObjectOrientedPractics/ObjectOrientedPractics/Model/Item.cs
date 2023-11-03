@@ -97,5 +97,12 @@ namespace ObjectOrientedPractics.Model
             Info = info;
             Cost = cost;
         }
+
+        /// <summary>
+        /// Выделяет память под объект класса <see cref="Item"></see>.
+        /// </summary>
+        public Item()
+        {
+        }
     }
 }
