@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public enum OrderStatus
     {
-        New,
+        New = 0,
         Processing,
         Assembly,
         Sent,

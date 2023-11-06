@@ -95,6 +95,11 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Определяет, является ли покупатель приоритетным.
+        /// </summary>
+        public bool IsPriority { get; set; } = false;
+
+        /// <summary>
         /// Создает экземпляр объекта класса <see cref="Customer"></see>.
         /// </summary>
         /// <param name="fullname">ФИО покупателя.</param>

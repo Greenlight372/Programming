@@ -50,6 +50,7 @@ namespace ObjectOrientedPractics.View.Tabs
             applyChangesPanel = new Panel();
             cancelButton = new Button();
             applyButton = new Button();
+            isPriorityCheckBox = new CheckBox();
             backgroundPanel.SuspendLayout();
             itemsPanel.SuspendLayout();
             selectedCustomerBackgroundPanel.SuspendLayout();
@@ -153,8 +154,8 @@ namespace ObjectOrientedPractics.View.Tabs
             selectedCustomerBackgroundPanel.Location = new Point(215, 3);
             selectedCustomerBackgroundPanel.Name = "selectedCustomerBackgroundPanel";
             selectedCustomerBackgroundPanel.RowCount = 3;
-            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 21.97531F));
-            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 78.02469F));
+            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 27.4074078F));
+            selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 72.59259F));
             selectedCustomerBackgroundPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             selectedCustomerBackgroundPanel.Size = new Size(294, 442);
             selectedCustomerBackgroundPanel.TabIndex = 1;
@@ -162,6 +163,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // selectedCustomerPanel
             // 
             selectedCustomerPanel.BackColor = SystemColors.ControlLightLight;
+            selectedCustomerPanel.Controls.Add(isPriorityCheckBox);
             selectedCustomerPanel.Controls.Add(fullnameTextBox);
             selectedCustomerPanel.Controls.Add(idTextBox);
             selectedCustomerPanel.Controls.Add(fullnameLabel);
@@ -170,7 +172,7 @@ namespace ObjectOrientedPractics.View.Tabs
             selectedCustomerPanel.Dock = DockStyle.Fill;
             selectedCustomerPanel.Location = new Point(3, 3);
             selectedCustomerPanel.Name = "selectedCustomerPanel";
-            selectedCustomerPanel.Size = new Size(288, 83);
+            selectedCustomerPanel.Size = new Size(288, 105);
             selectedCustomerPanel.TabIndex = 2;
             // 
             // fullnameTextBox
@@ -223,9 +225,9 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             addressControlPanel.Controls.Add(addressControl);
             addressControlPanel.Dock = DockStyle.Fill;
-            addressControlPanel.Location = new Point(3, 92);
+            addressControlPanel.Location = new Point(3, 114);
             addressControlPanel.Name = "addressControlPanel";
-            addressControlPanel.Size = new Size(288, 310);
+            addressControlPanel.Size = new Size(288, 288);
             addressControlPanel.TabIndex = 3;
             // 
             // addressControl
@@ -241,7 +243,7 @@ namespace ObjectOrientedPractics.View.Tabs
             addressControl.IsReadOnly = false;
             addressControl.Location = new Point(0, 0);
             addressControl.Name = "addressControl";
-            addressControl.Size = new Size(288, 310);
+            addressControl.Size = new Size(288, 288);
             addressControl.TabIndex = 0;
             addressControl.Enter += addressControl_Enter;
             addressControl.Leave += addressControl_Leave;
@@ -279,6 +281,17 @@ namespace ObjectOrientedPractics.View.Tabs
             applyButton.Text = "Apply";
             applyButton.UseVisualStyleBackColor = true;
             applyButton.Click += applyButton_Click;
+            // 
+            // isPriorityCheckBox
+            // 
+            isPriorityCheckBox.AutoSize = true;
+            isPriorityCheckBox.Location = new Point(61, 82);
+            isPriorityCheckBox.Name = "isPriorityCheckBox";
+            isPriorityCheckBox.Size = new Size(75, 19);
+            isPriorityCheckBox.TabIndex = 5;
+            isPriorityCheckBox.Text = "Is Priority";
+            isPriorityCheckBox.UseVisualStyleBackColor = true;
+            isPriorityCheckBox.CheckedChanged += isPriorityCheckBox_CheckedChanged;
             // 
             // CustomersTab
             // 
@@ -321,5 +334,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private Button applyButton;
         private Button editButton;
         private AddressControl addressControl;
+        private CheckBox isPriorityCheckBox;
     }
 }
