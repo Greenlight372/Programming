@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Содержит возможное время
+    /// доставки товара.
+    /// </summary>
     public enum DeliveryTime
     {
         NineToEleven = 0,

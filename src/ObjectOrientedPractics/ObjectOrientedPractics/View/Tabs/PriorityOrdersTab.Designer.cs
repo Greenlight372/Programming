@@ -60,7 +60,7 @@
             // tableLayoutPanel
             // 
             tableLayoutPanel.ColumnCount = 1;
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel.Controls.Add(priorityOrdersPanel, 0, 0);
             tableLayoutPanel.Controls.Add(addressControlPanel, 0, 1);
             tableLayoutPanel.Controls.Add(orderItemsPanel, 0, 2);
@@ -68,9 +68,9 @@
             tableLayoutPanel.Location = new Point(0, 0);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 3;
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 237F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 23.6328125F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 28.90625F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 47.4609375F));
             tableLayoutPanel.Size = new Size(512, 512);
             tableLayoutPanel.TabIndex = 0;
             // 
@@ -89,12 +89,11 @@
             priorityOrdersPanel.Dock = DockStyle.Fill;
             priorityOrdersPanel.Location = new Point(3, 3);
             priorityOrdersPanel.Name = "priorityOrdersPanel";
-            priorityOrdersPanel.Size = new Size(506, 119);
+            priorityOrdersPanel.Size = new Size(506, 115);
             priorityOrdersPanel.TabIndex = 0;
             // 
             // deliveryTimeComboBox
             // 
-            deliveryTimeComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             deliveryTimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             deliveryTimeComboBox.FormattingEnabled = true;
             deliveryTimeComboBox.Items.AddRange(new object[] { "9:00-11:00", "11:00-13:00", "13:00-15:00", "15:00-17:00", "17:00-19:00", "19:00-21:00" });
@@ -106,7 +105,6 @@
             // 
             // deliveryTimeLabel
             // 
-            deliveryTimeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             deliveryTimeLabel.AutoSize = true;
             deliveryTimeLabel.Location = new Point(270, 32);
             deliveryTimeLabel.Name = "deliveryTimeLabel";
@@ -116,7 +114,6 @@
             // 
             // priorityOptionsLabel
             // 
-            priorityOptionsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             priorityOptionsLabel.AutoSize = true;
             priorityOptionsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             priorityOptionsLabel.Location = new Point(270, 3);
@@ -136,7 +133,6 @@
             // 
             // statusComboBox
             // 
-            statusComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             statusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             statusComboBox.FormattingEnabled = true;
             statusComboBox.Location = new Point(60, 87);
@@ -147,7 +143,6 @@
             // 
             // createdTextBox
             // 
-            createdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             createdTextBox.Location = new Point(60, 58);
             createdTextBox.Name = "createdTextBox";
             createdTextBox.ReadOnly = true;
@@ -156,7 +151,6 @@
             // 
             // idTextBox
             // 
-            idTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             idTextBox.Location = new Point(60, 29);
             idTextBox.Name = "idTextBox";
             idTextBox.ReadOnly = true;
@@ -195,9 +189,9 @@
             // 
             addressControlPanel.Controls.Add(addressControl);
             addressControlPanel.Dock = DockStyle.Fill;
-            addressControlPanel.Location = new Point(3, 128);
+            addressControlPanel.Location = new Point(3, 124);
             addressControlPanel.Name = "addressControlPanel";
-            addressControlPanel.Size = new Size(506, 144);
+            addressControlPanel.Size = new Size(506, 142);
             addressControlPanel.TabIndex = 1;
             // 
             // addressControl
@@ -209,11 +203,10 @@
             address1.Index = "000000";
             address1.Street = "";
             addressControl.Address = address1;
-            addressControl.Dock = DockStyle.Fill;
             addressControl.IsReadOnly = false;
             addressControl.Location = new Point(0, 0);
             addressControl.Name = "addressControl";
-            addressControl.Size = new Size(506, 144);
+            addressControl.Size = new Size(351, 142);
             addressControl.TabIndex = 0;
             addressControl.Enter += addressControl_Enter;
             // 
@@ -227,16 +220,16 @@
             orderItemsPanel.Controls.Add(orderItemsListBox);
             orderItemsPanel.Controls.Add(orderItemsLabel);
             orderItemsPanel.Dock = DockStyle.Fill;
-            orderItemsPanel.Location = new Point(3, 278);
+            orderItemsPanel.Location = new Point(3, 272);
             orderItemsPanel.Name = "orderItemsPanel";
-            orderItemsPanel.Size = new Size(506, 231);
+            orderItemsPanel.Size = new Size(506, 237);
             orderItemsPanel.TabIndex = 2;
             // 
             // money
             // 
             money.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             money.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            money.Location = new Point(285, 164);
+            money.Location = new Point(285, 170);
             money.Name = "money";
             money.Size = new Size(218, 30);
             money.TabIndex = 10;
@@ -248,7 +241,7 @@
             amountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             amountLabel.AutoSize = true;
             amountLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            amountLabel.Location = new Point(441, 147);
+            amountLabel.Location = new Point(441, 153);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(62, 17);
             amountLabel.TabIndex = 6;
@@ -257,7 +250,7 @@
             // clearButton
             // 
             clearButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            clearButton.Location = new Point(405, 197);
+            clearButton.Location = new Point(405, 203);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(98, 31);
             clearButton.TabIndex = 5;
@@ -268,7 +261,7 @@
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            removeButton.Location = new Point(107, 197);
+            removeButton.Location = new Point(107, 203);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(98, 31);
             removeButton.TabIndex = 4;
@@ -279,7 +272,7 @@
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            addButton.Location = new Point(3, 197);
+            addButton.Location = new Point(3, 203);
             addButton.Name = "addButton";
             addButton.Size = new Size(98, 31);
             addButton.TabIndex = 3;
@@ -296,7 +289,7 @@
             orderItemsListBox.Location = new Point(3, 23);
             orderItemsListBox.Name = "orderItemsListBox";
             orderItemsListBox.ScrollAlwaysVisible = true;
-            orderItemsListBox.Size = new Size(500, 121);
+            orderItemsListBox.Size = new Size(500, 127);
             orderItemsListBox.TabIndex = 2;
             // 
             // orderItemsLabel
