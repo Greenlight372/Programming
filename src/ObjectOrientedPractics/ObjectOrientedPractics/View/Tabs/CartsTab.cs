@@ -232,12 +232,26 @@ namespace ObjectOrientedPractics.View.Tabs
                 List<Item> items = new List<Item>();
                 items.AddRange(_carts[customerComboBox.SelectedIndex].Items);
 
-                Customers[customerComboBox.SelectedIndex].Order.Add(new Order
-                (
-                    Customers[customerComboBox.SelectedIndex].Address,
-                    Customers[customerComboBox.SelectedIndex].Fullname,
-                    items
-                ));
+                if (Customers[customerComboBox.SelectedIndex].IsPriority == true)
+                {
+                    Customers[customerComboBox.SelectedIndex].Order.Add(new PriorityOrder
+                    (
+                        Customers[customerComboBox.SelectedIndex].Address,
+                        Customers[customerComboBox.SelectedIndex].Fullname,
+                        items,
+                        DateTime.Now,
+                        DeliveryTime.NineToEleven
+                    ));
+                }
+                else
+                {
+                    Customers[customerComboBox.SelectedIndex].Order.Add(new Order
+                    (
+                        Customers[customerComboBox.SelectedIndex].Address,
+                        Customers[customerComboBox.SelectedIndex].Fullname,
+                        items
+                    ));
+                }
 
                 Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
                 cartListBox.Items.Clear();

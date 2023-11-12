@@ -82,6 +82,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         _customers[customersListBox.SelectedIndex].Address.Building,
                         _customers[customersListBox.SelectedIndex].Address.Apartment
                     );
+                isPriorityCheckBox.Checked = _customers[customersListBox.SelectedIndex].IsPriority;
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
             }
@@ -121,6 +122,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 idTextBox.Text = "";
                 fullnameTextBox.Text = "";
                 addressControl.Address = new Address();
+                isPriorityCheckBox.Checked = false;
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
             }
@@ -184,6 +186,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     _customers[_selectedIndex].Fullname
                         = _customerInstance.Fullname;
 
+                _customers[_selectedIndex].IsPriority = _customerInstance.IsPriority;
                 _customers[_selectedIndex].Address
                     = new Address
                     (
@@ -234,6 +237,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     _customers[_selectedIndex].Address.Building,
                     _customers[_selectedIndex].Address.Apartment
                 );
+            isPriorityCheckBox.Checked = _customers[_selectedIndex].IsPriority;
             fullnameTextBox.Text = _customers[_selectedIndex].Fullname;
             idTextBox.Text
                 = _customers[_selectedIndex].GetId.ToString();
@@ -271,6 +275,19 @@ namespace ObjectOrientedPractics.View.Tabs
         private void addressControl_Enter(object sender, EventArgs e)
         {
             _isExceptionThrown = addressControl.GetExceptionThrown;
+        }
+
+        /// <summary>
+        /// Определяет, является ли покупатель приоритетным.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void isPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (customersListBox.SelectedIndex != -1)
+            {
+                _customerInstance.IsPriority = isPriorityCheckBox.Checked;
+            }
         }
     }
 }

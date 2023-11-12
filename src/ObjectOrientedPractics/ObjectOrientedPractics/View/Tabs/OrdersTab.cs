@@ -24,6 +24,17 @@ namespace ObjectOrientedPractics.View.Tabs
         private List<Order> _orders = new List<Order>();
 
         /// <summary>
+        /// Выбранный экземпляр заказа.
+        /// </summary>
+        private Order _selectedOrder;
+
+        /// <summary>
+        /// Выбранный экземпляр заказа с
+        /// приоритетным обслуживанием.
+        /// </summary>
+        private PriorityOrder _selectedPriorityOrder;
+
+        /// <summary>
         /// Инициализация компонентов.
         /// </summary>
         public OrdersTab()
@@ -100,15 +111,33 @@ namespace ObjectOrientedPractics.View.Tabs
                 addressPanel.Enabled = true;
                 orderItemsPanel.Enabled = true;
 
-                itemsListBox.Items.Clear();
-                itemsListBox.Items.AddRange(_orders[ordersDataGridView.CurrentRow.Index].Items.ToArray());
+                _selectedOrder = _orders[ordersDataGridView.CurrentRow.Index];
 
-                idTextBox.Text = _orders[ordersDataGridView.CurrentRow.Index].GetId.ToString();
-                createdTextBox.Text = _orders[ordersDataGridView.CurrentRow.Index].GetDate.ToString();
+                var orderType = _orders[ordersDataGridView.CurrentRow.Index].GetType();
+                if (orderType == typeof(PriorityOrder))
+                {
+                    _selectedPriorityOrder = (PriorityOrder)_orders[ordersDataGridView.CurrentRow.Index];
+                    deliveryTimeComboBox.SelectedIndex = Convert.ToInt32(_selectedPriorityOrder.DeliveryTime);
+                    itemsListBox.Items.Clear();
+                    itemsListBox.Items.AddRange(_selectedPriorityOrder.Items.ToArray());
+                    priorityOptionsPanel.Visible = true;
+                    priorityOptionsPanel.Enabled = true;
+                }
+                else
+                {
+                    _selectedPriorityOrder = null;
+                    itemsListBox.Items.Clear();
+                    itemsListBox.Items.AddRange(_selectedOrder.Items.ToArray());
+                    priorityOptionsPanel.Visible = false;
+                    priorityOptionsPanel.Enabled = false;
+                }
+
+                idTextBox.Text = _selectedOrder.GetId.ToString();
+                createdTextBox.Text = _selectedOrder.GetDate.ToString();
                 money.Text = String.Format("{0:0.00}",
-                    _orders[ordersDataGridView.CurrentRow.Index].Amount.ToString());
-                addressControl.Address = _orders[ordersDataGridView.CurrentRow.Index].Address;
-                statusComboBox.Text = _orders[ordersDataGridView.CurrentRow.Index].Status.ToString();
+                    _selectedOrder.Amount.ToString());
+                addressControl.Address = _selectedOrder.Address;
+                statusComboBox.Text = _selectedOrder.Status.ToString();
             }
             else
             {
@@ -123,6 +152,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 selectedOrderPanel.Enabled = false;
                 addressPanel.Enabled = false;
                 orderItemsPanel.Enabled = false;
+                priorityOptionsPanel.Visible = false;
+                priorityOptionsPanel.Enabled = false;
             }
         }
 
@@ -135,10 +166,37 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ordersDataGridView.CurrentRow != null && _orders.Count() > 0)
             {
-                _orders[ordersDataGridView.CurrentRow.Index].Status
-                    = (OrderStatus)Enum.Parse(typeof(OrderStatus), statusComboBox.SelectedItem.ToString());
+                var orderType = _orders[ordersDataGridView.CurrentRow.Index].GetType();
+                if (orderType == typeof(PriorityOrder))
+                {
+                    _selectedPriorityOrder.Status
+                        = (OrderStatus)Enum.Parse(typeof(OrderStatus), statusComboBox.SelectedItem.ToString());
+                    _orders[ordersDataGridView.CurrentRow.Index] = _selectedPriorityOrder;
+                }
+                else
+                {
+                    _selectedOrder.Status
+                        = (OrderStatus)Enum.Parse(typeof(OrderStatus), statusComboBox.SelectedItem.ToString());
+                    _orders[ordersDataGridView.CurrentRow.Index] = _selectedOrder;
+                }
+
                 ordersDataGridView[2, ordersDataGridView.CurrentRow.Index].Value
                     = Enum.GetName(_orders[ordersDataGridView.CurrentRow.Index].Status);
+            }
+        }
+
+        /// <summary>
+        /// Задает время заказа для заказа
+        /// с приоритетным обслуживанием.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ordersDataGridView.CurrentRow != null && _orders.Count() > 0)
+            {
+                _selectedPriorityOrder.DeliveryTime = (DeliveryTime)deliveryTimeComboBox.SelectedIndex;
+                _orders[ordersDataGridView.CurrentRow.Index] = _selectedPriorityOrder;
             }
         }
     }

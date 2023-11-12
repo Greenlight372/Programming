@@ -120,5 +120,18 @@ namespace ObjectOrientedPractics.Model
             _fullname = fullname;
             Status = OrderStatus.New;
         }
+
+        /// <summary>
+        /// Выделяет память под объект
+        /// класса <see cref="Order"></see>.
+        /// </summary>
+        public Order()
+        {
+            _id = _idCounter++;
+            _date = DateTime.Now;
+            Address = new Address();
+            Items = new List<Item>();
+            Status = OrderStatus.New;
+        }
     }
 }
