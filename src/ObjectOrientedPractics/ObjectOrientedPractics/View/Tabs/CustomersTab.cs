@@ -113,6 +113,8 @@ namespace ObjectOrientedPractics.View.Tabs
             idTextBox.Text = "";
             fullnameTextBox.Text = "";
             addressControl.Address = new Address();
+            isPriorityCheckBox.Checked = false;
+            discountsListBox.Items.Clear();
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
         }
@@ -134,6 +136,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 fullnameTextBox.Text = "";
                 addressControl.Address = new Address();
                 isPriorityCheckBox.Checked = false;
+                discountsListBox.Items.Clear();
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
             }
@@ -171,6 +174,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _selectedIndex = customersListBox.SelectedIndex;
                 _customerInstance = new Customer();
+                _customerInstance.Discounts = _customers[_selectedIndex].Discounts;
                 _isEdited = true;
 
                 addressControl.Enabled = _isEdited;
@@ -198,8 +202,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         = _customerInstance.Fullname;
 
                 _customers[_selectedIndex].IsPriority = _customerInstance.IsPriority;
-                if (_customerInstance.Discounts != null)
-                    _customers[_selectedIndex].Discounts = _customerInstance.Discounts;
+                _customers[_selectedIndex].Discounts = _customerInstance.Discounts;
                 _customers[_selectedIndex].Address
                     = new Address
                     (

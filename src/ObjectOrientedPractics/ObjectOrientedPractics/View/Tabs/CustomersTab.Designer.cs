@@ -315,7 +315,6 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // removeDiscountButton
             // 
-            removeDiscountButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             removeDiscountButton.Location = new Point(224, 71);
             removeDiscountButton.Name = "removeDiscountButton";
             removeDiscountButton.Size = new Size(64, 45);
@@ -326,7 +325,6 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // addDiscountButton
             // 
-            addDiscountButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             addDiscountButton.Location = new Point(224, 20);
             addDiscountButton.Name = "addDiscountButton";
             addDiscountButton.Size = new Size(64, 45);

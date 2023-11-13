@@ -258,7 +258,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     discountAmount.Text = "0";
                     totalAmount.Text = "0";
 
-                    discountsCheckedListBox.SelectedIndex = 0;
+                    discountsCheckedListBox.SelectedIndex = -1;
                 }
 
                 _carts.Clear();
