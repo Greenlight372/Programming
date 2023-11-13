@@ -86,7 +86,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
                     money.Text = String.Format("{0:0.00}",
-                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                        _carts[customerComboBox.SelectedIndex].Amount);
 
                     double dAmount = 0;
                     for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
@@ -103,8 +103,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     }
 
                     discountAmount.Text = dAmount.ToString();
-                    totalAmount.Text
-                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
+                    totalAmount.Text = String.Format("{0:0.00}",
+                        (Convert.ToDouble(money.Text) - dAmount));
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
                     money.Text = String.Format("{0:0.00}",
-                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                        _carts[customerComboBox.SelectedIndex].Amount);
 
                     double dAmount = 0;
                     for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
@@ -145,8 +145,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     }
 
                     discountAmount.Text = dAmount.ToString();
-                    totalAmount.Text
-                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
+                    totalAmount.Text = String.Format("{0:0.00}",
+                        (Convert.ToDouble(money.Text) - dAmount));
                 }
 
                 _carts.Clear();
@@ -191,7 +191,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
                     money.Text = String.Format("{0:0.00}",
-                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                        _carts[customerComboBox.SelectedIndex].Amount);
 
                     double dAmount = 0;
                     for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
@@ -208,8 +208,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     }
 
                     discountAmount.Text = dAmount.ToString();
-                    totalAmount.Text
-                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
+                    totalAmount.Text = String.Format("{0:0.00}",
+                        (Convert.ToDouble(money.Text) - dAmount));
                 }
 
                 _carts.Clear();
@@ -253,7 +253,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         (_carts[customerComboBox.SelectedIndex].Items.ToArray());
 
                     money.Text = String.Format("{0:0.00}",
-                        _carts[customerComboBox.SelectedIndex].Amount.ToString());
+                        _carts[customerComboBox.SelectedIndex].Amount);
 
                     discountAmount.Text = "0";
                     totalAmount.Text = "0";
@@ -439,8 +439,8 @@ namespace ObjectOrientedPractics.View.Tabs
             }
 
             discountAmount.Text = dAmount.ToString();
-            totalAmount.Text
-                = (Convert.ToDouble(money.Text) - dAmount).ToString();
+            totalAmount.Text = String.Format("{0:0.00}", 
+                (Convert.ToDouble(money.Text) - dAmount));
         }
     }
 }

@@ -198,6 +198,8 @@ namespace ObjectOrientedPractics.View.Tabs
                         = _customerInstance.Fullname;
 
                 _customers[_selectedIndex].IsPriority = _customerInstance.IsPriority;
+                if (_customerInstance.Discounts != null)
+                    _customers[_selectedIndex].Discounts = _customerInstance.Discounts;
                 _customers[_selectedIndex].Address
                     = new Address
                     (
@@ -219,6 +221,9 @@ namespace ObjectOrientedPractics.View.Tabs
                 idTextBox.Enabled = _isEdited;
                 selectedCustomerBackgroundPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
+
+                discountsListBox.Items.Clear();
+                discountsListBox.Items.AddRange(_customers[_selectedIndex].Discounts.ToArray());
             }
             else
             {
@@ -262,6 +267,9 @@ namespace ObjectOrientedPractics.View.Tabs
             idTextBox.Enabled = _isEdited;
             selectedCustomerBackgroundPanel.Enabled = _isEdited;
             itemsPanel.Enabled = !_isEdited;
+
+            discountsListBox.Items.Clear();
+            discountsListBox.Items.AddRange(_customers[_selectedIndex].Discounts.ToArray());
         }
 
         /// <summary>
@@ -301,33 +309,42 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Добавляет процентную скидку.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addDiscountButton_Click(object sender, EventArgs e)
         {
             AddDiscountForm form = new AddDiscountForm();
             form.ShowDialog();
             if (form.IsAborted == false)
             {
-                _customers[customersListBox.SelectedIndex].Discounts.Add
+                _customerInstance.Discounts.Add
                     (new PercentDiscount(form.Category));
 
                 discountsListBox.Items.Clear();
                 foreach
-                    (IDiscount discount in _customers[customersListBox.SelectedIndex].Discounts)
+                    (IDiscount discount in _customerInstance.Discounts)
                 {
                     discountsListBox.Items.Add(discount);
                 }
             }
         }
 
+        /// <summary>
+        /// Удаляет выбранную скидку.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void removeDiscountButton_Click(object sender, EventArgs e)
         {
             if (discountsListBox.SelectedIndex > 0)
             {
-                _customers[customersListBox.SelectedIndex]
-                    .Discounts.RemoveAt(discountsListBox.SelectedIndex);
+                _customerInstance.Discounts.RemoveAt(discountsListBox.SelectedIndex);
                 discountsListBox.Items.Clear();
                 foreach
-                    (IDiscount discount in _customers[customersListBox.SelectedIndex].Discounts)
+                    (IDiscount discount in _customerInstance.Discounts)
                 {
                     discountsListBox.Items.Add(discount);
                 }

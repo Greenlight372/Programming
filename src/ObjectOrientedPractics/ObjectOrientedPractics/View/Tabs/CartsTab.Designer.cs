@@ -193,7 +193,7 @@
             discountsCheckedListBox.FormattingEnabled = true;
             discountsCheckedListBox.Location = new Point(3, 393);
             discountsCheckedListBox.Name = "discountsCheckedListBox";
-            discountsCheckedListBox.Size = new Size(177, 126);
+            discountsCheckedListBox.Size = new Size(201, 126);
             discountsCheckedListBox.TabIndex = 13;
             discountsCheckedListBox.SelectedIndexChanged += discountsCheckedListBox_SelectedIndexChanged;
             // 

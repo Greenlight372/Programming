@@ -138,7 +138,9 @@ namespace ObjectOrientedPractics.View.Tabs
                 idTextBox.Text = _selectedOrder.GetId.ToString();
                 createdTextBox.Text = _selectedOrder.GetDate.ToString();
                 money.Text = String.Format("{0:0.00}",
-                    _selectedOrder.Amount.ToString());
+                    _selectedOrder.Amount);
+                totalSum.Text = String.Format("{0:0.00}",
+                    _selectedOrder.Total);
                 addressControl.Address = _selectedOrder.Address;
                 statusComboBox.Text = _selectedOrder.Status.ToString();
             }
@@ -149,6 +151,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 idTextBox.Text = "";
                 createdTextBox.Text = "";
                 money.Text = "0";
+                totalSum.Text = "0";
                 addressControl.Address = new Address();
                 statusComboBox.SelectedItem = 0;
 
