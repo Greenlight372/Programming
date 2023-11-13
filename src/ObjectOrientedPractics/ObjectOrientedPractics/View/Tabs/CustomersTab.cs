@@ -174,7 +174,11 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _selectedIndex = customersListBox.SelectedIndex;
                 _customerInstance = new Customer();
-                _customerInstance.Discounts = _customers[_selectedIndex].Discounts;
+                _customerInstance.Discounts.Clear();
+                foreach (IDiscount discount in _customers[_selectedIndex].Discounts)
+                {
+                    _customerInstance.Discounts.Add(discount);
+                }
                 _isEdited = true;
 
                 addressControl.Enabled = _isEdited;
