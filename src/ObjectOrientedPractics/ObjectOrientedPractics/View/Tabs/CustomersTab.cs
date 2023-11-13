@@ -1,5 +1,7 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Discounts;
 using ObjectOrientedPractics.View.Controls;
+using ObjectOrientedPractics.View.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,6 +62,8 @@ namespace ObjectOrientedPractics.View.Tabs
             customersListBox.DisplayMember = "Fullname";
 
             addressControl.Address = new Address();
+
+            discountsListBox.DisplayMember = "Info";
         }
 
         /// <summary>
@@ -85,6 +89,13 @@ namespace ObjectOrientedPractics.View.Tabs
                 isPriorityCheckBox.Checked = _customers[customersListBox.SelectedIndex].IsPriority;
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
+
+                discountsListBox.Items.Clear();
+                foreach
+                    (IDiscount discount in _customers[customersListBox.SelectedIndex].Discounts)
+                {
+                    discountsListBox.Items.Add(discount);
+                }
             }
         }
 
@@ -287,6 +298,39 @@ namespace ObjectOrientedPractics.View.Tabs
             if (customersListBox.SelectedIndex != -1)
             {
                 _customerInstance.IsPriority = isPriorityCheckBox.Checked;
+            }
+        }
+
+        private void addDiscountButton_Click(object sender, EventArgs e)
+        {
+            AddDiscountForm form = new AddDiscountForm();
+            form.ShowDialog();
+            if (form.IsAborted == false)
+            {
+                _customers[customersListBox.SelectedIndex].Discounts.Add
+                    (new PercentDiscount(form.Category));
+
+                discountsListBox.Items.Clear();
+                foreach
+                    (IDiscount discount in _customers[customersListBox.SelectedIndex].Discounts)
+                {
+                    discountsListBox.Items.Add(discount);
+                }
+            }
+        }
+
+        private void removeDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (discountsListBox.SelectedIndex > 0)
+            {
+                _customers[customersListBox.SelectedIndex]
+                    .Discounts.RemoveAt(discountsListBox.SelectedIndex);
+                discountsListBox.Items.Clear();
+                foreach
+                    (IDiscount discount in _customers[customersListBox.SelectedIndex].Discounts)
+                {
+                    discountsListBox.Items.Add(discount);
+                }
             }
         }
     }

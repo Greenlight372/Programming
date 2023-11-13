@@ -20,7 +20,6 @@ namespace ObjectOrientedPractics.View
             cartsControl.Items = _store.Items;
             cartsControl.Customers = _store.Customers;
             ordersControl.Customers = _store.Customers;
-            priorityOrdersControl.Items = _store.Items;
         }
         /// <summary>
         /// Обновляет данные в <see cref="cartsControl"></see>.
@@ -32,7 +31,6 @@ namespace ObjectOrientedPractics.View
             cartsControl.RefreshData();
             ordersControl.RefreshData();
             ordersControl.UpdateOrders();
-            priorityOrdersControl.RefreshData();
         }
     }
 }

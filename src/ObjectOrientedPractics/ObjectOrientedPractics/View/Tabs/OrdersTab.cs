@@ -1,4 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,7 +94,8 @@ namespace ObjectOrientedPractics.View.Tabs
                         $" {_orders[i].Address.Building}" +
                         $" {_orders[i].Address.Street}" +
                         $" {_orders[i].Address.City}" +
-                        $" {_orders[i].Address.Country}"
+                        $" {_orders[i].Address.Country}",
+                        _orders[i].Total
                     );
                 }
             }

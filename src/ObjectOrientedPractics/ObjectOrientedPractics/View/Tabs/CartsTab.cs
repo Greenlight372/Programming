@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,7 @@ namespace ObjectOrientedPractics.View.Tabs
             itemsListBox.DisplayMember = "Name";
             customerComboBox.DisplayMember = "Fullname";
             cartListBox.DisplayMember = "Name";
+            discountsCheckedListBox.DisplayMember = "Info";
         }
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             cartListBox.Items.Clear();
+            discountsCheckedListBox.Items.Clear();
             if (customerComboBox.SelectedItem != null)
             {
                 _carts.Clear();
@@ -69,6 +72,14 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 Customers[customerComboBox.SelectedIndex].Cart
                     = _carts[customerComboBox.SelectedIndex];
+
+                discountsCheckedListBox.Items.AddRange
+                    (Customers[customerComboBox.SelectedIndex].Discounts.ToArray());
+                for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+                {
+                    discountsCheckedListBox.SetItemChecked(i, true);
+                }
+
                 if (_carts[customerComboBox.SelectedIndex].Items != null)
                 {
                     cartListBox.Items.AddRange
@@ -76,6 +87,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
                     money.Text = String.Format("{0:0.00}",
                         _carts[customerComboBox.SelectedIndex].Amount.ToString());
+
+                    double dAmount = 0;
+                    for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+                    {
+                        for (int j = 0; j < discountsCheckedListBox.CheckedItems.Count; j++)
+                        {
+                            if (discountsCheckedListBox.Items[i] == discountsCheckedListBox.CheckedItems[j])
+                            {
+                                dAmount
+                                    += Customers[customerComboBox.SelectedIndex].Discounts[i]
+                                    .Calculate(_carts[customerComboBox.SelectedIndex].Items);
+                            }
+                        }
+                    }
+
+                    discountAmount.Text = dAmount.ToString();
+                    totalAmount.Text
+                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
                 }
             }
         }
@@ -100,6 +129,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
                     money.Text = String.Format("{0:0.00}",
                         _carts[customerComboBox.SelectedIndex].Amount.ToString());
+
+                    double dAmount = 0;
+                    for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+                    {
+                        for (int j = 0; j < discountsCheckedListBox.CheckedItems.Count; j++)
+                        {
+                            if (discountsCheckedListBox.Items[i] == discountsCheckedListBox.CheckedItems[j])
+                            {
+                                dAmount
+                                    += Customers[customerComboBox.SelectedIndex].Discounts[i]
+                                    .Calculate(_carts[customerComboBox.SelectedIndex].Items);
+                            }
+                        }
+                    }
+
+                    discountAmount.Text = dAmount.ToString();
+                    totalAmount.Text
+                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
                 }
 
                 _carts.Clear();
@@ -145,6 +192,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
                     money.Text = String.Format("{0:0.00}",
                         _carts[customerComboBox.SelectedIndex].Amount.ToString());
+
+                    double dAmount = 0;
+                    for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+                    {
+                        for (int j = 0; j < discountsCheckedListBox.CheckedItems.Count; j++)
+                        {
+                            if (discountsCheckedListBox.Items[i] == discountsCheckedListBox.CheckedItems[j])
+                            {
+                                dAmount
+                                    += Customers[customerComboBox.SelectedIndex].Discounts[i]
+                                    .Calculate(_carts[customerComboBox.SelectedIndex].Items);
+                            }
+                        }
+                    }
+
+                    discountAmount.Text = dAmount.ToString();
+                    totalAmount.Text
+                        = (Convert.ToDouble(money.Text) - dAmount).ToString();
                 }
 
                 _carts.Clear();
@@ -189,6 +254,11 @@ namespace ObjectOrientedPractics.View.Tabs
 
                     money.Text = String.Format("{0:0.00}",
                         _carts[customerComboBox.SelectedIndex].Amount.ToString());
+
+                    discountAmount.Text = "0";
+                    totalAmount.Text = "0";
+
+                    discountsCheckedListBox.SelectedIndex = 0;
                 }
 
                 _carts.Clear();
@@ -239,6 +309,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         Customers[customerComboBox.SelectedIndex].Address,
                         Customers[customerComboBox.SelectedIndex].Fullname,
                         items,
+                        Convert.ToDouble(discountAmount.Text),
                         DateTime.Now,
                         DeliveryTime.NineToEleven
                     ));
@@ -249,13 +320,33 @@ namespace ObjectOrientedPractics.View.Tabs
                     (
                         Customers[customerComboBox.SelectedIndex].Address,
                         Customers[customerComboBox.SelectedIndex].Fullname,
-                        items
+                        items,
+                        Convert.ToDouble(discountAmount.Text)
                     ));
                 }
 
                 Customers[customerComboBox.SelectedIndex].Cart.Items.Clear();
                 cartListBox.Items.Clear();
+                discountAmount.Text = "0";
+                totalAmount.Text = "0";
                 money.Text = "0";
+
+                for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+                {
+                    for (int j = 0; j < discountsCheckedListBox.CheckedItems.Count; j++)
+                    {
+                        if (discountsCheckedListBox.Items[i] == discountsCheckedListBox.CheckedItems[j])
+                        {
+                            Customers[customerComboBox.SelectedIndex].Discounts[i].Apply(items);
+                        }
+                    }
+                }
+
+                for (int i = 0;
+                    i < Customers[customerComboBox.SelectedIndex].Discounts.Count; i++)
+                {
+                    Customers[customerComboBox.SelectedIndex].Discounts[i].Update(items);
+                }
 
                 _carts.Clear();
                 for (int i = 0; i < Customers.Count(); i++)
@@ -276,6 +367,10 @@ namespace ObjectOrientedPractics.View.Tabs
                         _carts[i].Items = new List<Item>();
                     }
                 }
+
+                discountsCheckedListBox.Items.Clear();
+                discountsCheckedListBox.Items.AddRange
+                    (Customers[customerComboBox.SelectedIndex].Discounts.ToArray());
 
                 Customers[customerComboBox.SelectedIndex].Cart
                     = _carts[customerComboBox.SelectedIndex];
@@ -316,11 +411,36 @@ namespace ObjectOrientedPractics.View.Tabs
                     }
                 }
 
+                discountsCheckedListBox.Items.Clear();
                 customerComboBox.Items.Clear();
                 customerComboBox.Items.AddRange(Customers.ToArray());
+                discountsCheckedListBox.Items.Clear();
             }
 
+            discountAmount.Text = "0";
+            totalAmount.Text = "0";
             money.Text = "0";
+        }
+
+        private void discountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            double dAmount = 0;
+            for (int i = 0; i < discountsCheckedListBox.Items.Count; i++)
+            {
+                for (int j = 0; j < discountsCheckedListBox.CheckedItems.Count; j++)
+                {
+                    if (discountsCheckedListBox.Items[i] == discountsCheckedListBox.CheckedItems[j])
+                    {
+                        dAmount
+                            += Customers[customerComboBox.SelectedIndex].Discounts[i]
+                            .Calculate(_carts[customerComboBox.SelectedIndex].Items);
+                    }
+                }
+            }
+
+            discountAmount.Text = dAmount.ToString();
+            totalAmount.Text
+                = (Convert.ToDouble(money.Text) - dAmount).ToString();
         }
     }
 }

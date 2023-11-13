@@ -1,11 +1,11 @@
-﻿using ObjectOrientedPractics.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enums;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Класс, описывающий заказ покупателя.
@@ -109,9 +109,19 @@ namespace ObjectOrientedPractics.Model
         public OrderStatus Status { get; set; }
 
         /// <summary>
+        /// Размер скидки для заказа.
+        /// </summary>
+        public double DiscountAmount { get; }
+
+        /// <summary>
+        /// Итоговая сумма к оплате.
+        /// </summary>
+        public double Total { get => Amount - DiscountAmount; }
+
+        /// <summary>
         /// Создает объект класса <see cref="Order"></see>.
         /// </summary>
-        public Order(Address address, string fullname, List<Item> items)
+        public Order(Address address, string fullname, List<Item> items, double discountAmount = 0)
         {
             _id = _idCounter++;
             _date = DateTime.Now;
@@ -119,6 +129,7 @@ namespace ObjectOrientedPractics.Model
             Items = items;
             _fullname = fullname;
             Status = OrderStatus.New;
+            DiscountAmount = discountAmount;
         }
 
         /// <summary>
@@ -132,6 +143,7 @@ namespace ObjectOrientedPractics.Model
             Address = new Address();
             Items = new List<Item>();
             Status = OrderStatus.New;
+            DiscountAmount = 0;
         }
     }
 }

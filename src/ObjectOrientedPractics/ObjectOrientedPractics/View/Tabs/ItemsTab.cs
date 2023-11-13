@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -221,6 +222,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _selectedIndex = itemsListBox.SelectedIndex;
                 _itemInstance = new Item();
+                _itemInstance.Cost = _items[_selectedIndex].Cost;
                 _isEdited = true;
                 selectedItemLayoutPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
