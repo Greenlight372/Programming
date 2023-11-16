@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс, описывающий адрес клиента магазина.
     /// </summary>
-    public class Address
+    public class Address : ICloneable
     {
         /// <summary>
         /// Почтовый индекс.
@@ -145,6 +145,35 @@ namespace ObjectOrientedPractics.Model
             Street = street;
             Building = building;
             Apartment = apartment;
+        }
+
+        /// <inheritdoc />
+        public object Clone()
+        {
+            return new Address(this.Index, this.Country, this.City, this.Street, this.Building, this.Apartment);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (!(other is Address))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            var address2 = (Address)other;
+
+            return (this.Index == address2.Index);
         }
     }
 }

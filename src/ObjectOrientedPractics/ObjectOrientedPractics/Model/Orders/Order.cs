@@ -145,5 +145,28 @@ namespace ObjectOrientedPractics.Model.Orders
             Status = OrderStatus.New;
             DiscountAmount = 0;
         }
+
+        /// <inheritdoc />
+        public override bool Equals(object other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (!(other is Order))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            var order2 = (Order)other;
+
+            return (this.GetId == order2.GetId);
+        }
     }
 }

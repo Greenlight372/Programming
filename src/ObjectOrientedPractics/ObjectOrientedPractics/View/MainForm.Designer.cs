@@ -38,11 +38,14 @@
             cartsControl = new Tabs.CartsTab();
             ordersPage = new TabPage();
             ordersControl = new Tabs.OrdersTab();
+            interfaceTab = new TabPage();
+            interfaceControl = new Tabs.InterfaceTab();
             shopTabControl.SuspendLayout();
             itemsPage.SuspendLayout();
             customersPage.SuspendLayout();
             cartsPage.SuspendLayout();
             ordersPage.SuspendLayout();
+            interfaceTab.SuspendLayout();
             SuspendLayout();
             // 
             // shopTabControl
@@ -51,6 +54,7 @@
             shopTabControl.Controls.Add(customersPage);
             shopTabControl.Controls.Add(cartsPage);
             shopTabControl.Controls.Add(ordersPage);
+            shopTabControl.Controls.Add(interfaceTab);
             shopTabControl.Dock = DockStyle.Fill;
             shopTabControl.Location = new Point(0, 0);
             shopTabControl.Name = "shopTabControl";
@@ -142,6 +146,25 @@
             ordersControl.Size = new Size(690, 647);
             ordersControl.TabIndex = 0;
             // 
+            // interfaceTab
+            // 
+            interfaceTab.Controls.Add(interfaceControl);
+            interfaceTab.Location = new Point(4, 24);
+            interfaceTab.Name = "interfaceTab";
+            interfaceTab.Padding = new Padding(3);
+            interfaceTab.Size = new Size(696, 653);
+            interfaceTab.TabIndex = 4;
+            interfaceTab.Text = "Interface Test";
+            interfaceTab.UseVisualStyleBackColor = true;
+            // 
+            // interfaceControl
+            // 
+            interfaceControl.Dock = DockStyle.Fill;
+            interfaceControl.Location = new Point(3, 3);
+            interfaceControl.Name = "interfaceControl";
+            interfaceControl.Size = new Size(690, 647);
+            interfaceControl.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -158,6 +181,7 @@
             customersPage.ResumeLayout(false);
             cartsPage.ResumeLayout(false);
             ordersPage.ResumeLayout(false);
+            interfaceTab.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -176,5 +200,7 @@
         private Tabs.OrdersTab ordersControl;
         private TabPage ordersPage;
         private Tabs.CartsTab cartsControl;
+        private TabPage interfaceTab;
+        private Tabs.InterfaceTab interfaceControl;
     }
 }

@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс, описывающий товар в магазине.
     /// </summary>
-    public class Item
+    public class Item : ICloneable
     {
         /// <summary>
         /// Счетчик.
@@ -104,6 +104,54 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Item()
         {
+        }
+
+        /// <inheritdoc />
+        public object Clone()
+        {
+            return new Item(this.Name, this.Info, this.Cost);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (!(other is Item))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            var item2 = (Item)other;
+
+            return (this.Name == item2.Name);
+        }
+
+        /// <inheritdoc cref="IComparable.CompareTo(object?)"/>
+        public int CompareTo(object other)
+        {
+            var item2 = (Item)other;
+
+            if (this.Cost == item2.Cost)
+            {
+                return 0;
+            }
+            else if (this.Cost > item2.Cost)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

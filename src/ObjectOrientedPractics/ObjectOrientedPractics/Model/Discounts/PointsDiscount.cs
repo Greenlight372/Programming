@@ -102,5 +102,24 @@ namespace ObjectOrientedPractics.Model.Discounts
         {
             _points = 0;
         }
+
+        /// <inheritdoc cref="IComparable.CompareTo(object?)"/>
+        public int CompareTo(object other)
+        {
+            var pointsDiscount2 = (PointsDiscount)other;
+
+            if (this.GetPoints == pointsDiscount2.GetPoints)
+            {
+                return 0;
+            }
+            else if (this.GetPoints > pointsDiscount2.GetPoints)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 }

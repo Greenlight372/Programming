@@ -114,5 +114,24 @@ namespace ObjectOrientedPractics.Model.Discounts
             _discount = 1;
             _sum = 0;
         }
+
+        /// <inheritdoc cref="IComparable.CompareTo(object?)"/>
+        public int CompareTo(object other)
+        {
+            var percentDiscount2 = (PercentDiscount)other;
+
+            if (this._discount == percentDiscount2._discount)
+            {
+                return 0;
+            }
+            else if (this._discount > percentDiscount2._discount)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 }

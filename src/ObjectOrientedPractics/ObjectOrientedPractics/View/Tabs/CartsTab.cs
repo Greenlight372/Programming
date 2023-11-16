@@ -422,6 +422,11 @@ namespace ObjectOrientedPractics.View.Tabs
             money.Text = "0";
         }
 
+        /// <summary>
+        /// Вычисляет общий размер скидки.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void discountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             double dAmount = 0;
