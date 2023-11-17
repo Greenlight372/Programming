@@ -26,10 +26,5 @@ namespace ObjectOrientedPractics.View.Tabs
             boolLabel.Text = address.Equals(addressCopy).ToString();
             iCompLabel.Text = item.CompareTo(item2).ToString();
         }
-
-        private void InterfaceTab_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
