@@ -1,5 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,12 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        /// <summary>
+        /// Ссылается на метод, по которому
+        /// должна происходить сортировка
+        /// списка товаров.
+        /// </summary>
+        private Func<Item, Item, bool> _sortingWay = DataTools.SortByName; 
         /// <summary>
         /// Список объектов класса <see cref="Item"></see>.
         /// </summary>
@@ -30,6 +37,8 @@ namespace ObjectOrientedPractics.View.Tabs
         /// Экземпляр класса <see cref="Item"></see>.
         /// </summary>
         private Item _itemInstance = new Item();
+
+        private List<Item> _displayedItems = new List<Item>();
         /// <summary>
         /// Свойство для редактирования и доступа к
         /// Списку объектов класса <see cref="Item"></see>.
@@ -52,11 +61,30 @@ namespace ObjectOrientedPractics.View.Tabs
             nameTextBox.BackColor = System.Drawing.Color.White;
             descriptionTextBox.BackColor = System.Drawing.Color.White;
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
+            orderComboBox.SelectedIndex = 0;
 
             selectedItemLayoutPanel.Enabled = false;
 
             itemsListBox.DisplayMember = "Name";
             categoryComboBox.DisplayMember = "";
+        }
+
+        /// <summary>
+        /// Определяет, является ли запрос
+        /// частью названий товаров.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool CompareSubstring(Item item)
+        {
+            if (findTextBox.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return item.Name.Contains(findTextBox.Text);
+            }
         }
 
         /// <summary>
@@ -68,11 +96,11 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
-                idTextBox.Text = _items[itemsListBox.SelectedIndex].GetId.ToString();
-                costTextBox.Text = _items[itemsListBox.SelectedIndex].Cost.ToString();
-                nameTextBox.Text = _items[itemsListBox.SelectedIndex].Name;
-                descriptionTextBox.Text = _items[itemsListBox.SelectedIndex].Info;
-                categoryComboBox.Text = _items[itemsListBox.SelectedIndex].Category.ToString();
+                idTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].GetId.ToString();
+                costTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Cost.ToString();
+                nameTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Name;
+                descriptionTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Info;
+                categoryComboBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Category.ToString();
 
                 costTextBox.BackColor = System.Drawing.Color.White;
                 nameTextBox.BackColor = System.Drawing.Color.White;
@@ -88,8 +116,29 @@ namespace ObjectOrientedPractics.View.Tabs
         private void addButton_Click(object sender, EventArgs e)
         {
             _items.Add(new Item("Название", "Описание.", 100));
+
+            if (_items.Count > 1)
+            {
+                int uniqueNameCounter = 1;
+
+                while (uniqueNameCounter != 0)
+                {
+                    uniqueNameCounter = 0;
+                    for (int i = 0; i < _items.Count - 1; i++)
+                    {
+                        if (_items[_items.Count - 1].Name == _items[i].Name)
+                        {
+                            uniqueNameCounter += 1;
+                            _items[_items.Count - 1].Name = _items[i].Name + " 2";
+                        }
+                    }
+                }
+            }
+            _displayedItems = DataTools.Filtering(_items, CompareSubstring);
+            _displayedItems = DataTools.Sort(_displayedItems, _sortingWay);
+
             itemsListBox.Items.Clear();
-            itemsListBox.Items.AddRange(_items.ToArray());
+            itemsListBox.Items.AddRange(_displayedItems.ToArray());
 
             idTextBox.Text = "";
             costTextBox.Text = "";
@@ -113,9 +162,12 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
-                _items.RemoveAt(itemsListBox.SelectedIndex);
+                _items.RemoveAt(_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex]));
+                _displayedItems = DataTools.Filtering(_items, CompareSubstring);
+                _displayedItems = DataTools.Sort(_displayedItems, _sortingWay);
+
                 itemsListBox.Items.Clear();
-                itemsListBox.Items.AddRange(_items.ToArray());
+                itemsListBox.Items.AddRange(_displayedItems.ToArray());
 
                 idTextBox.Text = "";
                 costTextBox.Text = "";
@@ -163,8 +215,16 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 try
                 {
-                    _itemInstance.Name = nameTextBox.Text;
+                    _itemInstance.Name = nameTextBox.Text.TrimEnd();
                     nameTextBox.BackColor = System.Drawing.Color.White;
+
+                    for (int i = 0; i < _items.Count; i++)
+                    {
+                        if (_itemInstance.Name == _items[i].Name && i != _selectedIndex)
+                        {
+                            nameTextBox.BackColor = System.Drawing.Color.Red;
+                        }
+                    }
                 }
                 catch
                 {
@@ -220,7 +280,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex > -1)
             {
-                _selectedIndex = itemsListBox.SelectedIndex;
+                _selectedIndex = _items.IndexOf(_displayedItems[itemsListBox.SelectedIndex]);
                 _itemInstance = new Item();
                 _itemInstance.Cost = _items[_selectedIndex].Cost;
                 _isEdited = true;
@@ -246,27 +306,32 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 if (_itemInstance.Name != null)
                     _items[_selectedIndex].Name = _itemInstance.Name;
-                
+
                 if (_itemInstance.Info != null)
                     _items[_selectedIndex].Info = _itemInstance.Info;
-                
+
                 if (_itemInstance.Category != null)
                     _items[_selectedIndex].Category = _itemInstance.Category;
 
+                Item editedItem = _items[_selectedIndex];
+
+                _displayedItems = DataTools.Filtering(_items, CompareSubstring);
+                _displayedItems = DataTools.Sort(_displayedItems, _sortingWay);
+
                 itemsListBox.Items.Clear();
-                itemsListBox.Items.AddRange(_items.ToArray());
+                itemsListBox.Items.AddRange(_displayedItems.ToArray());
 
                 _isEdited = false;
                 selectedItemLayoutPanel.Enabled = _isEdited;
                 itemsPanel.Enabled = !_isEdited;
 
-                itemsListBox.SelectedIndex = _selectedIndex;
+                itemsListBox.SelectedIndex = _displayedItems.IndexOf(editedItem);
 
-                idTextBox.Text = _items[_selectedIndex].GetId.ToString();
-                costTextBox.Text = _items[_selectedIndex].Cost.ToString();
-                nameTextBox.Text = _items[_selectedIndex].Name;
-                descriptionTextBox.Text = _items[_selectedIndex].Info;
-                categoryComboBox.Text = _items[_selectedIndex].Category.ToString();
+                idTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].GetId.ToString();
+                costTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Cost.ToString();
+                nameTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Name;
+                descriptionTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Info;
+                categoryComboBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Category.ToString();
             }
             else
             {
@@ -282,17 +347,73 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="e"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            Item editedItem = _items[_selectedIndex];
             _isEdited = false;
             selectedItemLayoutPanel.Enabled = _isEdited;
             itemsPanel.Enabled = !_isEdited;
 
-            itemsListBox.SelectedIndex = _selectedIndex;
+            itemsListBox.SelectedIndex = _displayedItems.IndexOf(editedItem);
 
-            idTextBox.Text = _items[_selectedIndex].GetId.ToString();
-            costTextBox.Text = _items[_selectedIndex].Cost.ToString();
-            nameTextBox.Text = _items[_selectedIndex].Name;
-            descriptionTextBox.Text = _items[_selectedIndex].Info;
-            categoryComboBox.Text = _items[_selectedIndex].Category.ToString();
+            idTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].GetId.ToString();
+            costTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Cost.ToString();
+            nameTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Name;
+            descriptionTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Info;
+            categoryComboBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Category.ToString();
+
+            costTextBox.BackColor = System.Drawing.Color.White;
+            nameTextBox.BackColor = System.Drawing.Color.White;
+            descriptionTextBox.BackColor = System.Drawing.Color.White;
+        }
+
+        /// <summary>
+        /// Проверяет наличие подстроки в названиях товаров.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void findTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _displayedItems = DataTools.Filtering(_items, CompareSubstring);
+            _displayedItems = DataTools.Sort(_displayedItems, _sortingWay);
+
+            itemsListBox.Items.Clear();
+            itemsListBox.Items.AddRange(_displayedItems.ToArray());
+        }
+
+        /// <summary>
+        /// Определяет тип сортировки списка товаров.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void orderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (orderComboBox.SelectedIndex)
+            {
+                case 0:
+                    _sortingWay = DataTools.SortByName;
+                    break;
+                case 1:
+                    _sortingWay = DataTools.SortByAscending;
+                    break;
+                case 2:
+                    _sortingWay = DataTools.SortByDescending;
+                    break;
+            }
+
+            _displayedItems = DataTools.Filtering(_items, CompareSubstring);
+            _displayedItems = DataTools.Sort(_displayedItems, _sortingWay);
+
+            itemsListBox.Items.Clear();
+            itemsListBox.Items.AddRange(_displayedItems.ToArray());
+
+            idTextBox.Text = "";
+            costTextBox.Text = "";
+            nameTextBox.Text = "";
+            descriptionTextBox.Text = "";
+            categoryComboBox.Text = "";
+
+            costTextBox.BackColor = System.Drawing.Color.White;
+            nameTextBox.BackColor = System.Drawing.Color.White;
+            descriptionTextBox.BackColor = System.Drawing.Color.White;
         }
     }
 }

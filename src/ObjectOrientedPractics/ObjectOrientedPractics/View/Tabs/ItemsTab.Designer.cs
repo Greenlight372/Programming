@@ -30,6 +30,10 @@
         {
             backgroundPanel = new TableLayoutPanel();
             itemsPanel = new Panel();
+            orderComboBox = new ComboBox();
+            orderLabel = new Label();
+            findTextBox = new TextBox();
+            findLabel = new Label();
             editButton = new Button();
             removeButton = new Button();
             addButton = new Button();
@@ -61,8 +65,8 @@
             // backgroundPanel
             // 
             backgroundPanel.ColumnCount = 2;
-            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.40625F));
-            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 58.59375F));
+            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.140625F));
+            backgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.859375F));
             backgroundPanel.Controls.Add(itemsPanel, 0, 0);
             backgroundPanel.Controls.Add(selectedItemLayoutPanel, 1, 0);
             backgroundPanel.Dock = DockStyle.Fill;
@@ -75,6 +79,10 @@
             // 
             // itemsPanel
             // 
+            itemsPanel.Controls.Add(orderComboBox);
+            itemsPanel.Controls.Add(orderLabel);
+            itemsPanel.Controls.Add(findTextBox);
+            itemsPanel.Controls.Add(findLabel);
             itemsPanel.Controls.Add(editButton);
             itemsPanel.Controls.Add(removeButton);
             itemsPanel.Controls.Add(addButton);
@@ -83,8 +91,48 @@
             itemsPanel.Dock = DockStyle.Fill;
             itemsPanel.Location = new Point(3, 3);
             itemsPanel.Name = "itemsPanel";
-            itemsPanel.Size = new Size(206, 442);
+            itemsPanel.Size = new Size(220, 442);
             itemsPanel.TabIndex = 0;
+            // 
+            // orderComboBox
+            // 
+            orderComboBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            orderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            orderComboBox.FormattingEnabled = true;
+            orderComboBox.Items.AddRange(new object[] { "Name (Alphabetic)", "Cost (Ascending)", "Cost (Descending)" });
+            orderComboBox.Location = new Point(65, 371);
+            orderComboBox.Name = "orderComboBox";
+            orderComboBox.Size = new Size(152, 23);
+            orderComboBox.TabIndex = 8;
+            orderComboBox.SelectedIndexChanged += orderComboBox_SelectedIndexChanged;
+            // 
+            // orderLabel
+            // 
+            orderLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            orderLabel.AutoSize = true;
+            orderLabel.Location = new Point(3, 374);
+            orderLabel.Name = "orderLabel";
+            orderLabel.Size = new Size(56, 15);
+            orderLabel.TabIndex = 7;
+            orderLabel.Text = "Order by:";
+            // 
+            // findTextBox
+            // 
+            findTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            findTextBox.Location = new Point(65, 27);
+            findTextBox.Name = "findTextBox";
+            findTextBox.Size = new Size(152, 23);
+            findTextBox.TabIndex = 6;
+            findTextBox.TextChanged += findTextBox_TextChanged;
+            // 
+            // findLabel
+            // 
+            findLabel.AutoSize = true;
+            findLabel.Location = new Point(3, 30);
+            findLabel.Name = "findLabel";
+            findLabel.Size = new Size(33, 15);
+            findLabel.TabIndex = 5;
+            findLabel.Text = "Find:";
             // 
             // editButton
             // 
@@ -125,10 +173,10 @@
             itemsListBox.FormattingEnabled = true;
             itemsListBox.IntegralHeight = false;
             itemsListBox.ItemHeight = 15;
-            itemsListBox.Location = new Point(3, 24);
+            itemsListBox.Location = new Point(3, 56);
             itemsListBox.Name = "itemsListBox";
             itemsListBox.ScrollAlwaysVisible = true;
-            itemsListBox.Size = new Size(200, 367);
+            itemsListBox.Size = new Size(214, 309);
             itemsListBox.TabIndex = 1;
             itemsListBox.SelectedIndexChanged += itemsListBox_SelectedIndexChanged;
             // 
@@ -149,12 +197,12 @@
             selectedItemLayoutPanel.Controls.Add(selectedItemPanel, 0, 0);
             selectedItemLayoutPanel.Controls.Add(buttonsPanel, 0, 1);
             selectedItemLayoutPanel.Dock = DockStyle.Fill;
-            selectedItemLayoutPanel.Location = new Point(215, 3);
+            selectedItemLayoutPanel.Location = new Point(229, 3);
             selectedItemLayoutPanel.Name = "selectedItemLayoutPanel";
             selectedItemLayoutPanel.RowCount = 2;
             selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 93.43891F));
             selectedItemLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 6.561086F));
-            selectedItemLayoutPanel.Size = new Size(294, 442);
+            selectedItemLayoutPanel.Size = new Size(280, 442);
             selectedItemLayoutPanel.TabIndex = 1;
             // 
             // selectedItemPanel
@@ -174,7 +222,7 @@
             selectedItemPanel.Dock = DockStyle.Fill;
             selectedItemPanel.Location = new Point(3, 3);
             selectedItemPanel.Name = "selectedItemPanel";
-            selectedItemPanel.Size = new Size(288, 407);
+            selectedItemPanel.Size = new Size(274, 407);
             selectedItemPanel.TabIndex = 2;
             // 
             // categoryComboBox
@@ -185,7 +233,7 @@
             categoryComboBox.ImeMode = ImeMode.Off;
             categoryComboBox.Location = new Point(61, 82);
             categoryComboBox.Name = "categoryComboBox";
-            categoryComboBox.Size = new Size(224, 23);
+            categoryComboBox.Size = new Size(210, 23);
             categoryComboBox.TabIndex = 10;
             categoryComboBox.SelectedValueChanged += categoryComboBox_SelectedValueChanged;
             // 
@@ -205,7 +253,7 @@
             descriptionTextBox.Multiline = true;
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.ScrollBars = ScrollBars.Vertical;
-            descriptionTextBox.Size = new Size(285, 153);
+            descriptionTextBox.Size = new Size(271, 153);
             descriptionTextBox.TabIndex = 8;
             descriptionTextBox.TextChanged += descriptionTextBox_TextChanged;
             // 
@@ -225,7 +273,7 @@
             nameTextBox.Multiline = true;
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ScrollBars = ScrollBars.Vertical;
-            nameTextBox.Size = new Size(285, 90);
+            nameTextBox.Size = new Size(271, 90);
             nameTextBox.TabIndex = 6;
             nameTextBox.TextChanged += nameTextBox_TextChanged;
             // 
@@ -243,7 +291,7 @@
             costTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             costTextBox.Location = new Point(61, 53);
             costTextBox.Name = "costTextBox";
-            costTextBox.Size = new Size(224, 23);
+            costTextBox.Size = new Size(210, 23);
             costTextBox.TabIndex = 4;
             costTextBox.TextChanged += costTextBox_TextChanged;
             // 
@@ -253,7 +301,7 @@
             idTextBox.Location = new Point(61, 24);
             idTextBox.Name = "idTextBox";
             idTextBox.ReadOnly = true;
-            idTextBox.Size = new Size(224, 23);
+            idTextBox.Size = new Size(210, 23);
             idTextBox.TabIndex = 3;
             // 
             // costLabel
@@ -291,13 +339,13 @@
             buttonsPanel.Dock = DockStyle.Fill;
             buttonsPanel.Location = new Point(3, 416);
             buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Size = new Size(288, 23);
+            buttonsPanel.Size = new Size(274, 23);
             buttonsPanel.TabIndex = 3;
             // 
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            applyButton.Location = new Point(129, -1);
+            applyButton.Location = new Point(115, -1);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 5;
@@ -308,7 +356,7 @@
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cancelButton.Location = new Point(210, -1);
+            cancelButton.Location = new Point(196, -1);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 4;
@@ -359,5 +407,9 @@
         private Button applyButton;
         private Button cancelButton;
         private Button editButton;
+        private ComboBox orderComboBox;
+        private Label orderLabel;
+        private TextBox findTextBox;
+        private Label findLabel;
     }
 }
