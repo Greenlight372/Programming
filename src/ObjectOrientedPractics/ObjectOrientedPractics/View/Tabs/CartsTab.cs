@@ -42,6 +42,8 @@ namespace ObjectOrientedPractics.View.Tabs
             discountsCheckedListBox.DisplayMember = "Info";
         }
 
+        public event EventHandler<EventArgs> CartsChanged;
+
         /// <summary>
         /// Выбор покупателя.
         /// </summary>
@@ -374,6 +376,8 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 Customers[customerComboBox.SelectedIndex].Cart
                     = _carts[customerComboBox.SelectedIndex];
+
+                CartsChanged?.Invoke(this, new EventArgs());
             }
         }
 

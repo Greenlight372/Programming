@@ -20,17 +20,31 @@ namespace ObjectOrientedPractics.View
             cartsControl.Items = _store.Items;
             cartsControl.Customers = _store.Customers;
             ordersControl.Customers = _store.Customers;
+
+            itemsControl.ItemsChanged += store_StoreChanged;
+            customersControl.CustomersChanged += store_StoreChanged;
+            cartsControl.CartsChanged += store_StoreChanged;
+            ordersControl.OrderChanged += store_StoreChanged;
         }
+
         /// <summary>
         /// Обновляет данные в <see cref="cartsControl"></see>.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void shopTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void store_StoreChanged(object sender, EventArgs e)
         {
             cartsControl.RefreshData();
             ordersControl.RefreshData();
             ordersControl.UpdateOrders();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            itemsControl.ItemsChanged -= store_StoreChanged;
+            customersControl.CustomersChanged -= store_StoreChanged;
+            cartsControl.CartsChanged -= store_StoreChanged;
+            ordersControl.OrderChanged -= store_StoreChanged;
         }
     }
 }

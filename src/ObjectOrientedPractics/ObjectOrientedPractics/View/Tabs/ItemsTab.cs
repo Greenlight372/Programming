@@ -87,6 +87,8 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        public event EventHandler<EventArgs> ItemsChanged;
+
         /// <summary>
         /// Выводит информацию о выбранном объекте.
         /// </summary>
@@ -151,6 +153,7 @@ namespace ObjectOrientedPractics.View.Tabs
             descriptionTextBox.BackColor = System.Drawing.Color.White;
 
             selectedItemLayoutPanel.Enabled = false;
+            ItemsChanged?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -180,6 +183,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 descriptionTextBox.BackColor = System.Drawing.Color.White;
 
                 selectedItemLayoutPanel.Enabled = false;
+
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -332,6 +337,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 nameTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Name;
                 descriptionTextBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Info;
                 categoryComboBox.Text = _items[_items.IndexOf(_displayedItems[itemsListBox.SelectedIndex])].Category.ToString();
+
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
             else
             {

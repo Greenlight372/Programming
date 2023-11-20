@@ -66,6 +66,8 @@ namespace ObjectOrientedPractics.View.Tabs
             discountsListBox.DisplayMember = "Info";
         }
 
+        public event EventHandler<EventArgs> CustomersChanged;
+
         /// <summary>
         /// Выводит информацию о выбранном объекте.
         /// </summary>
@@ -117,6 +119,8 @@ namespace ObjectOrientedPractics.View.Tabs
             discountsListBox.Items.Clear();
 
             fullnameTextBox.BackColor = System.Drawing.Color.White;
+
+            CustomersChanged?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -139,6 +143,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 discountsListBox.Items.Clear();
 
                 fullnameTextBox.BackColor = System.Drawing.Color.White;
+
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -231,6 +237,8 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 discountsListBox.Items.Clear();
                 discountsListBox.Items.AddRange(_customers[_selectedIndex].Discounts.ToArray());
+
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
             else
             {

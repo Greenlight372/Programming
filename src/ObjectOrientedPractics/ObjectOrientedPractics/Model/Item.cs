@@ -13,6 +13,10 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Item : ICloneable
     {
+        public event EventHandler<EventArgs> NameChanged;
+        public event EventHandler<EventArgs> CostChanged;
+        public event EventHandler<EventArgs> InfoChanged;
+
         /// <summary>
         /// Счетчик.
         /// </summary>
@@ -52,7 +56,10 @@ namespace ObjectOrientedPractics.Model
             get => _name;
             set
             {
+                var args = new EventArgs();
                 ValueValidator.AssertStringOnLength(value, 200, nameof(Name));
+                if (_name != value)
+                    NameChanged?.Invoke(this, args);
                 _name = value;
             }
         }
@@ -65,7 +72,10 @@ namespace ObjectOrientedPractics.Model
             get => _info;
             set
             {
+                var args = new EventArgs();
                 ValueValidator.AssertStringOnLength(value, 1000, nameof(Info));
+                if (_info != value)
+                    InfoChanged?.Invoke(this, args);
                 _info = value;
             }
         }
@@ -78,8 +88,11 @@ namespace ObjectOrientedPractics.Model
             get => _cost;
             set
             {
+                var args = new EventArgs();
                 if (value < 0 || value > 100000)
                     throw new ArgumentException($"Цена товара должна быть от 0 до 100000 руб.");
+                if (_cost != value)
+                    CostChanged?.Invoke(this, args);
                 _cost = value;
             }
         }

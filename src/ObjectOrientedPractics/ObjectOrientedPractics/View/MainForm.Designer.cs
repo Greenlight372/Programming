@@ -61,7 +61,6 @@
             shopTabControl.SelectedIndex = 0;
             shopTabControl.Size = new Size(704, 681);
             shopTabControl.TabIndex = 0;
-            shopTabControl.SelectedIndexChanged += shopTabControl_SelectedIndexChanged;
             // 
             // itemsPage
             // 
@@ -176,6 +175,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Object Oriented Practics";
+            FormClosed += MainForm_FormClosed;
             shopTabControl.ResumeLayout(false);
             itemsPage.ResumeLayout(false);
             customersPage.ResumeLayout(false);

@@ -83,13 +83,17 @@ namespace ObjectOrientedPractics.Services
         {
             List<Item> newItems = new List<Item>();
 
-            foreach (Item item in items)
+            if (items != null)
             {
-                if (compare(item))
+                foreach (Item item in items)
                 {
-                    newItems.Add(item);
+                    if (compare(item))
+                    {
+                        newItems.Add(item);
+                    }
                 }
             }
+
             return newItems;
         }
 
