@@ -51,8 +51,6 @@ namespace ObjectOrientedPractics.View.Tabs
             orderItemsPanel.Enabled = false;
         }
 
-        public event EventHandler<EventArgs> OrderChanged;
-
         /// <summary>
         /// Обновляет данные о товарах и покупателях.
         /// </summary>

@@ -13,8 +13,20 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Item : ICloneable
     {
+        /// <summary>
+        /// Передает информацию об изменении
+        /// названия товара.
+        /// </summary>
         public event EventHandler<EventArgs> NameChanged;
+        /// <summary>
+        /// Передает информацию об изменении
+        /// стоимости товара.
+        /// </summary>
         public event EventHandler<EventArgs> CostChanged;
+        /// <summary>
+        /// Передает информацию об изменении
+        /// информации о товаре.
+        /// </summary>
         public event EventHandler<EventArgs> InfoChanged;
 
         /// <summary>

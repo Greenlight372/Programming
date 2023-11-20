@@ -24,7 +24,6 @@ namespace ObjectOrientedPractics.View
             itemsControl.ItemsChanged += store_StoreChanged;
             customersControl.CustomersChanged += store_StoreChanged;
             cartsControl.CartsChanged += store_StoreChanged;
-            ordersControl.OrderChanged += store_StoreChanged;
         }
 
         /// <summary>
@@ -44,7 +43,6 @@ namespace ObjectOrientedPractics.View
             itemsControl.ItemsChanged -= store_StoreChanged;
             customersControl.CustomersChanged -= store_StoreChanged;
             cartsControl.CartsChanged -= store_StoreChanged;
-            ordersControl.OrderChanged -= store_StoreChanged;
         }
     }
 }

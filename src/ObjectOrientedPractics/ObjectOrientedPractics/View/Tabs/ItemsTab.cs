@@ -87,6 +87,10 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Событие, срабатывающее при изменении
+        /// товаров.
+        /// </summary>
         public event EventHandler<EventArgs> ItemsChanged;
 
         /// <summary>
@@ -384,6 +388,16 @@ namespace ObjectOrientedPractics.View.Tabs
 
             itemsListBox.Items.Clear();
             itemsListBox.Items.AddRange(_displayedItems.ToArray());
+
+            idTextBox.Text = "";
+            costTextBox.Text = "";
+            nameTextBox.Text = "";
+            descriptionTextBox.Text = "";
+            categoryComboBox.Text = "";
+
+            costTextBox.BackColor = System.Drawing.Color.White;
+            nameTextBox.BackColor = System.Drawing.Color.White;
+            descriptionTextBox.BackColor = System.Drawing.Color.White;
         }
 
         /// <summary>

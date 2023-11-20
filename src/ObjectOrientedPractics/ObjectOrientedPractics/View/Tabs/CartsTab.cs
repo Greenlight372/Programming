@@ -42,6 +42,9 @@ namespace ObjectOrientedPractics.View.Tabs
             discountsCheckedListBox.DisplayMember = "Info";
         }
 
+        /// <summary>
+        /// Событие, срабатывающее при изменении корзины.
+        /// </summary>
         public event EventHandler<EventArgs> CartsChanged;
 
         /// <summary>

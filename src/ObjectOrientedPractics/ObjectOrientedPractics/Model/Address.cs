@@ -12,6 +12,10 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Address : ICloneable
     {
+        /// <summary>
+        /// Передает информацию об изменении полей
+        /// объекта
+        /// </summary>
         public event EventHandler<EventArgs> AddressChanged;
         /// <summary>
         /// Почтовый индекс.

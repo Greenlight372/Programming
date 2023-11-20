@@ -66,6 +66,9 @@ namespace ObjectOrientedPractics.View.Tabs
             discountsListBox.DisplayMember = "Info";
         }
 
+        /// <summary>
+        /// Событие, срабатывающее при изменении покупателей.
+        /// </summary>
         public event EventHandler<EventArgs> CustomersChanged;
 
         /// <summary>
