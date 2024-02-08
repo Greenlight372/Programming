@@ -451,7 +451,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
 
             discountAmount.Text = dAmount.ToString();
-            totalAmount.Text = String.Format("{0:0.00}", 
+            totalAmount.Text = String.Format("{0:0.00}",
                 (Convert.ToDouble(money.Text) - dAmount));
         }
     }

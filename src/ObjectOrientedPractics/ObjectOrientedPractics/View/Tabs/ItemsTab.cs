@@ -20,7 +20,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// должна происходить сортировка
         /// списка товаров.
         /// </summary>
-        private Func<Item, Item, bool> _sortingWay = DataTools.SortByName; 
+        private Func<Item, Item, bool> _sortingWay = DataTools.SortByName;
         /// <summary>
         /// Список объектов класса <see cref="Item"></see>.
         /// </summary>

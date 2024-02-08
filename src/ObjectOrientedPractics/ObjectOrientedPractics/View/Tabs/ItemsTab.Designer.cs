@@ -137,34 +137,37 @@
             // editButton
             // 
             editButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            editButton.BackColor = SystemColors.ActiveCaption;
             editButton.Location = new Point(142, 397);
             editButton.Name = "editButton";
             editButton.Size = new Size(64, 45);
             editButton.TabIndex = 4;
             editButton.Text = "Edit";
-            editButton.UseVisualStyleBackColor = true;
+            editButton.UseVisualStyleBackColor = false;
             editButton.Click += editButton_Click;
             // 
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            removeButton.BackColor = SystemColors.ActiveCaption;
             removeButton.Location = new Point(73, 397);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(64, 45);
             removeButton.TabIndex = 3;
             removeButton.Text = "Remove";
-            removeButton.UseVisualStyleBackColor = true;
+            removeButton.UseVisualStyleBackColor = false;
             removeButton.Click += removeButton_Click;
             // 
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            addButton.BackColor = SystemColors.ActiveCaption;
             addButton.Location = new Point(3, 397);
             addButton.Name = "addButton";
             addButton.Size = new Size(64, 45);
             addButton.TabIndex = 2;
             addButton.Text = "Add";
-            addButton.UseVisualStyleBackColor = true;
+            addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
             // itemsListBox
@@ -345,23 +348,25 @@
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            applyButton.BackColor = SystemColors.ActiveCaption;
             applyButton.Location = new Point(115, -1);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 5;
             applyButton.Text = "Apply";
-            applyButton.UseVisualStyleBackColor = true;
+            applyButton.UseVisualStyleBackColor = false;
             applyButton.Click += applyButton_Click;
             // 
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            cancelButton.BackColor = SystemColors.ActiveCaption;
             cancelButton.Location = new Point(196, -1);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 4;
             cancelButton.Text = "Cancel";
-            cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.UseVisualStyleBackColor = false;
             cancelButton.Click += cancelButton_Click;
             // 
             // ItemsTab

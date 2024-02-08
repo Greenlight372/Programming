@@ -83,12 +83,13 @@
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            addButton.BackColor = SystemColors.ActiveCaption;
             addButton.Location = new Point(3, 552);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 42);
             addButton.TabIndex = 4;
             addButton.Text = "Add To Cart";
-            addButton.UseVisualStyleBackColor = true;
+            addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
             // itemsListBox
@@ -211,34 +212,37 @@
             // createButton
             // 
             createButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            createButton.BackColor = SystemColors.ActiveCaption;
             createButton.Location = new Point(3, 328);
             createButton.Name = "createButton";
             createButton.Size = new Size(88, 42);
             createButton.TabIndex = 11;
             createButton.Text = "Create Order";
-            createButton.UseVisualStyleBackColor = true;
+            createButton.UseVisualStyleBackColor = false;
             createButton.Click += createButton_Click;
             // 
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            removeButton.BackColor = SystemColors.ActiveCaption;
             removeButton.Location = new Point(202, 328);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(88, 42);
             removeButton.TabIndex = 10;
             removeButton.Text = "Remove Item";
-            removeButton.UseVisualStyleBackColor = true;
+            removeButton.UseVisualStyleBackColor = false;
             removeButton.Click += removeButton_Click;
             // 
             // clearButton
             // 
             clearButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            clearButton.BackColor = SystemColors.ActiveCaption;
             clearButton.Location = new Point(296, 328);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(88, 42);
             clearButton.TabIndex = 9;
             clearButton.Text = "Clear Cart";
-            clearButton.UseVisualStyleBackColor = true;
+            clearButton.UseVisualStyleBackColor = false;
             clearButton.Click += clearButton_Click;
             // 
             // money
