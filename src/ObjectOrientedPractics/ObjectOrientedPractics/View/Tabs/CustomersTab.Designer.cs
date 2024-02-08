@@ -96,34 +96,37 @@ namespace ObjectOrientedPractics.View.Tabs
             // editButton
             // 
             editButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            editButton.BackColor = SystemColors.ActiveCaption;
             editButton.Location = new Point(142, 549);
             editButton.Name = "editButton";
             editButton.Size = new Size(64, 45);
             editButton.TabIndex = 4;
             editButton.Text = "Edit";
-            editButton.UseVisualStyleBackColor = true;
+            editButton.UseVisualStyleBackColor = false;
             editButton.Click += editButton_Click;
             // 
             // removeButton
             // 
             removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            removeButton.BackColor = SystemColors.ActiveCaption;
             removeButton.Location = new Point(73, 549);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(64, 45);
             removeButton.TabIndex = 3;
             removeButton.Text = "Remove";
-            removeButton.UseVisualStyleBackColor = true;
+            removeButton.UseVisualStyleBackColor = false;
             removeButton.Click += removeButton_Click;
             // 
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            addButton.BackColor = SystemColors.ActiveCaption;
             addButton.Location = new Point(3, 549);
             addButton.Name = "addButton";
             addButton.Size = new Size(64, 45);
             addButton.TabIndex = 2;
             addButton.Text = "Add";
-            addButton.UseVisualStyleBackColor = true;
+            addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
             // customersListBox
@@ -181,25 +184,27 @@ namespace ObjectOrientedPractics.View.Tabs
             // cancelButton
             // 
             cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            cancelButton.BackColor = SystemColors.ActiveCaption;
             cancelButton.Location = new Point(213, 139);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 1;
             cancelButton.Tag = "Apply";
             cancelButton.Text = "Cancel";
-            cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.UseVisualStyleBackColor = false;
             cancelButton.Click += cancelButton_Click;
             // 
             // applyButton
             // 
             applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            applyButton.BackColor = SystemColors.ActiveCaption;
             applyButton.Location = new Point(132, 139);
             applyButton.Name = "applyButton";
             applyButton.Size = new Size(75, 23);
             applyButton.TabIndex = 0;
             applyButton.Tag = "Apply";
             applyButton.Text = "Apply";
-            applyButton.UseVisualStyleBackColor = true;
+            applyButton.UseVisualStyleBackColor = false;
             applyButton.Click += applyButton_Click;
             // 
             // selectedCustomerPanel
@@ -315,22 +320,24 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // removeDiscountButton
             // 
+            removeDiscountButton.BackColor = SystemColors.ActiveCaption;
             removeDiscountButton.Location = new Point(224, 71);
             removeDiscountButton.Name = "removeDiscountButton";
             removeDiscountButton.Size = new Size(64, 45);
             removeDiscountButton.TabIndex = 4;
             removeDiscountButton.Text = "Remove";
-            removeDiscountButton.UseVisualStyleBackColor = true;
+            removeDiscountButton.UseVisualStyleBackColor = false;
             removeDiscountButton.Click += removeDiscountButton_Click;
             // 
             // addDiscountButton
             // 
+            addDiscountButton.BackColor = SystemColors.ActiveCaption;
             addDiscountButton.Location = new Point(224, 20);
             addDiscountButton.Name = "addDiscountButton";
             addDiscountButton.Size = new Size(64, 45);
             addDiscountButton.TabIndex = 3;
             addDiscountButton.Text = "Add";
-            addDiscountButton.UseVisualStyleBackColor = true;
+            addDiscountButton.UseVisualStyleBackColor = false;
             addDiscountButton.Click += addDiscountButton_Click;
             // 
             // discountsListBox
