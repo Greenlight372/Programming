@@ -11,6 +11,7 @@ namespace View.ViewModel
 {
     public class SaveCommand : ICommand
     {
+        private MainVM _viewModel;
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
 
@@ -20,10 +21,9 @@ namespace View.ViewModel
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public SaveCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public SaveCommand(MainVM viewModel)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            _viewModel = viewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -33,7 +33,14 @@ namespace View.ViewModel
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            ContactSerializer.CreateFolder();
+
+            string name = _viewModel.Name;
+            string phoneNumber = _viewModel.PhoneNumber;
+            string email = _viewModel.Email;
+            Contact contact = new Contact(name, phoneNumber, email);
+
+            ContactSerializer.Save(contact);
         }
     }
 }

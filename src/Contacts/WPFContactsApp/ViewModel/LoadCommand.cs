@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using View.Model;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
     public class LoadCommand : ICommand
     {
+        private MainVM _viewModel;
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
 
@@ -18,10 +21,9 @@ namespace View.ViewModel
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public LoadCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public LoadCommand(MainVM viewModel)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            _viewModel = viewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -31,7 +33,11 @@ namespace View.ViewModel
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            Contact contact = ContactSerializer.Load();
+
+            _viewModel.Name = contact.Name;
+            _viewModel.PhoneNumber = contact.PhoneNumber;
+            _viewModel.Email = contact.Email;
         }
     }
 }

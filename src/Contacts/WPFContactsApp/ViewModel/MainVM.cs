@@ -116,14 +116,9 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            SaveCommand = new SaveCommand(parameter =>
-            {
-                ContactSerializer.Save(Contact);
-            });
-            LoadCommand = new LoadCommand(parameter =>
-            {
-                _contact = ContactSerializer.Load();
-            });
+            _contact = new Contact();
+            SaveCommand = new SaveCommand(this);
+            LoadCommand = new LoadCommand(this);
         }
     }
 }

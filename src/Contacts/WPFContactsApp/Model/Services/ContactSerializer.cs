@@ -5,34 +5,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace View.Model.Services
 {
     static public class ContactSerializer
     {
-        static private JsonSerializer _serializer = new JsonSerializer();
-        static private string _filePath = "C:\\tmp\\contacts.json";
-            //= $"C:\\Users\\{Environment.UserName.ToString()}\\{Environment.SpecialFolder.MyDocuments.ToString()}\\contacts.json";
-        static public string FilePath
+        private static string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private static string _filePath = System.IO.Path.Combine(_directoryPath, "Contacts.json");
+        public static void CreateFolder()
         {
-            get { return _filePath; }
-            set
+            if (!Directory.Exists(_directoryPath))
             {
-                _filePath = value;
+                Directory.CreateDirectory(_directoryPath);
+            }
+
+            if (!File.Exists(_filePath))
+            {
+                using (FileStream stream = new FileStream(_filePath, FileMode.Create))
+                {
+                    stream.Write(Encoding.Default.GetBytes("[]"), 0, Encoding.Default.GetBytes("[]").Length);
+                }
             }
         }
-        static private StreamWriter _streamWriter = new StreamWriter(FilePath);
         
-        static public void Save(Contact contact)
+        public static async void Save(Contact contact)
         {
-            string json = JsonConvert.SerializeObject(contact);
-            File.WriteAllText(FilePath, json);
+            string json = JsonSerializer.Serialize(contact);
+            using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
+            {
+                stream.Write(Encoding.Default.GetBytes(json), 0, Encoding.Default.GetBytes(json).Length);
+            }
         }
+
         static public Contact Load()
         {
-            string json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<Contact>(json);
+            using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
+            {
+                try
+                {
+                    return JsonSerializer.Deserialize<Contact>(stream);
+                }
+                catch
+                {
+                    throw new DirectoryNotFoundException("Файл в данной директории отсутствует.");
+                }
+            }
         }
     }
 }
