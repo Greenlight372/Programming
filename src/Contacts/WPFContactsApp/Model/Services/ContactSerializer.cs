@@ -18,11 +18,13 @@ namespace View.Model.Services
         /// <summary>
         /// Путь до папки с текстовым файлом.
         /// </summary>
-        private static string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private static string _directoryPath = 
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         /// <summary>
         /// Путь до текстового файла.
         /// </summary>
-        private static string _filePath = System.IO.Path.Combine(_directoryPath, "Contacts.json");
+        private static string _filePath = 
+            System.IO.Path.Combine(_directoryPath, "Contacts.json");
         
         /// <summary>
         /// Создает папку и файл при их отсутствии.
@@ -38,7 +40,8 @@ namespace View.Model.Services
             {
                 using (FileStream stream = new FileStream(_filePath, FileMode.Create))
                 {
-                    stream.Write(Encoding.Default.GetBytes("[]"), 0, Encoding.Default.GetBytes("[]").Length);
+                    stream.Write(Encoding.Default.GetBytes("[]"),
+                        0, Encoding.Default.GetBytes("[]").Length);
                 }
             }
         }
@@ -55,7 +58,9 @@ namespace View.Model.Services
             string json = JsonSerializer.Serialize(contact);
             using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
             {
-                stream.Write(Encoding.Default.GetBytes(json), 0, Encoding.Default.GetBytes(json).Length);
+                stream.Write(
+                    Encoding.Default.GetBytes(json),
+                    0, Encoding.Default.GetBytes(json).Length);
             }
         }
 
@@ -74,7 +79,8 @@ namespace View.Model.Services
                 }
                 catch
                 {
-                    throw new DirectoryNotFoundException("Файл в данной директории отсутствует.");
+                    throw new 
+                        DirectoryNotFoundException("Файл в данной директории отсутствует.");
                 }
             }
         }

@@ -28,10 +28,6 @@ namespace View.ViewModel
         /// Электронная почта контакта.
         /// </summary>
         private string _email;
-        /// <summary>
-        /// Экземпляр контакта.
-        /// </summary>
-        private Contact _contact = new Contact();
 
         /// <summary>
         /// Предоставляет доступ к имени контакта.
@@ -42,8 +38,8 @@ namespace View.ViewModel
             set
             {
                 _name = value;
-                _contact.Name = value;
-                OnPropertyChanged("Name");
+                Contact.Name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -56,8 +52,8 @@ namespace View.ViewModel
             set
             {
                 _phoneNumber = value;
-                _contact.PhoneNumber = value;
-                OnPropertyChanged("PhoneNumber");
+                Contact.PhoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
             }
         }
 
@@ -70,22 +66,15 @@ namespace View.ViewModel
             set
             {
                 _email = value;
-                _contact.Email = value;
-                OnPropertyChanged("Email");
+                Contact.Email = value;
+                OnPropertyChanged(nameof(Email));
             }
         }
 
         /// <summary>
         /// Предоставляет доступ к экземпляру контакта.
         /// </summary>
-        public Contact Contact
-        {
-            get { return _contact; }
-            set
-            {
-                _contact = value;
-            }
-        }
+        public Contact Contact { get; set; }
 
         /// <summary>
         /// Обрабатывает событие изменения свойства.
@@ -116,7 +105,7 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            _contact = new Contact();
+            Contact = new Contact();
             SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
         }
