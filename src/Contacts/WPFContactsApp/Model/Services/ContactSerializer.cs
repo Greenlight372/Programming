@@ -9,10 +9,24 @@ using System.Text.Json;
 
 namespace View.Model.Services
 {
-    static public class ContactSerializer
+    /// <summary>
+    /// Служебный класс для сохранения
+    /// и загрузки данных из текстового файла.
+    /// </summary>
+    public static class ContactSerializer
     {
+        /// <summary>
+        /// Путь до папки с текстовым файлом.
+        /// </summary>
         private static string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        /// <summary>
+        /// Путь до текстового файла.
+        /// </summary>
         private static string _filePath = System.IO.Path.Combine(_directoryPath, "Contacts.json");
+        
+        /// <summary>
+        /// Создает папку и файл при их отсутствии.
+        /// </summary>
         public static void CreateFolder()
         {
             if (!Directory.Exists(_directoryPath))
@@ -29,6 +43,13 @@ namespace View.Model.Services
             }
         }
         
+        /// <summary>
+        /// Сохраняет данные объекта.
+        /// </summary>
+        /// <param name="contact">
+        /// Экземпляр контактной информации
+        /// для сохранения.
+        /// </param>
         public static async void Save(Contact contact)
         {
             string json = JsonSerializer.Serialize(contact);
@@ -38,7 +59,12 @@ namespace View.Model.Services
             }
         }
 
-        static public Contact Load()
+        /// <summary>
+        /// Загружает данные объекта.
+        /// </summary>
+        /// <returns>Контактные данные.</returns>
+        /// <exception cref="DirectoryNotFoundException"></exception>
+        public static Contact Load()
         {
             using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
             {

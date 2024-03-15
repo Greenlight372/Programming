@@ -21,6 +21,9 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Конструктор главного окна.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
