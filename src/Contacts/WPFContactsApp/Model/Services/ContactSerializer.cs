@@ -28,9 +28,6 @@ namespace View.Model.Services
         {
             string json = JsonConvert.SerializeObject(contact);
             File.WriteAllText(FilePath, json);
-            using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Write, FileShare.ReadWrite))
-            {
-            }
         }
         static public Contact Load()
         {
