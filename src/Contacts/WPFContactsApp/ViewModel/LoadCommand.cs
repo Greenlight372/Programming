@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,11 +56,7 @@ namespace View.ViewModel
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            Contact contact = ContactSerializer.Load();
-
-            _mainVM.Name = contact.Name;
-            _mainVM.PhoneNumber = contact.PhoneNumber;
-            _mainVM.Email = contact.Email;
+            _mainVM.Contacts = ContactSerializer.Load();
         }
     }
 }

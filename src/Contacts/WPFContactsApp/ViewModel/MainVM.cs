@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using View.Model;
 using System.Windows.Input;
 using View.Model.Services;
+using System.Collections.ObjectModel;
 
 namespace View.ViewModel
 {
@@ -29,6 +30,16 @@ namespace View.ViewModel
         /// </summary>
         private string _email;
 
+        public ObservableCollection<Contact> Contacts { get; set; }
+        private Contact _selectedContact;
+
+        private bool _isControlElementReadOnly = true;
+        private bool _isControlElementEnabled = true;
+        private bool _isControlElementVisible = false;
+        public bool IsControlElementReadOnly { get => _isControlElementReadOnly; }
+        public bool IsControlElementEnabled { get => _isControlElementEnabled; }
+        public bool IsControlElementVisible { get => _isControlElementVisible; }
+
         /// <summary>
         /// Предоставляет доступ к имени контакта.
         /// </summary>
@@ -38,7 +49,7 @@ namespace View.ViewModel
             set
             {
                 _name = value;
-                Contact.Name = value;
+                SelectedContact.Name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -52,7 +63,7 @@ namespace View.ViewModel
             set
             {
                 _phoneNumber = value;
-                Contact.PhoneNumber = value;
+                SelectedContact.PhoneNumber = value;
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
@@ -66,15 +77,53 @@ namespace View.ViewModel
             set
             {
                 _email = value;
-                Contact.Email = value;
+                SelectedContact.Email = value;
                 OnPropertyChanged(nameof(Email));
             }
         }
 
-        /// <summary>
-        /// Предоставляет доступ к экземпляру контакта.
-        /// </summary>
-        public Contact Contact { get; set; }
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      Contact contact = new Contact();
+                      Contacts.Insert(0, contact);
+                      SelectedContact = contact;
+                  }));
+            }
+        }
+
+        private RelayCommand editCommand;
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ??
+                  (editCommand = new RelayCommand(obj =>
+                  {
+                      _isControlElementReadOnly = false;
+                      _isControlElementEnabled = false;
+                      _isControlElementVisible = true;
+                      OnPropertyChanged(nameof(IsControlElementReadOnly));
+                      OnPropertyChanged(nameof(IsControlElementEnabled));
+                      OnPropertyChanged(nameof(IsControlElementVisible));
+                  }));
+            }
+        }
+
+        public Contact SelectedContact
+        {
+            get { return _selectedContact; }
+            set
+            {
+                _selectedContact = value;
+                OnPropertyChanged(nameof(SelectedContact));
+            }
+        }
 
         /// <summary>
         /// Обрабатывает событие изменения свойства.
@@ -105,7 +154,12 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            Contact = new Contact();
+            Contacts = new ObservableCollection<Contact>
+            {
+                new Contact("Dummy Dummy #1", "+70000000000", "dummail@dum.my"),
+                new Contact("Dummy Dummy #2", "+70000000000", "dummail@dum.my"),
+                new Contact("Dummy Dummy #3", "+70000000000", "dummail@dum.my")
+            };
             SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using View.ViewModel;
+using Windows.UI.ViewManagement;
 
 namespace View
 {
@@ -21,14 +23,19 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainVM _mainVM = new MainVM();
         /// <summary>
         /// Конструктор главного окна.
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            MainVM MainVM = new MainVM();
-            DataContext = MainVM;
+            DataContext = _mainVM;
+        }
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            _mainVM.SaveCommand.Execute(null);
         }
     }
 }

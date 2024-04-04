@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Text.Json;
+using System.Collections.ObjectModel;
 
 namespace View.Model.Services
 {
@@ -53,9 +54,9 @@ namespace View.Model.Services
         /// Экземпляр контактной информации
         /// для сохранения.
         /// </param>
-        public static async void Save(Contact contact)
+        public static async void Save(ObservableCollection<Contact> contacts)
         {
-            string json = JsonSerializer.Serialize(contact);
+            string json = JsonSerializer.Serialize(contacts);
             using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
             {
                 stream.Write(
@@ -69,13 +70,13 @@ namespace View.Model.Services
         /// </summary>
         /// <returns>Контактные данные.</returns>
         /// <exception cref="DirectoryNotFoundException"></exception>
-        public static Contact Load()
+        public static ObservableCollection<Contact> Load()
         {
             using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
             {
                 try
                 {
-                    return JsonSerializer.Deserialize<Contact>(stream);
+                    return JsonSerializer.Deserialize<ObservableCollection<Contact>>(stream);
                 }
                 catch
                 {

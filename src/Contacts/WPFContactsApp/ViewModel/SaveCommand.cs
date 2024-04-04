@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,12 +59,9 @@ namespace View.ViewModel
         {
             ContactSerializer.CreateFolder();
 
-            string name = _mainVM.Name;
-            string phoneNumber = _mainVM.PhoneNumber;
-            string email = _mainVM.Email;
-            Contact contact = new Contact(name, phoneNumber, email);
+            ObservableCollection<Contact> contacts = _mainVM.Contacts;
 
-            ContactSerializer.Save(contact);
+            ContactSerializer.Save(contacts);
         }
     }
 }
