@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="imagePlaceholder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="iconConcept.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="imagePlaceholder.png" />
   </ItemGroup>
 
 </Project>

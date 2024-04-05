@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json.Serialization;
 
 namespace View.Model.Services
 {

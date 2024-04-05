@@ -9,6 +9,7 @@ using View.Model;
 using System.Windows.Input;
 using View.Model.Services;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace View.ViewModel
 {
@@ -33,12 +34,12 @@ namespace View.ViewModel
         public ObservableCollection<Contact> Contacts { get; set; }
         private Contact _selectedContact;
 
-        private bool _isControlElementReadOnly = true;
-        private bool _isControlElementEnabled = true;
-        private bool _isControlElementVisible = false;
-        public bool IsControlElementReadOnly { get => _isControlElementReadOnly; }
-        public bool IsControlElementEnabled { get => _isControlElementEnabled; }
-        public bool IsControlElementVisible { get => _isControlElementVisible; }
+        private bool _isReadOnly = true;
+        private bool _isEnabled = true;
+        private bool _visibility = false;
+        public bool IsReadOnly { get => _isReadOnly; }
+        public bool IsEnabled { get => _isEnabled; }
+        public bool Visibility { get => _visibility; }
 
         /// <summary>
         /// Предоставляет доступ к имени контакта.
@@ -105,12 +106,44 @@ namespace View.ViewModel
                 return editCommand ??
                   (editCommand = new RelayCommand(obj =>
                   {
-                      _isControlElementReadOnly = false;
-                      _isControlElementEnabled = false;
-                      _isControlElementVisible = true;
-                      OnPropertyChanged(nameof(IsControlElementReadOnly));
-                      OnPropertyChanged(nameof(IsControlElementEnabled));
-                      OnPropertyChanged(nameof(IsControlElementVisible));
+                      _isReadOnly = false;
+                      _isEnabled = false;
+                      _visibility = false;
+                      OnPropertyChanged(nameof(IsReadOnly));
+                      OnPropertyChanged(nameof(IsEnabled));
+                      OnPropertyChanged(nameof(Visibility));
+                  }));
+            }
+        }
+
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      Contacts.Remove(SelectedContact);
+                      OnPropertyChanged(nameof(SelectedContact));
+                  }));
+            }
+        }
+
+        private RelayCommand applyCommand;
+        public RelayCommand ApplyCommand
+        {
+            get
+            {
+                return applyCommand ??
+                  (applyCommand = new RelayCommand(obj =>
+                  {
+                      _isReadOnly = true;
+                      _isEnabled = true;
+                      _visibility = false;
+                      OnPropertyChanged(nameof(IsReadOnly));
+                      OnPropertyChanged(nameof(IsEnabled));
+                      OnPropertyChanged(nameof(Visibility));
                   }));
             }
         }
@@ -154,14 +187,9 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            Contacts = new ObservableCollection<Contact>
-            {
-                new Contact("Dummy Dummy #1", "+70000000000", "dummail@dum.my"),
-                new Contact("Dummy Dummy #2", "+70000000000", "dummail@dum.my"),
-                new Contact("Dummy Dummy #3", "+70000000000", "dummail@dum.my")
-            };
             SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
+            Contacts = new ObservableCollection<Contact>();
         }
     }
 }
