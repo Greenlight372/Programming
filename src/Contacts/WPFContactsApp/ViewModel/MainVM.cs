@@ -216,7 +216,7 @@ namespace View.ViewModel
         {
             SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
-            LoadCommand.Execute(null);
+            LoadCommand.Execute(true);
         }
     }
 }

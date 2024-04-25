@@ -23,6 +23,9 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Экземпляр ViewModel.
+        /// </summary>
         private MainVM _mainVM = new MainVM();
         /// <summary>
         /// Конструктор главного окна.
@@ -32,10 +35,15 @@ namespace View
             InitializeComponent();
             DataContext = _mainVM;
         }
-
+        /// <summary>
+        /// Выполняется при закрытии
+        /// приложения.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            _mainVM.SaveCommand.Execute(null);
+            _mainVM.SaveCommand.Execute(true);
         }
     }
 }

@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
-using System.Text.Json;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace View.Model.Services
 {
@@ -18,36 +17,13 @@ namespace View.Model.Services
     public static class ContactSerializer
     {
         /// <summary>
-        /// Путь до папки с текстовым файлом.
+        /// Путь до файла.
         /// </summary>
-        private static string _directoryPath = 
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        /// <summary>
-        /// Путь до текстового файла.
-        /// </summary>
-        private static string _filePath = 
-            System.IO.Path.Combine(_directoryPath, "Contacts.json");
-        
-        /// <summary>
-        /// Создает папку и файл при их отсутствии.
-        /// </summary>
-        public static void CreateFolder()
-        {
-            if (!Directory.Exists(_directoryPath))
-            {
-                Directory.CreateDirectory(_directoryPath);
-            }
+        private static string _filePath =
+            System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "Сontacts.json");
 
-            if (!File.Exists(_filePath))
-            {
-                using (FileStream stream = new FileStream(_filePath, FileMode.Create))
-                {
-                    stream.Write(Encoding.Default.GetBytes("[]"),
-                        0, Encoding.Default.GetBytes("[]").Length);
-                }
-            }
-        }
-        
         /// <summary>
         /// Сохраняет данные объекта.
         /// </summary>
@@ -57,12 +33,9 @@ namespace View.Model.Services
         /// </param>
         public static async void Save(ObservableCollection<Contact> contacts)
         {
-            string json = JsonSerializer.Serialize(contacts);
-            using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
+            using (StreamWriter stream = new StreamWriter(_filePath))
             {
-                stream.Write(
-                    Encoding.Default.GetBytes(json),
-                    0, Encoding.Default.GetBytes(json).Length);
+                stream.Write(JsonConvert.SerializeObject(contacts));
             }
         }
 
@@ -72,17 +45,22 @@ namespace View.Model.Services
         /// <returns>Контактные данные.</returns>
         public static ObservableCollection<Contact> Load()
         {
-            using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
+            var contacts = new ObservableCollection<Contact>();
+            try
             {
-                try
+                using (StreamReader reader = new StreamReader(_filePath))
                 {
-                    return JsonSerializer.Deserialize<ObservableCollection<Contact>>(stream);
+                    contacts =
+                        JsonConvert.DeserializeObject<ObservableCollection<Contact>>(reader.ReadToEnd());
                 }
-                catch
-                {
-                    return new ObservableCollection<Contact>();
-                }
+
+                if (contacts == null) contacts = new ObservableCollection<Contact>();
             }
+            catch
+            {
+                return contacts;
+            }
+            return contacts;
         }
     }
 }
