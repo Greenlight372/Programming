@@ -58,9 +58,7 @@ namespace View.ViewModel
         public void Execute(object parameter)
         {
             ContactSerializer.CreateFolder();
-
             ObservableCollection<Contact> contacts = _mainVM.Contacts;
-
             ContactSerializer.Save(contacts);
         }
     }

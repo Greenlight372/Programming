@@ -51,7 +51,7 @@ namespace View.Model.Services
         /// <summary>
         /// Сохраняет данные объекта.
         /// </summary>
-        /// <param name="contact">
+        /// <param name="contacts">
         /// Экземпляр контактной информации
         /// для сохранения.
         /// </param>
@@ -70,7 +70,6 @@ namespace View.Model.Services
         /// Загружает данные объекта.
         /// </summary>
         /// <returns>Контактные данные.</returns>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static ObservableCollection<Contact> Load()
         {
             using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate))
@@ -81,8 +80,7 @@ namespace View.Model.Services
                 }
                 catch
                 {
-                    throw new 
-                        DirectoryNotFoundException("Файл в данной директории отсутствует.");
+                    return new ObservableCollection<Contact>();
                 }
             }
         }

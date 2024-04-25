@@ -19,110 +19,124 @@ namespace View.ViewModel
     public class MainVM : INotifyPropertyChanged
     {
         /// <summary>
-        /// Имя контакта.
+        /// Коллекция экземпляров
+        /// контактной информации.
         /// </summary>
-        private string _name;
-        /// <summary>
-        /// Номер телефона контакта.
-        /// </summary>
-        private string _phoneNumber;
-        /// <summary>
-        /// Электронная почта контакта.
-        /// </summary>
-        private string _email;
-
         public ObservableCollection<Contact> Contacts { get; set; }
+
+        /// <summary>
+        /// Выбранный экземпляр
+        /// контактной информации.
+        /// </summary>
         private Contact _selectedContact;
 
+        /// <summary>
+        /// Указывает доступ
+        /// к редактированию.
+        /// </summary>
         private bool _isReadOnly = true;
+
+        /// <summary>
+        /// Указывает на то,
+        /// включен ли элемент управления.
+        /// </summary>
         private bool _isEnabled = true;
+
+        /// <summary>
+        /// Указывает на видимость
+        /// элемента управления.
+        /// </summary>
         private bool _visibility = false;
+
+        /// <summary>
+        /// Возвращает доступ
+        /// к редактированию.
+        /// </summary>
         public bool IsReadOnly { get => _isReadOnly; }
+
+        /// <summary>
+        /// Возвращает флаг, указывающий
+        /// на то, включены ли элементы
+        /// управления.
+        /// </summary>
         public bool IsEnabled { get => _isEnabled; }
+
+        /// <summary>
+        /// Возвращает видимость
+        /// элементов управления.
+        /// </summary>
         public bool Visibility { get => _visibility; }
 
         /// <summary>
-        /// Предоставляет доступ к имени контакта.
+        /// Выполняется при добавлении.
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                SelectedContact.Name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        private RelayCommand _addCommand;
 
         /// <summary>
-        /// Предоставляет доступ к номеру телефона контакта.
+        /// Обрабатывает добавление
+        /// контактной информации.
         /// </summary>
-        public string PhoneNumber
-        {
-            get { return _phoneNumber; }
-            set
-            {
-                _phoneNumber = value;
-                SelectedContact.PhoneNumber = value;
-                OnPropertyChanged(nameof(PhoneNumber));
-            }
-        }
-
-        /// <summary>
-        /// Предоставляет доступ к электронной почте контакта.
-        /// </summary>
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = value;
-                SelectedContact.Email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
-
-        private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
             get
             {
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
+                return _addCommand ??
+                  (_addCommand = new RelayCommand(obj =>
                   {
-                      Contact contact = new Contact();
+                      Contact contact = new Contact(
+                          "Dummy Dummy Dummy", "+79995554400", "dummyMail@Mail.Dum");
                       Contacts.Insert(0, contact);
                       SelectedContact = contact;
                   }));
             }
         }
 
-        private RelayCommand editCommand;
+        /// <summary>
+        /// Позволяет редактировать
+        /// выбранную контактную информацию.
+        /// </summary>
+        private RelayCommand _editCommand;
+
+        /// <summary>
+        /// Обрабатывает редактирование
+        /// контактной информации.
+        /// </summary>
         public RelayCommand EditCommand
         {
             get
             {
-                return editCommand ??
-                  (editCommand = new RelayCommand(obj =>
+                return _editCommand ??
+                  (_editCommand = new RelayCommand(obj =>
                   {
-                      _isReadOnly = false;
-                      _isEnabled = false;
-                      _visibility = false;
-                      OnPropertyChanged(nameof(IsReadOnly));
-                      OnPropertyChanged(nameof(IsEnabled));
-                      OnPropertyChanged(nameof(Visibility));
+                      if (SelectedContact != null)
+                      {
+                          _isReadOnly = false;
+                          _isEnabled = false;
+                          _visibility = true;
+                          OnPropertyChanged(nameof(IsReadOnly));
+                          OnPropertyChanged(nameof(IsEnabled));
+                          OnPropertyChanged(nameof(Visibility));
+                      }
                   }));
             }
         }
 
-        private RelayCommand removeCommand;
+        /// <summary>
+        /// Удаляет выбранную контактную
+        /// информацию.
+        /// </summary>
+        private RelayCommand _removeCommand;
+
+        /// <summary>
+        /// Обрабатывает удаление выбранной
+        /// контактной информации.
+        /// </summary>
         public RelayCommand RemoveCommand
         {
             get
             {
-                return removeCommand ??
-                  (removeCommand = new RelayCommand(obj =>
+                return _removeCommand ??
+                  (_removeCommand = new RelayCommand(obj =>
                   {
                       Contacts.Remove(SelectedContact);
                       OnPropertyChanged(nameof(SelectedContact));
@@ -130,13 +144,22 @@ namespace View.ViewModel
             }
         }
 
-        private RelayCommand applyCommand;
+        /// <summary>
+        /// Подтверждает внесенные
+        /// изменения.
+        /// </summary>
+        private RelayCommand _applyCommand;
+
+        /// <summary>
+        /// Обрабатывает подтверждение
+        /// внесенных изменений.
+        /// </summary>
         public RelayCommand ApplyCommand
         {
             get
             {
-                return applyCommand ??
-                  (applyCommand = new RelayCommand(obj =>
+                return _applyCommand ??
+                  (_applyCommand = new RelayCommand(obj =>
                   {
                       _isReadOnly = true;
                       _isEnabled = true;
@@ -148,6 +171,10 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Возвращает или задает экземпляр
+        /// контактной информации.
+        /// </summary>
         public Contact SelectedContact
         {
             get { return _selectedContact; }
@@ -189,7 +216,7 @@ namespace View.ViewModel
         {
             SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
-            Contacts = new ObservableCollection<Contact>();
+            LoadCommand.Execute(null);
         }
     }
 }

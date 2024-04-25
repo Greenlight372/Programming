@@ -8,11 +8,14 @@
         SizeToContent="WidthAndHeight"
         Closing="MainWindow_Closing"
         Title="Contacts" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
     <Grid Margin="15,15,15,15">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" MinWidth="200"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*" MinWidth="256"></ColumnDefinition>
             <ColumnDefinition Width="3"></ColumnDefinition>
-            <ColumnDefinition MinWidth="300"></ColumnDefinition>
+            <ColumnDefinition MinWidth="300" Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -21,31 +24,36 @@
             <Grid Width="NaN" Height="NaN">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="2" Orientation="Vertical" Margin="3,3,3,3">
                     <Label x:Name="EditNameLabel" Content="Name:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="NameTextBox" DataContext="{Binding SelectedContact}"  IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Height="18" Margin="3,0,3,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"/>
+                    <TextBox x:Name="NameTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.Name, UpdateSourceTrigger=PropertyChanged}" Height="18" Margin="3,0,3,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"/>
                     <Label x:Name="EditPhoneLabel" Content="Phone Number:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="PhoneTextBox" DataContext="{Binding SelectedContact}" IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
+                    <TextBox x:Name="PhoneTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
                     <Label x:Name="EditEmailLabel" Content="Email:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="EmailTextBox" DataContext="{Binding SelectedContact}" IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
-                    <Button Content="Apply" Command="{Binding ApplyCommand}" Visibility="{Binding Visibility, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="75" HorizontalAlignment="Left" Margin="3,50,3,3" Height="25"/>
+                    <TextBox x:Name="EmailTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.Email, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
+                    <Button Content="Apply" Command="{Binding ApplyCommand}" Visibility="{Binding Visibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}" Width="75" HorizontalAlignment="Left" Margin="3,50,3,3" Height="25"/>
                 </StackPanel>
                 <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="0,29,0,0" Source="/imagePlaceholder.png"/>
             </Grid>
         </GroupBox>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="NaN" Height="NaN" Margin="0,0,0,0" Background="White"/>
-        <DockPanel Background="#FFF8F8F8">
-            <Grid Height="29" DockPanel.Dock="Top">
+        <Grid Background="#FFF8F8F8" Grid.ColumnSpan="2" Margin="0,0,7,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Height="29" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Find:" HorizontalAlignment="Left" Margin="3,3,3,3" VerticalAlignment="Top"/>
-                <TextBox Grid.Column="1" Margin="3,6,3,3" TextWrapping="Wrap" IsReadOnly="True" Text="" VerticalAlignment="Top"/>
+                <TextBox Grid.Column="1" Margin="3,6,0,3" TextWrapping="Wrap" IsReadOnly="True" Text="" VerticalAlignment="Top"/>
             </Grid>
-            <ListBox IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="391" DockPanel.Dock="Top">
+            <ListBox Grid.Row="1" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -54,16 +62,16 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Height="29" HorizontalAlignment="Left" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+            <Grid Grid.Row="2" Height="29" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Add" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Command="{Binding AddCommand}" Margin="0,0,0,3" Height="25" Width="80" HorizontalAlignment="Left"/>
-                <Button Grid.Column="1" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"  Content="Edit" Command="{Binding EditCommand}" Margin="3,0,0,3" Height="25" Width="80" HorizontalAlignment="Left"/>
-                <Button Grid.Column="2" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Content="Remove" Command="{Binding RemoveCommand}" Margin="3,0,0,3" Height="25" Width="79" HorizontalAlignment="Left"/>
+                <Button Content="Add" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Command="{Binding AddCommand}" Margin="0,0,-3,3" Height="25" Width="80" HorizontalAlignment="Left"/>
+                <Button Grid.Column="1" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"  Content="Edit" Command="{Binding EditCommand}" Margin="9,0,0,3" Height="25" Width="80" HorizontalAlignment="Left"/>
+                <Button Grid.Column="2" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Content="Remove" Command="{Binding RemoveCommand}" Margin="6,0,0,3" Height="25" Width="80" HorizontalAlignment="Left"/>
             </Grid>
-        </DockPanel>
+        </Grid>
     </Grid>
 </Window>

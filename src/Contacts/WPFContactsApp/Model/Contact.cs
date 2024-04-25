@@ -13,44 +13,72 @@ namespace View.Model
     /// </summary>
     public class Contact : INotifyPropertyChanged
     {
-        private string _name;
-        private string _phoneNumber;
-        private string _email;
         /// <summary>
         /// Имя контакта.
         /// </summary>
-        public string Name 
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
+        private string _name;
         /// <summary>
         /// Номер телефона контакта.
         /// </summary>
-        public string PhoneNumber
+        private string _phoneNumber;
+        /// <summary>
+        /// Электронная почта
+        /// контакта.
+        /// </summary>
+        private string _email;
+        /// <summary>
+        /// Получает или задает
+        /// имя контакта.
+        /// </summary>
+        public string Name 
         {
-            get { return _phoneNumber; }
+            get => _name;
             set
             {
-                _phoneNumber = value;
-                OnPropertyChanged("PhoneNumber");
+                _name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
         /// <summary>
-        /// Электронная почта контакта.
+        /// Получает или задает
+        /// номер телефона контакта.
+        /// </summary>
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set
+            {
+                _phoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
+            }
+        }
+        /// <summary>
+        /// Получает или задает
+        /// электронную почту контакта.
         /// </summary>
         public string Email
         {
-            get { return _email; }
+            get => _email;
             set
             {
                 _email = value;
-                OnPropertyChanged("Email");
+                OnPropertyChanged(nameof(Email));
             }
+        }
+
+        /// <summary>
+        /// Обрабатывает событие изменения свойства.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Зажигает событие изменения свойства.
+        /// </summary>
+        /// <param name="prop"></param>
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
         /// <summary>
         /// Конструктор контакта.
@@ -63,12 +91,6 @@ namespace View.Model
             Name = name;
             PhoneNumber = phoneNumber;
             Email = email;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
         /// <summary>
         /// Конструктор по умолчанию.
