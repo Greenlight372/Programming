@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,20 +11,75 @@ namespace View.Model
     /// <summary>
     /// Класс, описывающий контактную информацию.
     /// </summary>
-    public class Contact
+    public class Contact : INotifyPropertyChanged
     {
         /// <summary>
         /// Имя контакта.
         /// </summary>
-        public string Name { get; set; }
+        private string _name;
         /// <summary>
         /// Номер телефона контакта.
         /// </summary>
-        public string PhoneNumber { get; set; }
+        private string _phoneNumber;
         /// <summary>
-        /// Электронная почта контакта.
+        /// Электронная почта
+        /// контакта.
         /// </summary>
-        public string Email { get; set; }
+        private string _email;
+        /// <summary>
+        /// Получает или задает
+        /// имя контакта.
+        /// </summary>
+        public string Name 
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+        /// <summary>
+        /// Получает или задает
+        /// номер телефона контакта.
+        /// </summary>
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set
+            {
+                _phoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
+            }
+        }
+        /// <summary>
+        /// Получает или задает
+        /// электронную почту контакта.
+        /// </summary>
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        /// <summary>
+        /// Обрабатывает событие изменения свойства.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Зажигает событие изменения свойства.
+        /// </summary>
+        /// <param name="prop"></param>
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
         /// <summary>
         /// Конструктор контакта.
         /// </summary>
