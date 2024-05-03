@@ -4,14 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace View.Model
 {
     /// <summary>
     /// Класс, описывающий контактную информацию.
     /// </summary>
-    public class Contact : INotifyPropertyChanged
+    public class Contact : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
         /// Имя контакта.
@@ -64,6 +66,49 @@ namespace View.Model
                 _email = value;
                 OnPropertyChanged(nameof(Email));
             }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case nameof(Name):
+                        if (Name.Length > 100)
+                        {
+                            error = $"Field {nameof(Name)} shouldn't" +
+                                $" contain more than 100 symbols.";
+                        }
+                        break;
+                    case nameof(PhoneNumber):
+                        //Regex regex = new Regex("^[0-9\\-\\+\\(\\)]$");
+                        if (PhoneNumber.Length > 100)
+                        {
+                            error = $"Field {nameof(PhoneNumber)} shouldn't" +
+                                $" contain more than 100 symbols.";
+                        }
+                        break;
+                    case nameof(Email):
+                        if (Email.Length > 100)
+                        {
+                            error = $"Field {nameof(Email)} shouldn't" +
+                                $" contain more than 100 symbols.";
+                        }
+                        else if (!Email.Contains("@"))
+                        {
+                            error = $"Field {nameof(PhoneNumber)} should" +
+                                $" contain the following symbol: @.";
+                        }
+                        break;
+                }
+                return error;
+            }
+        }
+        public string Error
+        {
+            get;
         }
 
         /// <summary>

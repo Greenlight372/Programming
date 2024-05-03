@@ -48,6 +48,8 @@ namespace View.ViewModel
         /// </summary>
         private bool _visibility = false;
 
+        private bool _isValidated = true;
+
         /// <summary>
         /// Возвращает доступ
         /// к редактированию.
@@ -66,6 +68,8 @@ namespace View.ViewModel
         /// элементов управления.
         /// </summary>
         public bool Visibility { get => _visibility; }
+
+        public bool IsValidated { get => _isValidated; }
 
         /// <summary>
         /// Выполняется при добавлении.

@@ -4,12 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
+        xmlns:uc="clr-namespace:View.Controls"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         Closing="MainWindow_Closing"
         Title="Contacts" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <DataTemplate x:Key="listTemplate">
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Width="30" Height="30" Source="/imagePlaceholder.png" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <StackPanel Grid.Column="1" Margin="3">
+                    <TextBlock FontSize="12" Text="{Binding Path=Name}" FontWeight="Bold" />
+                    <TextBlock FontSize="12" Text="{Binding Path=PhoneNumber}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="2">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
     </Window.Resources>
     <Grid Margin="15,15,15,15">
         <Grid.ColumnDefinitions>
@@ -20,24 +42,24 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox x:Name="EditContactGroupBox" Header="" Grid.Column="2" Grid.Row="0" Margin="3,-17,3,23" Height="NaN" Width="NaN" BorderThickness="0,0,0,0">
-            <Grid Width="NaN" Height="NaN">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="3,3,3,3">
-                    <Label x:Name="EditNameLabel" Content="Name:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="NameTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.Name, UpdateSourceTrigger=PropertyChanged}" Height="18" Margin="3,0,3,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"/>
-                    <Label x:Name="EditPhoneLabel" Content="Phone Number:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="PhoneTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
-                    <Label x:Name="EditEmailLabel" Content="Email:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                    <TextBox x:Name="EmailTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Text="{Binding SelectedContact.Email, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch"/>
-                    <Button Content="Apply" Command="{Binding ApplyCommand}" Visibility="{Binding Visibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}" Width="75" HorizontalAlignment="Left" Margin="3,50,3,3" Height="25"/>
-                </StackPanel>
-                <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="0,29,0,0" Source="/imagePlaceholder.png"/>
-            </Grid>
-        </GroupBox>
+        <uc:ContactControl x:Name="ContactController" Grid.Column="2" Grid.Row="0" Margin="3,-17,3,23" Height="NaN" Width="NaN" BorderThickness="0,0,0,0"/>
+        <Button x:Name="ApplyButton" Grid.Column="2" Grid.Row="0" Content="Apply" Command="{Binding ApplyCommand}" Visibility="{Binding Visibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}" Width="75" HorizontalAlignment="Left" Margin="110,50,3,3" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=ContactController, Path=(Validation.HasError), UpdateSourceTrigger=PropertyChanged}" 
+                                    Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" 
+                            Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="NaN" Height="NaN" Margin="0,0,0,0" Background="White"/>
         <Grid Background="#FFF8F8F8" Grid.ColumnSpan="2" Margin="0,0,7,0">
             <Grid.RowDefinitions>
@@ -53,15 +75,7 @@
                 <Label Content="Find:" HorizontalAlignment="Left" Margin="3,3,3,3" VerticalAlignment="Top"/>
                 <TextBox Grid.Column="1" Margin="3,6,0,3" TextWrapping="Wrap" IsReadOnly="True" Text="" VerticalAlignment="Top"/>
             </Grid>
-            <ListBox Grid.Row="1" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListBox ItemTemplate="{StaticResource listTemplate}" Grid.Row="1" IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
             <Grid Grid.Row="2" Height="29" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
