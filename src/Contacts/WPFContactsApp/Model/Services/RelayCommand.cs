@@ -45,6 +45,11 @@ namespace View.Model.Services
             this.canExecute = canExecute;
         }
 
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
+
         /// <summary>
         /// Проверяет, может ли быть
         /// выполнена команда.

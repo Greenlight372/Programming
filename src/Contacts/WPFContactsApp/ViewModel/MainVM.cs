@@ -10,6 +10,8 @@ using System.Windows.Input;
 using View.Model.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Collections;
+using System.Windows.Controls;
 
 namespace View.ViewModel
 {
@@ -164,6 +166,7 @@ namespace View.ViewModel
                       _isReadOnly = true;
                       _isEnabled = true;
                       _visibility = false;
+                      SaveCommand.Execute(true);
                       OnPropertyChanged(nameof(IsReadOnly));
                       OnPropertyChanged(nameof(IsEnabled));
                       OnPropertyChanged(nameof(Visibility));
