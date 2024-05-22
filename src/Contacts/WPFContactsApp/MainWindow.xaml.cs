@@ -43,7 +43,10 @@ namespace View
         /// <param name="e"></param>
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            _mainVM.SaveCommand.Execute(true);
+            if (_mainVM.IsReadOnly == true)
+            {
+                _mainVM.SaveCommand.Execute(true);
+            }
         }
     }
 }

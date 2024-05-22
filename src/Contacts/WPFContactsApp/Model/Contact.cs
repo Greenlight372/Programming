@@ -29,6 +29,14 @@ namespace View.Model
         /// </summary>
         private string _email;
         /// <summary>
+        /// Сообщение об ошибке.
+        /// </summary>
+        private string _error;
+        /// <summary>
+        /// Имеется ли сообщение об ошибке.
+        /// </summary>
+        private bool _hasErrorNegative;
+        /// <summary>
         /// Получает или задает
         /// имя контакта.
         /// </summary>
@@ -38,6 +46,7 @@ namespace View.Model
             set
             {
                 _name = value;
+                HasErrorNegative = true;
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -51,6 +60,7 @@ namespace View.Model
             set
             {
                 _phoneNumber = value;
+                HasErrorNegative = true;
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
@@ -64,51 +74,78 @@ namespace View.Model
             set
             {
                 _email = value;
+                HasErrorNegative = true;
                 OnPropertyChanged(nameof(Email));
             }
         }
 
+        /// <summary>
+        /// Возвращает сообщения об ошибках.
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public string this[string columnName]
         {
             get
             {
-                string error = String.Empty;
+                _error = String.Empty;
                 switch (columnName)
                 {
                     case nameof(Name):
                         if (Name.Length > 100)
                         {
-                            error = $"Field {nameof(Name)} shouldn't" +
+                            _error = $"Field {nameof(Name)} shouldn't" +
                                 $" contain more than 100 symbols.";
+                            HasErrorNegative = false;
                         }
                         break;
                     case nameof(PhoneNumber):
-                        //Regex regex = new Regex("^[0-9\\-\\+\\(\\)]$");
                         if (PhoneNumber.Length > 100)
                         {
-                            error = $"Field {nameof(PhoneNumber)} shouldn't" +
+                            _error = $"Field {nameof(PhoneNumber)} shouldn't" +
                                 $" contain more than 100 symbols.";
+                            HasErrorNegative = false;
                         }
                         break;
                     case nameof(Email):
                         if (Email.Length > 100)
                         {
-                            error = $"Field {nameof(Email)} shouldn't" +
+                            _error = $"Field {nameof(Email)} shouldn't" +
                                 $" contain more than 100 symbols.";
+                            HasErrorNegative = false;
                         }
                         else if (!Email.Contains("@"))
                         {
-                            error = $"Field {nameof(PhoneNumber)} should" +
+                            _error = $"Field {nameof(PhoneNumber)} should" +
                                 $" contain the following symbol: @.";
+                            HasErrorNegative = false;
                         }
                         break;
                 }
-                return error;
+                return _error;
             }
         }
+
+        /// <summary>
+        /// Возвращает сообщение об ошибке.
+        /// </summary>
         public string Error
         {
-            get;
+            get => _error;
+        }
+
+        /// <summary>
+        /// Возвращает статус сообщения
+        /// об ошибке.
+        /// </summary>
+        public bool HasErrorNegative
+        {
+            get => _hasErrorNegative;
+            set
+            {
+                _hasErrorNegative = value;
+                OnPropertyChanged(nameof(HasErrorNegative));
+            }
         }
 
         /// <summary>

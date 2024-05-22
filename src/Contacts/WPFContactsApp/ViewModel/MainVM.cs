@@ -10,6 +10,8 @@ using System.Windows.Input;
 using View.Model.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Collections;
+using System.Windows.Controls;
 
 namespace View.ViewModel
 {
@@ -48,8 +50,6 @@ namespace View.ViewModel
         /// </summary>
         private bool _visibility = false;
 
-        private bool _isValidated = true;
-
         /// <summary>
         /// Возвращает доступ
         /// к редактированию.
@@ -68,8 +68,6 @@ namespace View.ViewModel
         /// элементов управления.
         /// </summary>
         public bool Visibility { get => _visibility; }
-
-        public bool IsValidated { get => _isValidated; }
 
         /// <summary>
         /// Выполняется при добавлении.
@@ -168,6 +166,7 @@ namespace View.ViewModel
                       _isReadOnly = true;
                       _isEnabled = true;
                       _visibility = false;
+                      SaveCommand.Execute(true);
                       OnPropertyChanged(nameof(IsReadOnly));
                       OnPropertyChanged(nameof(IsEnabled));
                       OnPropertyChanged(nameof(Visibility));

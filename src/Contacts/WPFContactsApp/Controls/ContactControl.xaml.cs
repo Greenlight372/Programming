@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,20 @@ namespace View.Controls
     /// </summary>
     public partial class ContactControl : UserControl
     {
+        /// <summary>
+        /// Конструктор пользовательского
+        /// элемента управления.
+        /// </summary>
         public ContactControl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Проверяет правильность ввода номера телефона.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             int val;
@@ -36,12 +46,32 @@ namespace View.Controls
             }
         }
 
+        /// <summary>
+        /// Проверяет отсутствие пробелов при вводе
+        /// номера телефона.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// Запрещает вставлять текст из буфера
+        /// обмена.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+             if (e.Command == ApplicationCommands.Paste)
+             {
+                  e.Handled = true;
+             }
         }
     }
 }

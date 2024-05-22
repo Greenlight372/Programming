@@ -43,7 +43,7 @@
                     </TextBox.Text>
                 </TextBox>
                 <Label x:Name="EditPhoneLabel" Content="Phone Number:" d:LayoutOverrides="Width" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26"/>
-                <TextBox x:Name="PhoneTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch" Validation.ErrorTemplate="{StaticResource validationFailed}" PreviewTextInput="TextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown">
+                <TextBox x:Name="PhoneTextBox" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap" Height="18" VerticalAlignment="Top" Margin="3,0,3,0" HorizontalContentAlignment="Stretch" Validation.ErrorTemplate="{StaticResource validationFailed}" PreviewTextInput="TextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown" CommandManager.PreviewExecuted="textBox_PreviewExecuted">
                     <TextBox.Text>
                         <Binding Path="SelectedContact.PhoneNumber" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
