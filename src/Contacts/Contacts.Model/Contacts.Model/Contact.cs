@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using CommunityToolkit.Mvvm;
 
-namespace View.Model
+namespace Contacts.Model
 {
     /// <summary>
     /// Класс, описывающий контактную информацию.
@@ -40,7 +40,7 @@ namespace View.Model
         /// Получает или задает
         /// имя контакта.
         /// </summary>
-        public string Name 
+        public string Name
         {
             get => _name;
             set
