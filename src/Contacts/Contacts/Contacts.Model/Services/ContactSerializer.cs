@@ -4,11 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace View.Model.Services
+namespace Contacts.Model.Services
 {
     /// <summary>
     /// Служебный класс для сохранения
