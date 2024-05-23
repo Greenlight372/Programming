@@ -34,6 +34,8 @@ namespace Contacts.View
         {
             InitializeComponent();
             DataContext = _mainVM;
+
+            Loaded += (o, e) => SizeToContent = SizeToContent.Manual;
         }
         /// <summary>
         /// Выполняется при закрытии

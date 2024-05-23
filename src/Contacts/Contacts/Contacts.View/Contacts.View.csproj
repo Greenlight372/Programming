@@ -18,11 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Contacts.ViewModel\Contacts.ViewModel\Contacts.ViewModel.csproj" />
+    <ProjectReference Include="..\Contacts.ViewModel\Contacts.ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
