@@ -1,15 +1,15 @@
-using ObjectOrientedPractics.Model;
+п»їusing ObjectOrientedPractics.Model;
 
 namespace ObjectOrientedPractics.View
 {
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Объект класса <see cref="Store"></see>.
+        /// РћР±СЉРµРєС‚ РєР»Р°СЃСЃР° <see cref="Store"></see>.
         /// </summary>
         private Store _store = new Store();
         /// <summary>
-        /// Инициализация компонентов.
+        /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ.
         /// </summary>
         public MainForm()
         {
@@ -27,7 +27,7 @@ namespace ObjectOrientedPractics.View
         }
 
         /// <summary>
-        /// Обновляет данные в <see cref="cartsControl"></see>.
+        /// РћР±РЅРѕРІР»СЏРµС‚ РґР°РЅРЅС‹Рµ РІ <see cref="cartsControl"></see>.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
