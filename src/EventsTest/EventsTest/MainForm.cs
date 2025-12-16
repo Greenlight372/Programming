@@ -1,4 +1,4 @@
-using EventsTest.Model;
+п»їusing EventsTest.Model;
 
 namespace EventsTest
 {
@@ -9,7 +9,7 @@ namespace EventsTest
         {
             InitializeComponent();
 
-            _contact = new Contact("Иванов И. И.", "+7-953-922-59-00", "Ул. Красноармейская, 201");
+            _contact = new Contact("РРІР°РЅРѕРІ Р. Р.", "+7-953-922-59-00", "РЈР». РљСЂР°СЃРЅРѕР°СЂРјРµР№СЃРєР°СЏ, 201");
 
             fullnameTextBox.Text = _contact.Fullname;
             phoneNumberTextBox.Text = _contact.PhoneNumber;
